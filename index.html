@@ -47,10 +47,10 @@
         body.light .test-page p { color: #8a7a6a; }
         body.light .btn-secondary { background: rgba(0, 0, 0, 0.03); color: #8a7a6a; border-color: rgba(0, 0, 0, 0.04); }
         body.light .btn-secondary:hover { background: rgba(0, 0, 0, 0.06); color: #5a4a3a; }
-        body.light .bismillah { color: #d4af37; opacity: 0.6; }
+        body.light .bismillah { color: #d4af37; opacity: 0.7; }
         body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent); }
         body.light .divider-icon { color: rgba(212, 175, 55, 0.3); }
-        body.light .floating-name { color: rgba(212, 175, 55, 0.08); }
+        body.light .floating-name { color: rgba(180, 130, 70, 0.12); }
 
         /* ===== ТЁМНАЯ ТЕМА ===== */
         body.dark {
@@ -83,7 +83,7 @@
         body.dark .divider-icon { color: rgba(255, 255, 255, 0.15); }
         body.dark .floating-name { color: rgba(255, 255, 255, 0.04); }
 
-        /* ===== ФОН С ИМЕНАМИ АЛЛАХА ===== */
+        /* ===== ФОН С ИМЕНАМИ АЛЛАХА (ЛЕНТА ВВЕРХ) ===== */
         .floating-names {
             position: fixed;
             top: 0;
@@ -97,18 +97,19 @@
         .floating-name {
             position: absolute;
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 600;
             white-space: nowrap;
-            animation: floatName linear infinite;
+            animation: floatUp linear infinite;
             transition: color 0.4s ease;
             letter-spacing: 2px;
+            opacity: 0.7;
         }
-        @keyframes floatName {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh); opacity: 0; }
+            5% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-10vh); opacity: 0; }
         }
 
         .container {
@@ -325,7 +326,6 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
         .choose-card h3 { font-size: 18px; font-weight: 600; }
-        .choose-card p { font-size: 13px; margin-bottom: 0; }
 
         /* ========================================================= */
         /*  СТРАНИЦА 3: ВЫБОР НОМЕРА                                 */
@@ -385,7 +385,7 @@
 </head>
 <body>
 
-<!-- ===== ФОН С ИМЕНАМИ АЛЛАХА ===== -->
+<!-- ===== ФОН С ИМЕНАМИ АЛЛАХА (ЛЕНТА ВВЕРХ) ===== -->
 <div class="floating-names" id="floatingNames"></div>
 
 <div class="container">
@@ -436,11 +436,9 @@
             <div class="choose-grid">
                 <div class="choose-card" id="btnChooseJuz">
                     <h3>Джуз</h3>
-                    <p>1–30</p>
                 </div>
                 <div class="choose-card" id="btnChooseSurah">
                     <h3>Сура</h3>
-                    <p>1–114</p>
                 </div>
             </div>
             <button class="btn-secondary" id="btnChooseBack">← Назад</button>
@@ -474,7 +472,7 @@
 
 <script>
     // ============================================================
-    //  ИМЕНА АЛЛАХА ДЛЯ ФОНА
+    //  ИМЕНА АЛЛАХА ДЛЯ ФОНА (ЛЕНТА ВВЕРХ)
     // ============================================================
 
     const namesOfAllah = [
@@ -492,17 +490,19 @@
 
     function createFloatingNames() {
         const container = document.getElementById('floatingNames');
-        const count = 20;
+        const count = 35;
+        const columns = 5;
         for (let i = 0; i < count; i++) {
             const name = namesOfAllah[Math.floor(Math.random() * namesOfAllah.length)];
             const el = document.createElement('span');
             el.className = 'floating-name';
             el.textContent = name;
-            el.style.left = Math.random() * 95 + '%';
-            el.style.fontSize = (20 + Math.random() * 24) + 'px';
-            const duration = 25 + Math.random() * 35;
+            const col = i % columns;
+            el.style.left = (col * (95 / (columns - 1))) + '%';
+            el.style.fontSize = (20 + Math.random() * 20) + 'px';
+            const duration = 30 + Math.random() * 40;
             el.style.animationDuration = duration + 's';
-            el.style.animationDelay = (Math.random() * 20) + 's';
+            el.style.animationDelay = (Math.random() * 30) + 's';
             container.appendChild(el);
         }
     }
