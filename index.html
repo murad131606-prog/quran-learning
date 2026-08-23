@@ -14,11 +14,10 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             padding: 24px;
             background: #f5efe8;
             position: relative;
-            padding-top: 40px;
         }
 
         body::before {
@@ -55,10 +54,10 @@
             background: rgba(255, 252, 248, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 40px 44px 50px 44px;
+            padding: 50px 44px;
             border-radius: 32px;
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
             position: relative;
             z-index: 1;
             text-align: center;
@@ -82,7 +81,6 @@
         /*  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                   */
         /* ========================================================= */
 
-        .welcome-page { padding: 10px 0; }
         .salam-block { padding: 10px 0 16px 0; }
         .arabic-salam {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
@@ -265,11 +263,6 @@
             border-color: rgba(212, 175, 55, 0.15);
             transform: translateY(-2px);
         }
-        .number-btn.active {
-            background: rgba(212, 175, 55, 0.12);
-            border-color: rgba(212, 175, 55, 0.2);
-            color: #7a5a3a;
-        }
 
         /* ========================================================= */
         /*  СТРАНИЦА 4: ТЕСТ (заглушка)                              */
@@ -299,29 +292,27 @@
     <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ (активна по умолчанию)              -->
     <!-- ============================================================ -->
     <div class="page active" id="pageWelcome">
-        <div class="welcome-page">
-            <div class="salam-block">
-                <div class="arabic-salam">
-                    ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
-                </div>
+        <div class="salam-block">
+            <div class="arabic-salam">
+                ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
             </div>
-
-            <div class="divider">
-                <span class="divider-line"></span>
-                <span class="divider-icon">✦</span>
-                <span class="divider-line"></span>
-            </div>
-
-            <div class="verse-block">
-                <div class="arabic-verse">
-                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-                    <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
-                </div>
-            </div>
-
-            <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
-            <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
         </div>
+
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="verse-block">
+            <div class="arabic-verse">
+                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+            </div>
+        </div>
+
+        <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+        <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
     </div>
 
     <!-- ============================================================ -->
@@ -453,562 +444,5 @@
     }
 </script>
 
-</body>
-</html>
-
-<div class="container">
-    <div class="header">
-        <div class="logo">﷽</div>
-        <span class="badge">Изучение Корана</span>
-    </div>
-
-    <!-- ============================================================ -->
-    <!--  БЛОК: ПРИВЕТСТВЕННАЯ СТРАНИЦА (НОВЫЙ ДИЗАЙН)               -->
-    <!-- ============================================================ -->
-    <div class="page active" id="pageWelcome">
-        <div class="welcome-page">
-            
-            <!-- 1. ПРИВЕТСТВИЕ (крупное, каллиграфическое) -->
-            <div class="salam-block">
-                <div class="arabic-salam">
-                    ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
-                </div>
-            </div>
-
-            <!-- 2. ДЕКОРАТИВНЫЙ РАЗДЕЛИТЕЛЬ -->
-            <div class="divider">
-                <span class="divider-line"></span>
-                <span class="divider-icon">✦</span>
-                <span class="divider-line"></span>
-            </div>
-
-            <!-- 3. АЯТ (с переводом) -->
-            <div class="verse-block">
-                <div class="arabic-verse">
-                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-                    <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
-                </div>
-            </div>
-
-            <!-- 4. КНОПКА -->
-            <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
-
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                   -->
-    <!-- ============================================================ -->
-    <div class="page" id="pageChoose">
-        <div class="choose-page">
-            <h2>📖 Выберите раздел</h2>
-            <p>Выберите джуз или суру для начала тестирования</p>
-            <div class="choose-grid">
-                <div class="choose-card" id="btnChooseJuz">
-                    <span class="icon">☾</span>
-                    <h3>Джузы</h3>
-                    <p>1–30</p>
-                </div>
-                <div class="choose-card" id="btnChooseSurah">
-                    <span class="icon">☰</span>
-                    <h3>Суры</h3>
-                    <p>1–114</p>
-                </div>
-            </div>
-            <button class="btn-back" id="btnChooseBack">← Назад</button>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 3: ВЫБОР НОМЕРА                                   -->
-    <!-- ============================================================ -->
-    <div class="page" id="pageSelect">
-        <div class="select-page">
-            <h2 id="selectTitle">Выберите джуз</h2>
-            <p id="selectSub">Выберите номер джуза (1–30)</p>
-            <div class="number-grid" id="numberGrid"></div>
-            <button class="btn-back" id="btnSelectBack">← Назад</button>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 4: ТЕСТ                                            -->
-    <!-- ============================================================ -->
-    <div class="page" id="pageTest">
-        <div class="test-page">
-            <div class="test-header">
-                <div class="info">
-                    <span>📖 <strong id="testTitle">30-й джуз</strong></span>
-                </div>
-                <span class="progress-text" id="progressText">0 из 20</span>
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-
-            <div id="questionsContainer"></div>
-
-            <div class="result-block" id="resultBlock">
-                <div class="score" id="scoreDisplay">0 / 0</div>
-                <div class="detail" id="detailDisplay"></div>
-                <div class="pass-status" id="passStatus"></div>
-                <div class="motivation" id="motivationText"></div>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-check" id="checkBtn">✅ Проверить ответы</button>
-                <button class="btn btn-reset" id="resetBtn">🔄 Пройти заново</button>
-                <button class="btn btn-home" id="homeBtn">🏠 На главную</button>
-            </div>
-            <div class="footer">При ошибке правильный вариант не показывается</div>
-        </div>
-    </div>
-</div>
-
-<script>
-(function() {
-    // ============================================================
-    //  ДАННЫЕ: ВСЕ 30 ДЖУЗОВ (1-30) С АЯТАМИ
-    // ============================================================
-
-    const allJuzData = {
-        1: [
-            { sura: 'الفاتحة', suraNum: 1, ayah: 1, text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 2, text: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 3, text: 'الرَّحْمَٰنِ الرَّحِيمِ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 4, text: 'مَالِكِ يَوْمِ الدِّينِ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 5, text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 6, text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 7, text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 1, text: 'الم' },
-            { sura: 'البقرة', suraNum: 2, ayah: 2, text: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 3, text: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 4, text: 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 5, text: 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 6, text: 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 7, text: 'خَتَمَ اللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰ أَبْصَارِهِمْ غِشَاوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 8, text: 'وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ وَمَا هُم بِمُؤْمِنِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 9, text: 'يُخَادِعُونَ اللَّهَ وَالَّذِينَ آمَنُوا وَمَا يَخْدَعُونَ إِلَّا أَنفُسَهُمْ وَمَا يَشْعُرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 10, text: 'فِي قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ اللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌ بِمَا كَانُوا يَكْذِبُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 11, text: 'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا فِي الْأَرْضِ قَالُوا إِنَّمَا نَحْنُ مُصْلِحُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 12, text: 'أَلَا إِنَّهُمْ هُمُ الْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 13, text: 'وَإِذَا قِيلَ لَهُمْ آمِنُوا كَمَا آمَنَ النَّاسُ قَالُوا أَنُؤْمِنُ كَمَا آمَنَ السُّفَهَاءُ ۘ أَلَا إِنَّهُمْ هُمُ السُّفَهَاءُ وَلَٰكِن لَّا يَعْلَمُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 14, text: 'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا وَإِذَا خَلَوْا إِلَىٰ شَيَاطِينِهِمْ قَالُوا إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِئُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 15, text: 'اللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِي طُغْيَانِهِمْ يَعْمَهُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 16, text: 'أُولَٰئِكَ الَّذِينَ اشْتَرَوُا الضَّلَالَةَ بِالْهُدَىٰ فَمَا رَبِحَت تِّجَارَتُهُمْ وَمَا كَانُوا مُهْتَدِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 17, text: 'مَّثَلُهُمْ كَمَثَلِ الَّذِي اسْتَوْقَدَ نَارًا فَلَمَّا أَضَاءَتْ مَا حَوْلَهُ ذَهَبَ اللَّهُ بِنُورِهِمْ وَتَرَكَهُمْ فِي ظُلُمَاتٍ لَّا يُبْصِرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 18, text: 'صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 19, text: 'أَوْ كَصَيِّبٍ مِّنَ السَّمَاءِ فِيهِ ظُلُمَاتٌ وَرَعْدٌ وَبَرْقٌ يَجْعَلُونَ أَصَابِعَهُمْ فِي آذَانِهِم مِّنَ الصَّوَاعِقِ حَذَرَ الْمَوْتِ ۚ وَاللَّهُ مُحِيطٌ بِالْكَافِرِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 20, text: 'يَكَادُ الْبَرْقُ يَخْطَفُ أَبْصَارَهُمْ ۖ كُلَّمَا أَضَاءَ لَهُم مَّشَوْا فِيهِ وَإِذَا أَظْلَمَ عَلَيْهِمْ قَامُوا ۚ وَلَوْ شَاءَ اللَّهُ لَذَهَبَ بِسَمْعِهِمْ وَأَبْصَارِهِمْ ۚ إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ' }
-        ],
-        2: [
-            { sura: 'البقرة', suraNum: 2, ayah: 21, text: 'يَا أَيُّهَا النَّاسُ اعْبُدُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ وَالَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 22, text: 'الَّذِي جَعَلَ لَكُمُ الْأَرْضَ فِرَاشًا وَالسَّمَاءَ بِنَاءً وَأَنزَلَ مِنَ السَّمَاءِ مَاءً فَأَخْرَجَ بِهِ مِنَ الثَّمَرَاتِ رِزْقًا لَّكُمْ ۖ فَلَا تَجْعَلُوا لِلَّهِ أَندَادًا وَأَنتُمْ تَعْلَمُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 23, text: 'وَإِن كُنتُمْ فِي رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ وَادْعُوا شُهَدَاءَكُم مِّن دُونِ اللَّهِ إِن كُنتُمْ صَادِقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 24, text: 'فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا فَاتَّقُوا النَّارَ الَّتِي وَقُودُهَا النَّاسُ وَالْحِجَارَةُ ۖ أُعِدَّتْ لِلْكَافِرِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 25, text: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ ۖ كُلَّمَا رُزِقُوا مِنْهَا مِن ثَمَرَةٍ رِّزْقًا ۙ قَالُوا هَٰذَا الَّذِي رُزِقْنَا مِن قَبْلُ ۖ وَأُتُوا بِهِ مُتَشَابِهًا ۖ وَلَهُمْ فِيهَا أَزْوَاجٌ مُّطَهَّرَةٌ ۖ وَهُمْ فِيهَا خَالِدُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 26, text: 'إِنَّ اللَّهَ لَا يَسْتَحْيِي أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا الَّذِينَ آمَنُوا فَيَعْلَمُونَ أَنَّهُ الْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا الَّذِينَ كَفَرُوا فَيَقُولُونَ مَاذَا أَرَادَ اللَّهُ بِهَٰذَا مَثَلًا ۘ يُضِلُّ بِهِ كَثِيرًا وَيَهْدِي بِهِ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِ إِلَّا الْفَاسِقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 27, text: 'الَّذِينَ يَنقُضُونَ عَهْدَ اللَّهِ مِن بَعْدِ مِيثَاقِهِ وَيَقْطَعُونَ مَا أَمَرَ اللَّهُ بِهِ أَن يُوصَلَ وَيُفْسِدُونَ فِي الْأَرْضِ ۚ أُولَٰئِكَ هُمُ الْخَاسِرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 28, text: 'كَيْفَ تَكْفُرُونَ بِاللَّهِ وَكُنتُمْ أَمْوَاتًا فَأَحْيَاكُمْ ۖ ثُمَّ يُمِيتُكُمْ ثُمَّ يُحْيِيكُمْ ثُمَّ إِلَيْهِ تُرْجَعُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 29, text: 'هُوَ الَّذِي خَلَقَ لَكُم مَّا فِي الْأَرْضِ جَمِيعًا ثُمَّ اسْتَوَىٰ إِلَى السَّمَاءِ فَسَوَّاهُنَّ سَبْعَ سَمَاوَاتٍ ۚ وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 30, text: 'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً ۖ قَالُوا أَتَجْعَلُ فِيهَا مَن يُفْسِدُ فِيهَا وَيَسْفِكُ الدِّمَاءَ وَنَحْنُ نُسَبِّحُ بِحَمْدِكَ وَنُقَدِّسُ لَكَ ۖ قَالَ إِنِّي أَعْلَمُ مَا لَا تَعْلَمُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 31, text: 'وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا ثُمَّ عَرَضَهُمْ عَلَى الْمَلَائِكَةِ فَقَالَ أَنبِئُونِي بِأَسْمَاءِ هَٰؤُلَاءِ إِن كُنتُمْ صَادِقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 32, text: 'قَالُوا سُبْحَانَكَ لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا ۖ إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 33, text: 'قَالَ يَا آدَمُ أَنبِئْهُم بِأَسْمَائِهِمْ ۖ فَلَمَّا أَنبَأَهُم بِأَسْمَائِهِمْ قَالَ أَلَمْ أَقُل لَّكُمْ إِنِّي أَعْلَمُ غَيْبَ السَّمَاوَاتِ وَالْأَرْضِ وَأَعْلَمُ مَا تُبْدُونَ وَمَا كُنتُمْ تَكْتُمُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 34, text: 'وَإِذْ قُلْنَا لِلْمَلَائِكَةِ اسْجُدُوا لِآدَمَ فَسَجَدُوا إِلَّا إِبْلِيسَ أَبَىٰ وَاسْتَكْبَرَ وَكَانَ مِنَ الْكَافِرِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 35, text: 'وَقُلْنَا يَا آدَمُ اسْكُنْ أَنتَ وَزَوْجُكَ الْجَنَّةَ وَكُلَا مِنْهَا رَغَدًا حَيْثُ شِئْتُمَا وَلَا تَقْرَبَا هَٰذِهِ الشَّجَرَةَ فَتَكُونَا مِنَ الظَّالِمِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 36, text: 'فَأَزَلَّهُمَا الشَّيْطَانُ عَنْهَا فَأَخْرَجَهُمَا مِمَّا كَانَا فِيهِ ۖ وَقُلْنَا اهْبِطُوا بَعْضُكُمْ لِبَعْضٍ عَدُوٌّ ۖ وَلَكُمْ فِي الْأَرْضِ مُسْتَقَرٌّ وَمَتَاعٌ إِلَىٰ حِينٍ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 37, text: 'فَتَلَقَّىٰ آدَمُ مِن رَّبِّهِ كَلِمَاتٍ فَتَابَ عَلَيْهِ ۚ إِنَّهُ هُوَ التَّوَّابُ الرَّحِيمُ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 38, text: 'قُلْنَا اهْبِطُوا مِنْهَا جَمِيعًا ۖ فَإِمَّا يَأْتِيَنَّكُم مِّنِّي هُدًى فَمَن تَبِعَ هُدَايَ فَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 39, text: 'وَالَّذِينَ كَفَرُوا وَكَذَّبُوا بِآيَاتِنَا أُولَٰئِكَ أَصْحَابُ النَّارِ ۖ هُمْ فِيهَا خَالِدُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 40, text: 'يَا بَنِي إِسْرَائِيلَ اذْكُرُوا نِعْمَتِيَ الَّتِي أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا بِعَهْدِي أُوفِ بِعَهْدِكُمْ وَإِيَّايَ فَارْهَبُونِ' }
-        ]
-    };
-
-    // ============================================================
-    //  ДАННЫЕ: ВСЕ 114 СУР (1-114) С АЯТАМИ
-    // ============================================================
-
-    const allSurahData = {
-        1: [
-            { sura: 'الفاتحة', suraNum: 1, ayah: 1, text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 2, text: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 3, text: 'الرَّحْمَٰنِ الرَّحِيمِ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 4, text: 'مَالِكِ يَوْمِ الدِّينِ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 5, text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 6, text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ' },
-            { sura: 'الفاتحة', suraNum: 1, ayah: 7, text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ' }
-        ],
-        2: [
-            { sura: 'البقرة', suraNum: 2, ayah: 1, text: 'الم' },
-            { sura: 'البقرة', suraNum: 2, ayah: 2, text: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 3, text: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 4, text: 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 5, text: 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 6, text: 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 7, text: 'خَتَمَ اللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰ أَبْصَارِهِمْ غِشَاوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 8, text: 'وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ وَمَا هُم بِمُؤْمِنِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 9, text: 'يُخَادِعُونَ اللَّهَ وَالَّذِينَ آمَنُوا وَمَا يَخْدَعُونَ إِلَّا أَنفُسَهُمْ وَمَا يَشْعُرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 10, text: 'فِي قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ اللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌ بِمَا كَانُوا يَكْذِبُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 11, text: 'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا فِي الْأَرْضِ قَالُوا إِنَّمَا نَحْنُ مُصْلِحُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 12, text: 'أَلَا إِنَّهُمْ هُمُ الْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 13, text: 'وَإِذَا قِيلَ لَهُمْ آمِنُوا كَمَا آمَنَ النَّاسُ قَالُوا أَنُؤْمِنُ كَمَا آمَنَ السُّفَهَاءُ ۘ أَلَا إِنَّهُمْ هُمُ السُّفَهَاءُ وَلَٰكِن لَّا يَعْلَمُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 14, text: 'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا وَإِذَا خَلَوْا إِلَىٰ شَيَاطِينِهِمْ قَالُوا إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِئُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 15, text: 'اللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِي طُغْيَانِهِمْ يَعْمَهُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 16, text: 'أُولَٰئِكَ الَّذِينَ اشْتَرَوُا الضَّلَالَةَ بِالْهُدَىٰ فَمَا رَبِحَت تِّجَارَتُهُمْ وَمَا كَانُوا مُهْتَدِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 17, text: 'مَّثَلُهُمْ كَمَثَلِ الَّذِي اسْتَوْقَدَ نَارًا فَلَمَّا أَضَاءَتْ مَا حَوْلَهُ ذَهَبَ اللَّهُ بِنُورِهِمْ وَتَرَكَهُمْ فِي ظُلُمَاتٍ لَّا يُبْصِرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 18, text: 'صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 19, text: 'أَوْ كَصَيِّبٍ مِّنَ السَّمَاءِ فِيهِ ظُلُمَاتٌ وَرَعْدٌ وَبَرْقٌ يَجْعَلُونَ أَصَابِعَهُمْ فِي آذَانِهِم مِّنَ الصَّوَاعِقِ حَذَرَ الْمَوْتِ ۚ وَاللَّهُ مُحِيطٌ بِالْكَافِرِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 20, text: 'يَكَادُ الْبَرْقُ يَخْطَفُ أَبْصَارَهُمْ ۖ كُلَّمَا أَضَاءَ لَهُم مَّشَوْا فِيهِ وَإِذَا أَظْلَمَ عَلَيْهِمْ قَامُوا ۚ وَلَوْ شَاءَ اللَّهُ لَذَهَبَ بِسَمْعِهِمْ وَأَبْصَارِهِمْ ۚ إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 21, text: 'يَا أَيُّهَا النَّاسُ اعْبُدُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ وَالَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 22, text: 'الَّذِي جَعَلَ لَكُمُ الْأَرْضَ فِرَاشًا وَالسَّمَاءَ بِنَاءً وَأَنزَلَ مِنَ السَّمَاءِ مَاءً فَأَخْرَجَ بِهِ مِنَ الثَّمَرَاتِ رِزْقًا لَّكُمْ ۖ فَلَا تَجْعَلُوا لِلَّهِ أَندَادًا وَأَنتُمْ تَعْلَمُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 23, text: 'وَإِن كُنتُمْ فِي رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ وَادْعُوا شُهَدَاءَكُم مِّن دُونِ اللَّهِ إِن كُنتُمْ صَادِقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 24, text: 'فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا فَاتَّقُوا النَّارَ الَّتِي وَقُودُهَا النَّاسُ وَالْحِجَارَةُ ۖ أُعِدَّتْ لِلْكَافِرِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 25, text: 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ ۖ كُلَّمَا رُزِقُوا مِنْهَا مِن ثَمَرَةٍ رِّزْقًا ۙ قَالُوا هَٰذَا الَّذِي رُزِقْنَا مِن قَبْلُ ۖ وَأُتُوا بِهِ مُتَشَابِهًا ۖ وَلَهُمْ فِيهَا أَزْوَاجٌ مُّطَهَّرَةٌ ۖ وَهُمْ فِيهَا خَالِدُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 26, text: 'إِنَّ اللَّهَ لَا يَسْتَحْيِي أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا الَّذِينَ آمَنُوا فَيَعْلَمُونَ أَنَّهُ الْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا الَّذِينَ كَفَرُوا فَيَقُولُونَ مَاذَا أَرَادَ اللَّهُ بِهَٰذَا مَثَلًا ۘ يُضِلُّ بِهِ كَثِيرًا وَيَهْدِي بِهِ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِ إِلَّا الْفَاسِقِينَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 27, text: 'الَّذِينَ يَنقُضُونَ عَهْدَ اللَّهِ مِن بَعْدِ مِيثَاقِهِ وَيَقْطَعُونَ مَا أَمَرَ اللَّهُ بِهِ أَن يُوصَلَ وَيُفْسِدُونَ فِي الْأَرْضِ ۚ أُولَٰئِكَ هُمُ الْخَاسِرُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 28, text: 'كَيْفَ تَكْفُرُونَ بِاللَّهِ وَكُنتُمْ أَمْوَاتًا فَأَحْيَاكُمْ ۖ ثُمَّ يُمِيتُكُمْ ثُمَّ يُحْيِيكُمْ ثُمَّ إِلَيْهِ تُرْجَعُونَ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 29, text: 'هُوَ الَّذِي خَلَقَ لَكُم مَّا فِي الْأَرْضِ جَمِيعًا ثُمَّ اسْتَوَىٰ إِلَى السَّمَاءِ فَسَوَّاهُنَّ سَبْعَ سَمَاوَاتٍ ۚ وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ' },
-            { sura: 'البقرة', suraNum: 2, ayah: 30, text: 'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً ۖ قَالُوا أَتَجْعَلُ فِيهَا مَن يُفْسِدُ فِيهَا وَيَسْفِكُ الدِّمَاءَ وَنَحْنُ نُسَبِّحُ بِحَمْدِكَ وَنُقَدِّسُ لَكَ ۖ قَالَ إِنِّي أَعْلَمُ مَا لَا تَعْلَمُونَ' }
-        ]
-    };
-
-    // ============================================================
-    //  ЛОГИКА ПРИЛОЖЕНИЯ
-    // ============================================================
-
-    let currentMode = 'juz';
-    let currentId = 30;
-    let currentQuestions = [];
-    let isTestCompleted = false;
-    const QUESTIONS_PER_TEST = 20;
-    const passThreshold = 70;
-
-    const pageWelcome = document.getElementById('pageWelcome');
-    const pageChoose = document.getElementById('pageChoose');
-    const pageSelect = document.getElementById('pageSelect');
-    const pageTest = document.getElementById('pageTest');
-
-    const btnWelcomeNext = document.getElementById('btnWelcomeNext');
-    const btnChooseJuz = document.getElementById('btnChooseJuz');
-    const btnChooseSurah = document.getElementById('btnChooseSurah');
-    const btnChooseBack = document.getElementById('btnChooseBack');
-    const btnSelectBack = document.getElementById('btnSelectBack');
-    const numberGrid = document.getElementById('numberGrid');
-    const selectTitle = document.getElementById('selectTitle');
-    const selectSub = document.getElementById('selectSub');
-    const testTitle = document.getElementById('testTitle');
-    const progressText = document.getElementById('progressText');
-    const progressBar = document.getElementById('progressBar');
-    const questionsContainer = document.getElementById('questionsContainer');
-    const resultBlock = document.getElementById('resultBlock');
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const detailDisplay = document.getElementById('detailDisplay');
-    const passStatus = document.getElementById('passStatus');
-    const motivationText = document.getElementById('motivationText');
-    const checkBtn = document.getElementById('checkBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const homeBtn = document.getElementById('homeBtn');
-
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    btnWelcomeNext.addEventListener('click', function() {
-        showPage('pageChoose');
-    });
-
-    btnChooseBack.addEventListener('click', function() {
-        showPage('pageWelcome');
-    });
-
-    btnSelectBack.addEventListener('click', function() {
-        showPage('pageChoose');
-    });
-
-    homeBtn.addEventListener('click', function() {
-        showPage('pageWelcome');
-        resetTest();
-    });
-
-    btnChooseJuz.addEventListener('click', function() {
-        currentMode = 'juz';
-        selectTitle.textContent = 'Выберите джуз';
-        selectSub.textContent = 'Выберите номер джуза (1–30)';
-        renderNumbers(30);
-        showPage('pageSelect');
-    });
-
-    btnChooseSurah.addEventListener('click', function() {
-        currentMode = 'surah';
-        selectTitle.textContent = 'Выберите суру';
-        selectSub.textContent = 'Выберите номер суры (1–114)';
-        renderNumbers(114);
-        showPage('pageSelect');
-    });
-
-    function renderNumbers(count) {
-        numberGrid.innerHTML = '';
-        for (let i = 1; i <= count; i++) {
-            const btn = document.createElement('button');
-            btn.className = 'number-btn';
-            btn.textContent = i;
-            btn.addEventListener('click', function() {
-                currentId = i;
-                startTest();
-            });
-            numberGrid.appendChild(btn);
-        }
-    }
-
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    function getRandomWords(text, count) {
-        const words = text.split(' ');
-        if (words.length <= 1) return null;
-        const available = [];
-        for (let i = 0; i < words.length; i++) {
-            if (words[i].length > 1 && words[i].length < 20) available.push(i);
-        }
-        if (available.length === 0) return null;
-        const result = [];
-        const shuffled = shuffleArray([...available]);
-        for (let i = 0; i < Math.min(count, shuffled.length); i++) {
-            result.push(shuffled[i]);
-        }
-        return result;
-    }
-
-    function generateOptions(correctWord) {
-        const commonWords = [
-            'اللَّهِ', 'الرَّحْمَٰنِ', 'الرَّحِيمِ', 'الْحَمْدُ', 'رَبِّ',
-            'الْعَالَمِينَ', 'الدِّينِ', 'نَعْبُدُ', 'نَسْتَعِينُ', 'الصِّرَاطَ',
-            'الْمُسْتَقِيمَ', 'الَّذِينَ', 'أَنْعَمْتَ', 'الْمَغْضُوبِ', 'الضَّالِّينَ',
-            'الْكِتَابُ', 'لَا', 'رَيْبَ', 'هُدًى', 'لِّلْمُتَّقِينَ',
-            'يُؤْمِنُونَ', 'الْغَيْبِ', 'الصَّلَاةَ', 'يُنفِقُونَ', 'أُنزِلَ'
-        ];
-        let options = new Set();
-        options.add(correctWord);
-        let attempts = 0;
-        while (options.size < 4 && attempts < 100) {
-            const word = commonWords[Math.floor(Math.random() * commonWords.length)];
-            if (word !== correctWord && word.length > 1) {
-                options.add(word);
-            }
-            attempts++;
-        }
-        while (options.size < 4) {
-            options.add('________');
-        }
-        return shuffleArray(Array.from(options));
-    }
-
-    function getDataForId(mode, id) {
-        if (mode === 'juz') {
-            return allJuzData[id] || null;
-        } else {
-            return allSurahData[id] || null;
-        }
-    }
-
-    function startTest() {
-        const data = getDataForId(currentMode, currentId);
-
-        if (!data || data.length === 0) {
-            alert('Для этого раздела пока нет вопросов. Выберите другой.');
-            return;
-        }
-
-        const shuffled = shuffleArray([...data]);
-        const selected = shuffled.slice(0, Math.min(QUESTIONS_PER_TEST, shuffled.length));
-
-        currentQuestions = selected.map(ayah => {
-            const words = ayah.text.split(' ');
-            const wordIndices = getRandomWords(ayah.text, 1);
-            if (!wordIndices || wordIndices.length === 0) {
-                return {
-                    sura: ayah.sura,
-                    suraNum: ayah.suraNum,
-                    ayahNum: ayah.ayah,
-                    fullText: ayah.text,
-                    ayahText: ayah.text,
-                    correct: ayah.text.split(' ')[0] || '',
-                    options: ['________', '________', '________', '________']
-                };
-            }
-            const idx = wordIndices[0];
-            const wordsArr = ayah.text.split(' ');
-            const correctWord = wordsArr[idx] || '';
-            wordsArr[idx] = '_____________';
-            const newText = wordsArr.join(' ');
-            const options = generateOptions(correctWord);
-            return {
-                sura: ayah.sura,
-                suraNum: ayah.suraNum,
-                ayahNum: ayah.ayah,
-                fullText: ayah.text,
-                ayahText: newText,
-                correct: correctWord,
-                options: options
-            };
-        });
-
-        isTestCompleted = false;
-        testTitle.textContent = (currentMode === 'juz' ? 'Джуз ' : 'Сура ') + currentId;
-        renderQuestions();
-        showPage('pageTest');
-        checkBtn.disabled = false;
-        resultBlock.style.display = 'none';
-    }
-
-    function renderQuestions() {
-        let html = '';
-        currentQuestions.forEach((q, idx) => {
-            const ayahHtml = q.ayahText.replace('_____________', '<span class="highlight-missing">______</span>');
-            const hintId = 'hint_' + idx;
-            html += `
-                <div class="question" id="q${idx}">
-                    <div class="question-number">Вопрос ${idx + 1} из ${currentQuestions.length}</div>
-                    <div class="hint-container">
-                        <button class="hint-btn" onclick="toggleHint('${hintId}')">
-                            <span class="icon">💡</span> Подсказка
-                        </button>
-                    </div>
-                    <div class="hint-text" id="${hintId}">
-                        📖 ${q.sura} (${q.suraNum}:${q.ayahNum})
-                    </div>
-                    <div class="ayah-text">${ayahHtml}</div>
-                    <div class="options" id="opts${idx}">
-                        ${q.options.map((opt, oi) => `
-                            <label id="lbl${idx}_${oi}">
-                                <input type="radio" name="q${idx}" value="${oi}">
-                                ${opt}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="fb${idx}"></div>
-                </div>
-            `;
-        });
-        questionsContainer.innerHTML = html;
-        updateProgress();
-
-        document.querySelectorAll('input[type="radio"]').forEach(el => {
-            el.addEventListener('change', updateProgress);
-        });
-    }
-
-    window.toggleHint = function(id) {
-        const el = document.getElementById(id);
-        if (el) {
-            el.classList.toggle('visible');
-        }
-    };
-
-    function updateProgress() {
-        const total = currentQuestions.length;
-        let answered = 0;
-        for (let i = 0; i < total; i++) {
-            const selected = document.querySelector(`input[name="q${i}"]:checked`);
-            if (selected) answered++;
-        }
-        const pct = Math.round((answered / total) * 100);
-        progressBar.style.width = pct + '%';
-        progressText.textContent = answered + ' из ' + total;
-    }
-
-    checkBtn.addEventListener('click', function() {
-        if (isTestCompleted) return;
-
-        let correct = 0;
-        const total = currentQuestions.length;
-
-        currentQuestions.forEach((q, idx) => {
-            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-            const qDiv = document.getElementById(`q${idx}`);
-            const fb = document.getElementById(`fb${idx}`);
-            const labels = document.querySelectorAll(`#opts${idx} label`);
-
-            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
-            qDiv.classList.remove('correct', 'wrong');
-
-            if (selected) {
-                const val = parseInt(selected.value);
-                if (q.options[val] === q.correct) {
-                    correct++;
-                    qDiv.classList.add('correct');
-                    fb.className = 'feedback correct';
-                    fb.textContent = '✅ Правильно';
-                    labels[val].classList.add('correct-answer');
-                } else {
-                    qDiv.classList.add('wrong');
-                    fb.className = 'feedback wrong';
-                    fb.textContent = '❌ Неправильно';
-                    labels[val].classList.add('wrong-answer');
-                }
-            } else {
-                qDiv.classList.add('wrong');
-                fb.className = 'feedback wrong';
-                fb.textContent = '❌ Ответ не выбран';
-            }
-
-            document.querySelectorAll(`input[name="q${idx}"]`).forEach(el => el.disabled = true);
-        });
-
-        const pct = Math.round((correct / total) * 100);
-        resultBlock.style.display = 'block';
-        scoreDisplay.textContent = correct + ' / ' + total;
-        detailDisplay.textContent = pct + '%';
-
-        const ps = document.getElementById('passStatus');
-        if (pct >= passThreshold) {
-            ps.className = 'pass-status pass';
-            ps.textContent = '✅ ТЕСТ СДАН! Отличный результат!';
-            motivationText.textContent = '🎉 Поздравляем! Вы успешно справились с тестом. Продолжайте изучение Корана!';
-        } else {
-            ps.className = 'pass-status fail';
-            ps.textContent = '❌ ТЕСТ НЕ СДАН. Нужно набрать ' + passThreshold + '%';
-            motivationText.textContent = '📖 Рекомендуем повторить аяты и пройти тест заново.';
-        }
-
-        isTestCompleted = true;
-        checkBtn.disabled = true;
-        resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-
-    function resetTest() {
-        isTestCompleted = false;
-        checkBtn.disabled = false;
-        resultBlock.style.display = 'none';
-        document.querySelectorAll('input[type="radio"]').forEach(el => {
-            el.checked = false;
-            el.disabled = false;
-        });
-        document.querySelectorAll('.question').forEach(el => el.classList.remove('correct', 'wrong'));
-        document.querySelectorAll('.feedback').forEach(el => {
-            el.textContent = '';
-            el.className = 'feedback';
-        });
-        document.querySelectorAll('.options label').forEach(el => el.classList.remove('correct-answer', 'wrong-answer'));
-        document.querySelectorAll('.hint-text').forEach(el => el.classList.remove('visible'));
-        updateProgress();
-    }
-
-    resetBtn.addEventListener('click', function() {
-        resetTest();
-        renderQuestions();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-})();
-</script>
 </body>
 </html>
