@@ -77,6 +77,15 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
         .welcome-page { text-align: center; padding: 30px 0 20px 0; }
+        .welcome-page .arabic-salam {
+            font-family: 'Amiri', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
         .welcome-page .arabic-verse {
             font-family: 'Amiri', serif;
             font-size: 32px;
@@ -485,6 +494,7 @@
             .btn-group { flex-direction: column; }
             .btn { min-width: unset; }
             .btn-home { flex: 1; }
+            .welcome-page .arabic-salam { font-size: 28px; }
             .welcome-page .arabic-verse { font-size: 24px; padding: 14px; }
             .ayah-text { font-size: 22px; padding: 10px 12px; }
             .options label { font-size: 18px; padding: 8px 14px 8px 38px; }
@@ -504,9 +514,12 @@
     <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
     <div class="page active" id="pageWelcome">
         <div class="welcome-page">
-            <div class="arabic-verse">
+            <div class="arabic-salam">
                 ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
-                <small>Ассаламу алейкум ва рахматуллахи ва баракатуху</small>
+            </div>
+            <div class="arabic-verse">
+                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
             </div>
             <p>Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
             <button class="btn-primary" id="btnWelcomeNext">Далее →</button>
