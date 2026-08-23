@@ -7,1135 +7,1542 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; font-family: 'Inter', -apple-system, sans-serif; }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            transition: all 0.4s ease;
-            min-height: 100vh;
-        }
-
-        body.light { background: #f5efe8; }
-        body.light .arabic-salam { color: #7a5a3a; }
-        body.light .arabic-verse { color: #3d2b1f; }
-        body.light .arabic-verse small { color: #9a8a7a; }
-        body.light .welcome-description { color: #8a7a6a; }
-        body.light .choose-page h2 { color: #3d2b1f; }
-        body.light .choose-page p { color: #8a7a6a; }
-        body.light .choose-card { color: #3d2b1f; border-color: rgba(0,0,0,0.04); }
-        body.light .choose-card:hover { background: rgba(212,175,55,0.05); }
-        body.light .select-page h2 { color: #3d2b1f; }
-        body.light .select-page p { color: #8a7a6a; }
-        body.light .number-btn { color: #6a5a4a; border-color: rgba(0,0,0,0.04); }
-        body.light .number-btn:hover { background: rgba(212,175,55,0.08); color: #3d2b1f; }
-        body.light .test-page .question-title { color: #3d2b1f; }
-        body.light .test-page .ayah-text { color: #3d2b1f; background: rgba(255,248,240,0.3); }
-        body.light .test-page .options label { color: #5a4a3a; border-color: rgba(0,0,0,0.04); }
-        body.light .test-page .options label:hover { background: rgba(212,175,55,0.05); }
-        body.light .test-page .feedback.correct { color: #28a745; }
-        body.light .test-page .feedback.wrong { color: #dc3545; }
-        body.light .btn-secondary { color: #8a7a6a; border-color: rgba(0,0,0,0.04); }
-        body.light .btn-secondary:hover { background: rgba(0,0,0,0.04); }
-        body.light .bismillah { color: #d4af37; opacity: 0.6; }
-        body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); }
-        body.light .divider-icon { color: rgba(212,175,55,0.2); }
-        body.light .hint-text { color: #8a7a6a; }
-        body.light .question-block { border-bottom-color: rgba(0,0,0,0.06); }
-        body.light .result-detail { border-bottom-color: rgba(0,0,0,0.06); }
-
-        body.dark {
-            background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
-        }
-        body.dark .arabic-salam { color: #d4af37; }
-        body.dark .arabic-verse { color: #ffffff; }
-        body.dark .arabic-verse small { color: rgba(255,255,255,0.3); }
-        body.dark .welcome-description { color: rgba(255,255,255,0.4); }
-        body.dark .choose-page h2 { color: #ffffff; }
-        body.dark .choose-page p { color: rgba(255,255,255,0.4); }
-        body.dark .choose-card { color: #ffffff; border-color: rgba(255,255,255,0.04); }
-        body.dark .choose-card:hover { background: rgba(255,255,255,0.05); }
-        body.dark .select-page h2 { color: #ffffff; }
-        body.dark .select-page p { color: rgba(255,255,255,0.4); }
-        body.dark .number-btn { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
-        body.dark .number-btn:hover { background: rgba(255,255,255,0.06); color: #ffffff; }
-        body.dark .test-page .question-title { color: #ffffff; }
-        body.dark .test-page .ayah-text { color: #ffffff; background: rgba(255,255,255,0.03); }
-        body.dark .test-page .options label { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
-        body.dark .test-page .options label:hover { background: rgba(255,255,255,0.04); }
-        body.dark .test-page .feedback.correct { color: #28a745; }
-        body.dark .test-page .feedback.wrong { color: #dc3545; }
-        body.dark .btn-secondary { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.04); }
-        body.dark .btn-secondary:hover { background: rgba(255,255,255,0.04); }
-        body.dark .bismillah { color: rgba(255,215,0,0.2); }
-        body.dark .divider-line { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); }
-        body.dark .divider-icon { color: rgba(255,255,255,0.1); }
-        body.dark .hint-text { color: rgba(255,255,255,0.4); }
-        body.dark .question-block { border-bottom-color: rgba(255,255,255,0.04); }
-        body.dark .result-detail { border-bottom-color: rgba(255,255,255,0.04); }
-
-        .container {
-            max-width: 950px;
-            width: 100%;
-            height: 100%;
-            max-height: 860px;
-            min-height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px 30px;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-
-        .bismillah {
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            z-index: 2;
-            transition: color 0.4s ease;
-            text-align: left;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: transparent;
-            border: none;
-            padding: 4px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-radius: 20px;
-        }
-        body.light .theme-toggle { color: #8a7a6a; }
-        body.light .theme-toggle:hover { background: rgba(0,0,0,0.04); }
-        body.dark .theme-toggle { color: rgba(255,255,255,0.3); }
-        body.dark .theme-toggle:hover { background: rgba(255,255,255,0.04); }
-        .theme-toggle .icon { font-size: 18px; }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.4s ease;
-            flex: 1;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-        .page.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-        .welcome-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            padding: 10px 0;
-        }
-
-        .salam-block { width: 100%; }
-        .arabic-salam {
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 52px;
-            font-weight: 600;
-            line-height: 1.5;
-            letter-spacing: 1px;
-            transition: color 0.4s ease;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            padding: 10px 0 14px 0;
-            width: 100%;
-        }
-        .divider-line {
-            flex: 1;
-            max-width: 80px;
-            height: 1px;
-            transition: background 0.4s ease;
-        }
-        .divider-icon {
-            font-size: 16px;
-            letter-spacing: 4px;
-            transition: color 0.4s ease;
-        }
-
-        .verse-block { width: 100%; padding: 4px 0; }
-        .arabic-verse {
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 34px;
-            font-weight: 500;
-            line-height: 1.8;
-            padding: 12px 0;
-            transition: color 0.4s ease;
-        }
-        .arabic-verse small {
-            display: block;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            margin-top: 8px;
-            letter-spacing: 0.5px;
-            transition: color 0.4s ease;
-        }
-
-        .welcome-description {
-            font-size: 18px;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-            transition: color 0.4s ease;
-            margin: 8px 0 16px 0;
-        }
-
-        .btn-primary {
-            background: linear-gradient(145deg, #c9a87c, #b8942e);
-            color: #ffffff;
-            border: none;
-            padding: 16px 60px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            display: inline-block;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
-            background: linear-gradient(145deg, #d4b488, #c9a87c);
-        }
-
-        .btn-secondary {
-            padding: 14px 40px;
-            font-size: 17px;
-            font-weight: 500;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            display: inline-block;
-            margin-top: 16px;
-            border: 1px solid;
-            background: transparent;
-            transition: all 0.4s ease;
-        }
-        .btn-secondary:hover { transform: translateY(-2px); }
-
-        .choose-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            width: 100%;
-            padding: 10px 0;
-        }
-        .choose-page h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            transition: color 0.4s ease;
-        }
-        .choose-page p {
-            font-size: 17px;
-            margin-bottom: 20px;
-            transition: color 0.4s ease;
-        }
-        .choose-grid {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .choose-card {
-            border-radius: 20px;
-            padding: 38px 48px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 200px;
-            text-align: center;
-            background: transparent;
-            border: 1px solid;
-        }
-        body.light .choose-card { border-color: rgba(0,0,0,0.04); }
-        body.dark .choose-card { border-color: rgba(255,255,255,0.04); }
-        .choose-card:hover { transform: translateY(-4px); }
-        .choose-card h3 { font-size: 22px; font-weight: 600; }
-
-        .select-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 10px 0;
-        }
-        .select-page h2 { font-size: 28px; font-weight: 600; margin-bottom: 4px; transition: color 0.4s ease; }
-        .select-page p { font-size: 17px; margin-bottom: 16px; transition: color 0.4s ease; }
-        .number-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            max-height: 340px;
-            overflow-y: auto;
-            padding: 8px 4px;
-            margin-bottom: 14px;
-            width: 100%;
-        }
-        .number-grid::-webkit-scrollbar { width: 4px; }
-        .number-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 10px; }
-        .number-grid::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.2); border-radius: 10px; }
-        .number-btn {
-            border-radius: 14px;
-            padding: 14px 22px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            min-width: 56px;
-            border: 1px solid;
-            background: transparent;
-        }
-        .number-btn:hover { transform: translateY(-2px); }
-
-        /* ========================================================= */
-        /*  СТРАНИЦА ТЕСТА                                             */
-        /* ========================================================= */
-
-        .test-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 16px;
-            width: 100%;
-            padding: 10px 0;
-            max-height: 85vh;
-            overflow-y: auto;
-            min-height: 400px;
-        }
-        .test-page .test-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 0 4px;
-            font-size: 14px;
-            color: #8a7a6a;
-            transition: color 0.4s ease;
-            flex-shrink: 0;
-        }
-        body.dark .test-page .test-header { color: rgba(255,255,255,0.4); }
-        .test-page .test-header strong { font-weight: 600; }
-
-        .questions-container {
-            width: 100%;
-            flex: 1;
-            overflow-y: auto;
-            padding: 4px 8px;
-        }
-
-        .question-block {
-            width: 100%;
-            padding: 12px 0;
-            border-bottom: 1px solid;
-            margin-bottom: 8px;
-            transition: border-color 0.4s ease;
-        }
-        .question-block:last-child {
-            border-bottom: none;
-        }
-
-        .question-number {
-            font-size: 13px;
-            color: #9a8a7a;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-            font-weight: 400;
-            transition: color 0.4s ease;
-            text-align: left;
-        }
-        body.dark .question-number { color: rgba(255,255,255,0.3); }
-        .ayah-text {
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 28px;
-            font-weight: 500;
-            line-height: 1.8;
-            padding: 16px 20px;
-            border-radius: 16px;
-            transition: all 0.4s ease;
-            text-align: right;
-            direction: rtl;
-            margin-bottom: 12px;
-        }
-        .ayah-text .highlight-missing {
-            background: rgba(220,53,69,0.12);
-            padding: 2px 12px;
-            border-radius: 6px;
-            border-bottom: 2px solid #dc3545;
-            color: #dc3545;
-            font-weight: 700;
-            min-width: 40px;
-            display: inline-block;
-            text-align: center;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 100%;
-        }
-        .options label {
-            display: block;
-            padding: 10px 16px;
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 22px;
-            text-align: right;
-            direction: rtl;
-            border: 1px solid;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            position: relative;
-        }
-        .options input[type="radio"] {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%) scale(1.1);
-            accent-color: #c9a87c;
-        }
-        .options label.correct-answer {
-            background: rgba(40,167,69,0.12) !important;
-            color: #28a745 !important;
-            border-color: rgba(40,167,69,0.2) !important;
-        }
-        .options label.wrong-answer {
-            background: rgba(220,53,69,0.12) !important;
-            color: #dc3545 !important;
-            border-color: rgba(220,53,69,0.2) !important;
-        }
-        .feedback {
-            font-size: 14px;
-            font-weight: 500;
-            margin-top: 6px;
-            text-align: left;
-        }
-        .feedback.correct { color: #28a745; }
-        .feedback.wrong { color: #dc3545; }
-
-        .btn-hint {
-            background: transparent;
-            border: 1px solid rgba(212,175,55,0.3);
-            color: #c9a87c;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            margin-top: 4px;
-        }
-        .btn-hint:hover {
-            background: rgba(212,175,55,0.08);
-            transform: translateY(-1px);
-        }
-        .hint-text {
-            font-size: 14px;
-            margin-top: 8px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            text-align: left;
-            transition: color 0.4s ease;
-            background: rgba(212,175,55,0.04);
-        }
-
-        .result-block {
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 16px;
-            text-align: center;
-            display: none;
-            margin: 8px 0;
-            flex-shrink: 0;
-        }
-        body.light .result-block { background: rgba(255,248,240,0.3); }
-        body.dark .result-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
-        .result-block .score {
-            font-size: 32px;
-            font-weight: 700;
-            transition: color 0.4s ease;
-        }
-        body.light .result-block .score { color: #3d2b1f; }
-        body.dark .result-block .score { color: #ffffff; }
-
-        .result-detail {
-            padding: 8px 0;
-            border-bottom: 1px solid;
-            text-align: left;
-            font-size: 14px;
-        }
-        .result-detail:last-child { border-bottom: none; }
-
-        .test-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 6px;
-            flex-shrink: 0;
-        }
-        .test-buttons .btn-secondary { margin-top: 0; }
-
-        @media (max-width: 768px) {
-            body { padding: 12px; }
-            .container { padding: 12px 16px; max-height: none; min-height: auto; }
-            .arabic-salam { font-size: 32px; }
-            .arabic-salam br { display: block; }
-            .arabic-verse { font-size: 22px; }
-            .divider-line { max-width: 40px; }
-            .btn-primary { padding: 14px 40px; font-size: 16px; }
-            .choose-card { padding: 24px 28px; min-width: 140px; }
-            .choose-card h3 { font-size: 19px; }
-            .choose-grid { gap: 16px; }
-            .number-btn { padding: 12px 16px; font-size: 15px; min-width: 46px; }
-            .bismillah { font-size: 20px; }
-            .theme-toggle { font-size: 12px; }
-            .welcome-description { font-size: 15px; }
-            .choose-page h2 { font-size: 22px; }
-            .select-page h2 { font-size: 22px; }
-            .test-page .ayah-text { font-size: 22px; padding: 12px 14px; }
-            .options label { font-size: 18px; padding: 8px 14px; }
-            .test-buttons .btn-secondary { padding: 12px 28px; font-size: 15px; }
-        }
-        @media (max-width: 400px) {
-            .container { padding: 10px; }
-            .arabic-salam { font-size: 26px; }
-            .arabic-verse { font-size: 18px; }
-            .choose-card { padding: 18px 20px; min-width: 110px; }
-            .choose-card h3 { font-size: 16px; }
-            .number-btn { padding: 10px 12px; font-size: 13px; min-width: 40px; }
-            .btn-primary { padding: 12px 28px; font-size: 14px; }
-            .test-page .ayah-text { font-size: 18px; padding: 10px 12px; }
-            .options label { font-size: 15px; padding: 6px 12px; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <div class="bismillah">﷽</div>
 
-<div class="container">
+        <button class="theme-toggle" id="themeToggle">
+            <span class="icon" id="themeIcon">🌙</span>
+            <span id="themeLabel">Тёмная</span>
+        </button>
 
-    <div class="bismillah">﷽</div>
-
-    <button class="theme-toggle" id="themeToggle">
-        <span class="icon" id="themeIcon">🌙</span>
-        <span id="themeLabel">Тёмная</span>
-    </button>
-
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                      -->
-    <!-- ============================================================ -->
-    <div class="page active" id="pageWelcome">
-        <div class="welcome-content">
-            <div class="salam-block">
-                <div class="arabic-salam">
-                    ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+        <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+        <div class="page active" id="pageWelcome">
+            <div class="welcome-content">
+                <div class="salam-block">
+                    <div class="arabic-salam">
+                        ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+                    </div>
                 </div>
-            </div>
-            <div class="divider">
-                <span class="divider-line"></span>
-                <span class="divider-icon">✦</span>
-                <span class="divider-line"></span>
-            </div>
-            <div class="verse-block">
-                <div class="arabic-verse">
-                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-                    <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-icon">✦</span>
+                    <span class="divider-line"></span>
                 </div>
+                <div class="verse-block">
+                    <div class="arabic-verse">
+                        وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                        <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+                    </div>
+                </div>
+                <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+                <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
             </div>
-            <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
-            <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                    -->
-    <!-- ============================================================ -->
-    <div class="page" id="pageChoose">
-        <div class="choose-page">
-            <h2>Выберите раздел</h2>
-            <p>Выберите джуз или суру для начала тестирования</p>
-            <div class="choose-grid">
-                <div class="choose-card" id="btnChooseJuz"><h3>Джуз</h3></div>
-                <div class="choose-card" id="btnChooseSurah"><h3>Сура</h3></div>
+        <!-- ===== СТРАНИЦА 2: ВЫБОР РАЗДЕЛА ===== -->
+        <div class="page" id="pageChoose">
+            <div class="choose-page">
+                <h2>Выберите раздел</h2>
+                <p>Выберите джуз или суру для начала тестирования</p>
+                <div class="choose-grid">
+                    <div class="choose-card" id="btnChooseJuz"><h3>Джуз</h3></div>
+                    <div class="choose-card" id="btnChooseSurah"><h3>Сура</h3></div>
+                </div>
+                <button class="btn-secondary" id="btnChooseBack">← Назад</button>
             </div>
-            <button class="btn-secondary" id="btnChooseBack">← Назад</button>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 3: ВЫБОР НОМЕРА                                    -->
-    <!-- ============================================================ -->
-    <div class="page" id="pageSelect">
-        <div class="select-page">
-            <h2 id="selectTitle">Выберите джуз</h2>
-            <p id="selectSub">Выберите номер джуза (1–30)</p>
-            <div class="number-grid" id="numberGrid"></div>
-            <button class="btn-secondary" id="btnSelectBack">← Назад</button>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 4: ТЕСТ                                             -->
-    <!-- ============================================================ -->
-    <div class="page" id="pageTest">
-        <div class="test-page">
-            <div class="test-header">
-                <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
-                <span id="progressText">0 из 0</span>
+        <!-- ===== СТРАНИЦА 3: ВЫБОР НОМЕРА ===== -->
+        <div class="page" id="pageSelect">
+            <div class="select-page">
+                <h2 id="selectTitle">Выберите джуз</h2>
+                <p id="selectSub">Выберите номер джуза (1–30)</p>
+                <div class="number-grid" id="numberGrid"></div>
+                <button class="btn-secondary" id="btnSelectBack">← Назад</button>
             </div>
-            <div class="questions-container" id="questionsContainer"></div>
-            <div class="result-block" id="resultBlock"></div>
-            <div class="test-buttons">
-                <button class="btn-secondary" id="btnTestBack">← Назад</button>
-                <button class="btn-secondary" id="btnTestHome">🏠 На главную</button>
-                <button class="btn-secondary" id="checkBtn">✅ Проверить</button>
+        </div>
+
+        <!-- ===== СТРАНИЦА 4: ТЕСТ ===== -->
+        <div class="page" id="pageTest">
+            <div class="test-page">
+                <div class="test-header">
+                    <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
+                    <span id="progressText">0 из 0</span>
+                </div>
+                <div class="questions-container" id="questionsContainer"></div>
+                <div class="result-block" id="resultBlock"></div>
+                <div class="test-buttons">
+                    <button class="btn-secondary" id="btnTestBack">← Назад</button>
+                    <button class="btn-secondary" id="btnTestHome">🏠 На главную</button>
+                    <button class="btn-secondary" id="checkBtn">✅ Проверить</button>
+                </div>
             </div>
         </div>
     </div>
 
-</div>
-
-<script>
-    // ================================================================
-    //  ====== БЛОК ДАННЫХ (реальные аяты из Корана) ======
-    // ================================================================
-
-    // РЕАЛЬНЫЕ АЯТЫ из Корана (взяты с quran-online.ru)
-    const REAL_AYATS = {
-        // Сура Аль-Фатиха (1)
-        '1:2': 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
-        '1:3': 'الرَّحْمَٰنِ الرَّحِيمِ',
-        '1:4': 'مَالِكِ يَوْمِ الدِّينِ',
-        '1:5': 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
-        '1:6': 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
-        '1:7': 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
-        
-        // Сура Аль-Бакара (2) - первые аяты
-        '2:2': 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ',
-        '2:3': 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ',
-        '2:4': 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ',
-        '2:5': 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ',
-        '2:6': 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ',
-        '2:7': 'خَتَمَ اللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰ أَبْصَارِهِمْ غِشَاوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ',
-        '2:8': 'وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ وَمَا هُم بِمُؤْمِنِينَ',
-        '2:9': 'يُخَادِعُونَ اللَّهَ وَالَّذِينَ آمَنُوا وَمَا يَخْدَعُونَ إِلَّا أَنفُسَهُمْ وَمَا يَشْعُرُونَ',
-        '2:10': 'فِي قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ اللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌ بِمَا كَانُوا يَكْذِبُونَ',
-        '2:11': 'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا فِي الْأَرْضِ قَالُوا إِنَّمَا نَحْنُ مُصْلِحُونَ',
-        '2:12': 'أَلَا إِنَّهُمْ هُمُ الْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ',
-        '2:13': 'وَإِذَا قِيلَ لَهُمْ آمِنُوا كَمَا آمَنَ النَّاسُ قَالُوا أَنُؤْمِنُ كَمَا آمَنَ السُّفَهَاءُ ۗ أَلَا إِنَّهُمْ هُمُ السُّفَهَاءُ وَلَٰكِن لَّا يَعْلَمُونَ',
-        '2:14': 'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا وَإِذَا خَلَوْا إِلَىٰ شَيَاطِينِهِمْ قَالُوا إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِئُونَ',
-        '2:15': 'اللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِي طُغْيَانِهِمْ يَعْمَهُونَ',
-        '2:16': 'أُولَٰئِكَ الَّذِينَ اشْتَرَوُا الضَّلَالَةَ بِالْهُدَىٰ فَمَا رَبِحَت تِّجَارَتُهُمْ وَمَا كَانُوا مُهْتَدِينَ',
-        '2:17': 'مَّثَلُهُمْ كَمَثَلِ الَّذِي اسْتَوْقَدَ نَارًا فَلَمَّا أَضَاءَتْ مَا حَوْلَهُ ذَهَبَ اللَّهُ بِنُورِهِمْ وَتَرَكَهُمْ فِي ظُلُمَاتٍ لَّا يُبْصِرُونَ',
-        '2:18': 'صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُونَ',
-        '2:19': 'أَوْ كَصَيِّبٍ مِّنَ السَّمَاءِ فِيهِ ظُلُمَاتٌ وَرَعْدٌ وَبَرْقٌ يَجْعَلُونَ أَصَابِعَهُمْ فِي آذَانِهِم مِّنَ الصَّوَاعِقِ حَذَرَ الْمَوْتِ ۚ وَاللَّهُ مُحِيطٌ بِالْكَافِرِينَ',
-        '2:20': 'يَكَادُ الْبَرْقُ يَخْطَفُ أَبْصَارَهُمْ ۖ كُلَّمَا أَضَاءَ لَهُم مَّشَوْا فِيهِ وَإِذَا أَظْلَمَ عَلَيْهِمْ قَامُوا ۚ وَلَوْ شَاءَ اللَّهُ لَذَهَبَ بِسَمْعِهِمْ وَأَبْصَارِهِمْ ۚ إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ',
-        
-        // Сура Аль-Ихляс (112)
-        '112:1': 'قُلْ هُوَ اللَّهُ أَحَدٌ',
-        '112:2': 'اللَّهُ الصَّمَدُ',
-        '112:3': 'لَمْ يَلِدْ وَلَمْ يُولَدْ',
-        '112:4': 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',
-        
-        // Сура Ан-Нас (114)
-        '114:1': 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
-        '114:2': 'مَلِكِ النَّاسِ',
-        '114:3': 'إِلَٰهِ النَّاسِ',
-        '114:4': 'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
-        '114:5': 'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ',
-        '114:6': 'مِنَ الْجِنَّةِ وَالنَّاسِ'
-    };
-
-    // Группировка аятов по джузам (упрощённо, для демонстрации)
-    const JUZ_AYATS = {
-        1: ['1:2', '1:3', '1:4', '1:5', '1:6', '1:7', '2:2', '2:3', '2:4', '2:5', '2:6', '2:7', '2:8', '2:9', '2:10', '2:11', '2:12', '2:13', '2:14', '2:15', '2:16', '2:17', '2:18', '2:19', '2:20'],
-        30: ['112:1', '112:2', '112:3', '112:4', '114:1', '114:2', '114:3', '114:4', '114:5', '114:6']
-    };
-
-    // Группировка по сурам
-    const SURAH_AYATS = {
-        1: ['1:2', '1:3', '1:4', '1:5', '1:6', '1:7'],
-        2: ['2:2', '2:3', '2:4', '2:5', '2:6', '2:7', '2:8', '2:9', '2:10', '2:11', '2:12', '2:13', '2:14', '2:15', '2:16', '2:17', '2:18', '2:19', '2:20'],
-        112: ['112:1', '112:2', '112:3', '112:4'],
-        114: ['114:1', '114:2', '114:3', '114:4', '114:5', '114:6']
-    };
-
-    // ================================================================
-    //  ====== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ======
-    // ================================================================
-
-    // Случайное перемешивание массива
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    // Выбор случайного слова из аята (кроме первых 2-х)
-    function getRandomWord(ayahText) {
-        const words = ayahText.split(' ');
-        if (words.length < 3) return null;
-        // Берём случайное слово, кроме первых двух и последнего
-        const minIdx = 2;
-        const maxIdx = words.length - 2;
-        if (minIdx > maxIdx) return null;
-        const randomIdx = Math.floor(Math.random() * (maxIdx - minIdx + 1)) + minIdx;
-        return {
-            word: words[randomIdx],
-            index: randomIdx,
-            words: words
-        };
-    }
-
-    // Генерация дистракторов (похожих слов)
-    function generateDistractors(correctWord, allWords) {
-        const distractors = [];
-        const pool = allWords.filter(w => w !== correctWord && w.length > 2 && w.length < 15);
-        shuffleArray(pool);
-        for (let i = 0; i < Math.min(3, pool.length); i++) {
-            distractors.push(pool[i]);
-        }
-        // Если не хватило, добавляем заглушки
-        while (distractors.length < 3) {
-            distractors.push('_______');
-        }
-        return distractors;
-    }
-
-    // Создание вопросов из списка аятов
-    function generateQuestions(ayahKeys) {
-        const questions = [];
-        const allWords = Object.values(REAL_AYATS).flatMap(text => text.split(' '));
-        
-        for (const key of ayahKeys) {
-            if (!REAL_AYATS[key]) continue;
-            
-            const ayahText = REAL_AYATS[key];
-            const randomResult = getRandomWord(ayahText);
-            if (!randomResult) continue;
-            
-            const { word: correctWord, index: wordIndex, words } = randomResult;
-            
-            // Создаём текст с пропуском
-            const wordsWithBlank = [...words];
-            wordsWithBlank[wordIndex] = '______';
-            const textWithBlank = wordsWithBlank.join(' ');
-            
-            // Генерируем варианты
-            const options = generateDistractors(correctWord, allWords);
-            // Добавляем правильный ответ и перемешиваем
-            const shuffledOptions = shuffleArray([correctWord, ...options]);
-            
-            const [surahNum, ayahNum] = key.split(':').map(Number);
-            
-            questions.push({
-                text: textWithBlank,
-                correct: correctWord,
-                options: shuffledOptions,
-                source: `Сура ${surahNum}, аят ${ayahNum}`,
-                fullAyah: ayahText,
-                surah: surahNum,
-                ayah: ayahNum
-            });
-        }
-        return questions;
-    }
-
-    // ================================================================
-    //  ====== ФОРМИРОВАНИЕ ДАННЫХ ДЛЯ ТЕСТОВ ======
-    // ================================================================
-
-    const TEST_DATA = {
-        juz: {},
-        surah: {}
-    };
-
-    // Заполняем джузы
-    for (const [juzNum, ayahKeys] of Object.entries(JUZ_AYATS)) {
-        const questions = generateQuestions(ayahKeys);
-        if (questions.length > 0) {
-            TEST_DATA.juz[juzNum] = {
-                label: `Джуз ${juzNum}`,
-                questions: questions.slice(0, 20) // максимум 20 вопросов
-            };
-        }
-    }
-
-    // Заполняем суры
-    for (const [surahNum, ayahKeys] of Object.entries(SURAH_AYATS)) {
-        const questions = generateQuestions(ayahKeys);
-        if (questions.length > 0) {
-            TEST_DATA.surah[surahNum] = {
-                label: `Сура ${surahNum}`,
-                questions: questions.slice(0, 20) // максимум 20 вопросов
-            };
-        }
-    }
-
-    // ================================================================
-    //  ====== ТЕМА ======
-    // ================================================================
-
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
-    const savedTheme = localStorage.getItem('quran-theme') || 'light';
-    document.body.classList.add(savedTheme);
-    updateThemeUI(savedTheme);
-    themeToggle.addEventListener('click', function() {
-        const isLight = document.body.classList.contains('light');
-        const newTheme = isLight ? 'dark' : 'light';
-        document.body.classList.remove('light', 'dark');
-        document.body.classList.add(newTheme);
-        localStorage.setItem('quran-theme', newTheme);
-        updateThemeUI(newTheme);
-    });
-    function updateThemeUI(theme) {
-        if (theme === 'dark') { themeIcon.textContent = '☀️'; themeLabel.textContent = 'Светлая'; }
-        else { themeIcon.textContent = '🌙'; themeLabel.textContent = 'Тёмная'; }
-    }
-
-    // ================================================================
-    //  ====== НАВИГАЦИЯ ======
-    // ================================================================
-
-    const pageWelcome = document.getElementById('pageWelcome');
-    const pageChoose = document.getElementById('pageChoose');
-    const pageSelect = document.getElementById('pageSelect');
-    const pageTest = document.getElementById('pageTest');
-
-    const btnWelcomeNext = document.getElementById('btnWelcomeNext');
-    const btnChooseJuz = document.getElementById('btnChooseJuz');
-    const btnChooseSurah = document.getElementById('btnChooseSurah');
-    const btnChooseBack = document.getElementById('btnChooseBack');
-    const btnSelectBack = document.getElementById('btnSelectBack');
-    const btnTestBack = document.getElementById('btnTestBack');
-    const btnTestHome = document.getElementById('btnTestHome');
-    const checkBtn = document.getElementById('checkBtn');
-
-    const numberGrid = document.getElementById('numberGrid');
-    const selectTitle = document.getElementById('selectTitle');
-    const selectSub = document.getElementById('selectSub');
-    const testTitle = document.getElementById('testTitle');
-    const testLabel = document.getElementById('testLabel');
-    const progressText = document.getElementById('progressText');
-    const questionsContainer = document.getElementById('questionsContainer');
-    const resultBlock = document.getElementById('resultBlock');
-
-    let currentMode = 'juz';
-    let currentId = 1;
-    let currentQuestions = [];
-    let isTestCompleted = false;
-
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    btnWelcomeNext.addEventListener('click', () => showPage('pageChoose'));
-    btnChooseBack.addEventListener('click', () => showPage('pageWelcome'));
-    btnSelectBack.addEventListener('click', () => showPage('pageChoose'));
-    btnTestBack.addEventListener('click', () => showPage('pageSelect'));
-    btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
-
-    // ================================================================
-    //  ====== ВЫБОР РАЗДЕЛА ======
-    // ================================================================
-
-    btnChooseJuz.addEventListener('click', function() {
-        currentMode = 'juz';
-        const ids = Object.keys(TEST_DATA.juz).map(Number);
-        if (ids.length === 0) {
-            alert('Джузы пока не добавлены.');
-            return;
-        }
-        selectTitle.textContent = 'Выберите джуз';
-        selectSub.textContent = 'Выберите номер джуза (1–30)';
-        renderNumbers(30, ids);
-        showPage('pageSelect');
-    });
-
-    btnChooseSurah.addEventListener('click', function() {
-        currentMode = 'surah';
-        const ids = Object.keys(TEST_DATA.surah).map(Number);
-        if (ids.length === 0) {
-            alert('Суры пока не добавлены.');
-            return;
-        }
-        selectTitle.textContent = 'Выберите суру';
-        selectSub.textContent = 'Выберите номер суры (1–114)';
-        renderNumbers(114, ids);
-        showPage('pageSelect');
-    });
-
-    function renderNumbers(count, availableIds) {
-        numberGrid.innerHTML = '';
-        for (let i = 1; i <= count; i++) {
-            const btn = document.createElement('button');
-            btn.className = 'number-btn';
-            btn.textContent = i;
-            if (!availableIds.includes(i)) {
-                btn.style.opacity = '0.2';
-                btn.style.cursor = 'default';
-                btn.title = 'Скоро будет добавлено';
-            } else {
-                btn.addEventListener('click', function() {
-                    currentId = i;
-                    startTest();
-                });
-            }
-            numberGrid.appendChild(btn);
-        }
-    }
-
-    // ================================================================
-    //  ====== ЗАПУСК ТЕСТА ======
-    // ================================================================
-
-    function startTest() {
-        const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
-        if (!data || !data.questions || data.questions.length === 0) {
-            alert('Для этого раздела пока нет вопросов.');
-            return;
-        }
-
-        let questions = [...data.questions];
-        
-        // Для джуза — ровно 20 вопросов
-        if (currentMode === 'juz') {
-            if (questions.length > 20) {
-                questions = questions.slice(0, 20);
-            } else if (questions.length < 20) {
-                // Дополняем из других джузов
-                const allJuz = Object.values(TEST_DATA.juz);
-                for (const j of allJuz) {
-                    if (questions.length >= 20) break;
-                    const extra = j.questions || [];
-                    for (const q of extra) {
-                        if (questions.length >= 20) break;
-                        if (!questions.some(ex => ex.text === q.text && ex.correct === q.correct)) {
-                            questions.push({...q});
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Для суры — все аяты, но не более 20
-        if (currentMode === 'surah' && questions.length > 20) {
-            questions = questions.slice(0, 20);
-        }
-
-        currentQuestions = shuffleArray(questions);
-        isTestCompleted = false;
-        const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
-        testTitle.textContent = label + currentId;
-        testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
-        renderQuestions();
-        resultBlock.style.display = 'none';
-        resultBlock.innerHTML = '';
-        checkBtn.style.display = 'inline-block';
-        showPage('pageTest');
-    }
-
-    // ================================================================
-    //  ====== РЕНДЕРИНГ ВОПРОСОВ ======
-    // ================================================================
-
-    function renderQuestions() {
-        let html = '';
-        currentQuestions.forEach((q, idx) => {
-            const parts = q.text.split('______');
-            let ayahHtml = '';
-            if (parts.length === 2) {
-                ayahHtml = parts[0] + '<span class="highlight-missing">______</span>' + parts[1];
-            } else {
-                ayahHtml = q.text;
-            }
-            
-            html += `
-                <div class="question-block" id="q${idx}">
-                    <div class="question-number">Вопрос ${idx+1} из ${currentQuestions.length}</div>
-                    <div class="ayah-text" dir="rtl">${ayahHtml}</div>
-                    <div class="options" id="opts${idx}">
-                        ${q.options.map((opt, oi) => `
-                            <label id="lbl${idx}_${oi}">
-                                <input type="radio" name="q${idx}" value="${oi}">
-                                ${opt}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <button class="btn-hint" onclick="showHint(${idx})">📖 Подсказка</button>
-                    <div class="hint-text" id="hint${idx}" style="display:none;">
-                        📍 ${q.source} — ${q.fullAyah}
-                    </div>
-                    <div class="feedback" id="fb${idx}"></div>
-                </div>
-            `;
-        });
-        questionsContainer.innerHTML = html;
-        updateProgress();
-
-        document.querySelectorAll('input[type="radio"]').forEach(el => {
-            el.addEventListener('change', updateProgress);
-        });
-    }
-
-    function showHint(idx) {
-        const hint = document.getElementById(`hint${idx}`);
-        if (hint.style.display === 'none') {
-            hint.style.display = 'block';
-        } else {
-            hint.style.display = 'none';
-        }
-    }
-
-    function updateProgress() {
-        const total = currentQuestions.length;
-        let answered = 0;
-        for (let i = 0; i < total; i++) {
-            const selected = document.querySelector(`input[name="q${i}"]:checked`);
-            if (selected) answered++;
-        }
-        progressText.textContent = answered + ' из ' + total;
-    }
-
-    // ================================================================
-    //  ====== ПРОВЕРКА С ДЕТАЛЬНЫМИ РЕЗУЛЬТАТАМИ ======
-    // ================================================================
-
-    checkBtn.addEventListener('click', function() {
-        if (isTestCompleted) return;
-
-        let correct = 0;
-        const total = currentQuestions.length;
-        const results = [];
-
-        currentQuestions.forEach((q, idx) => {
-            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-            const fb = document.getElementById(`fb${idx}`);
-            const labels = document.querySelectorAll(`#opts${idx} label`);
-
-            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
-
-            const userAnswer = selected ? q.options[parseInt(selected.value)] : null;
-            const isCorrect = userAnswer === q.correct;
-
-            if (isCorrect) {
-                correct++;
-                fb.className = 'feedback correct';
-                fb.textContent = '✅ Правильно';
-                if (selected) {
-                    labels[parseInt(selected.value)].classList.add('correct-answer');
-                }
-            } else {
-                fb.className = 'feedback wrong';
-                let msg = `❌ Неправильно. Правильный ответ: "${q.correct}"`;
-                if (userAnswer) {
-                    msg += ` (Ваш ответ: "${userAnswer}")`;
-                } else {
-                    msg += ' (Вы не выбрали ответ)';
-                }
-                fb.textContent = msg;
-                if (selected) {
-                    labels[parseInt(selected.value)].classList.add('wrong-answer');
-                }
-                for (let i = 0; i < labels.length; i++) {
-                    if (q.options[i] === q.correct) {
-                        labels[i].classList.add('correct-answer');
-                    }
-                }
-            }
-
-            results.push({
-                question: q,
-                userAnswer: userAnswer,
-                isCorrect: isCorrect,
-                correctAnswer: q.correct
-            });
-
-            document.querySelectorAll(`input[name="q${idx}"]`).forEach(el => el.disabled = true);
-        });
-
-        // ===== ПОКАЗЫВАЕМ ДЕТАЛЬНЫЕ РЕЗУЛЬТАТЫ =====
-        let resultHtml = `
-            <div style="text-align: center; margin-bottom: 16px;">
-                <div class="score">${correct} / ${total}</div>
-                <div style="font-size: 16px; opacity: 0.7;">${Math.round(correct/total*100)}% правильных ответов</div>
-            </div>
-            <div style="text-align: left; max-height: 350px; overflow-y: auto; padding: 4px 8px; border-radius: 8px; background: rgba(0,0,0,0.02);">
-        `;
-
-        results.forEach((r, idx) => {
-            const icon = r.isCorrect ? '✅' : '❌';
-            resultHtml += `
-                <div class="result-detail">
-                    <div><strong>Вопрос ${idx+1}:</strong> ${icon} ${r.isCorrect ? 'Верно' : 'Неверно'}</div>
-                    <div style="font-size: 13px; opacity: 0.7; direction: rtl; text-align: right; font-family: 'Noto Naskh Arabic', 'Amiri', serif;">
-                        ${r.question.fullAyah}
-                    </div>
-                    <div style="font-size: 13px; opacity: 0.7;">
-                        📖 ${r.question.source}
-                        ${!r.isCorrect ? ` — Ваш ответ: "${r.userAnswer || 'не выбран'}", правильный: "${r.correctAnswer}"` : ''}
-                    </div>
-                </div>
-            `;
-        });
-
-        resultHtml += '</div>';
-        
-        resultBlock.innerHTML = resultHtml;
-        resultBlock.style.display = 'block';
-
-        isTestCompleted = true;
-        checkBtn.style.display = 'none';
-        resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-</script>
-
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+// ================================================================
+//  data.js — ВСЕ ДАННЫЕ КОРАНА
+//  Меняйте только этот файл, дизайн и логика не пострадают
+// ================================================================
+
+// ================================================================
+//  1. ВСЕ АЯТЫ КОРАНА (реальные тексты)
+// ================================================================
+
+const REAL_AYATS = {
+    // ===== СУРА 1: АЛЬ-ФАТИХА (7 аятов) =====
+    '1:1': 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+    '1:2': 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
+    '1:3': 'الرَّحْمَٰنِ الرَّحِيمِ',
+    '1:4': 'مَالِكِ يَوْمِ الدِّينِ',
+    '1:5': 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+    '1:6': 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
+    '1:7': 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
+
+    // ===== СУРА 2: АЛЬ-БАКАРА (аяты 1-141 для 1-го джуза) =====
+    '2:1': 'الم',
+    '2:2': 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ',
+    '2:3': 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ',
+    '2:4': 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ',
+    '2:5': 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ',
+    '2:6': 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ',
+    '2:7': 'خَتَمَ اللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰ أَبْصَارِهِمْ غِشَاوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ',
+    '2:8': 'وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ وَمَا هُم بِمُؤْمِنِينَ',
+    '2:9': 'يُخَادِعُونَ اللَّهَ وَالَّذِينَ آمَنُوا وَمَا يَخْدَعُونَ إِلَّا أَنفُسَهُمْ وَمَا يَشْعُرُونَ',
+    '2:10': 'فِي قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ اللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌ بِمَا كَانُوا يَكْذِبُونَ',
+    '2:11': 'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا فِي الْأَرْضِ قَالُوا إِنَّمَا نَحْنُ مُصْلِحُونَ',
+    '2:12': 'أَلَا إِنَّهُمْ هُمُ الْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ',
+    '2:13': 'وَإِذَا قِيلَ لَهُمْ آمِنُوا كَمَا آمَنَ النَّاسُ قَالُوا أَنُؤْمِنُ كَمَا آمَنَ السُّفَهَاءُ ۗ أَلَا إِنَّهُمْ هُمُ السُّفَهَاءُ وَلَٰكِن لَّا يَعْلَمُونَ',
+    '2:14': 'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا وَإِذَا خَلَوْا إِلَىٰ شَيَاطِينِهِمْ قَالُوا إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِئُونَ',
+    '2:15': 'اللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِي طُغْيَانِهِمْ يَعْمَهُونَ',
+    '2:16': 'أُولَٰئِكَ الَّذِينَ اشْتَرَوُا الضَّلَالَةَ بِالْهُدَىٰ فَمَا رَبِحَت تِّجَارَتُهُمْ وَمَا كَانُوا مُهْتَدِينَ',
+    '2:17': 'مَّثَلُهُمْ كَمَثَلِ الَّذِي اسْتَوْقَدَ نَارًا فَلَمَّا أَضَاءَتْ مَا حَوْلَهُ ذَهَبَ اللَّهُ بِنُورِهِمْ وَتَرَكَهُمْ فِي ظُلُمَاتٍ لَّا يُبْصِرُونَ',
+    '2:18': 'صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُونَ',
+    '2:19': 'أَوْ كَصَيِّبٍ مِّنَ السَّمَاءِ فِيهِ ظُلُمَاتٌ وَرَعْدٌ وَبَرْقٌ يَجْعَلُونَ أَصَابِعَهُمْ فِي آذَانِهِم مِّنَ الصَّوَاعِقِ حَذَرَ الْمَوْتِ ۚ وَاللَّهُ مُحِيطٌ بِالْكَافِرِينَ',
+    '2:20': 'يَكَادُ الْبَرْقُ يَخْطَفُ أَبْصَارَهُمْ ۖ كُلَّمَا أَضَاءَ لَهُم مَّشَوْا فِيهِ وَإِذَا أَظْلَمَ عَلَيْهِمْ قَامُوا ۚ وَلَوْ شَاءَ اللَّهُ لَذَهَبَ بِسَمْعِهِمْ وَأَبْصَارِهِمْ ۚ إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ',
+    '2:21': 'يَا أَيُّهَا النَّاسُ اعْبُدُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ وَالَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ',
+    '2:22': 'الَّذِي جَعَلَ لَكُمُ الْأَرْضَ فِرَاشًا وَالسَّمَاءَ بِنَاءً وَأَنزَلَ مِنَ السَّمَاءِ مَاءً فَأَخْرَجَ بِهِ مِنَ الثَّمَرَاتِ رِزْقًا لَّكُمْ ۖ فَلَا تَجْعَلُوا لِلَّهِ أَندَادًا وَأَنتُمْ تَعْلَمُونَ',
+    '2:23': 'وَإِن كُنتُمْ فِي رَيْبٍ مِّمَّا نَزَّلْنَا عَلَىٰ عَبْدِنَا فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ وَادْعُوا شُهَدَاءَكُم مِّن دُونِ اللَّهِ إِن كُنتُمْ صَادِقِينَ',
+    '2:24': 'فَإِن لَّمْ تَفْعَلُوا وَلَن تَفْعَلُوا فَاتَّقُوا النَّارَ الَّتِي وَقُودُهَا النَّاسُ وَالْحِجَارَةُ ۖ أُعِدَّتْ لِلْكَافِرِينَ',
+    '2:25': 'وَبَشِّرِ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أَنَّ لَهُمْ جَنَّاتٍ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ ۖ كُلَّمَا رُزِقُوا مِنْهَا مِن ثَمَرَةٍ رِّزْقًا ۙ قَالُوا هَٰذَا الَّذِي رُزِقْنَا مِن قَبْلُ ۖ وَأُتُوا بِهِ مُتَشَابِهًا ۖ وَلَهُمْ فِيهَا أَزْوَاجٌ مُّطَهَّرَةٌ ۖ وَهُمْ فِيهَا خَالِدُونَ',
+    '2:26': 'إِنَّ اللَّهَ لَا يَسْتَحْيِي أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا الَّذِينَ آمَنُوا فَيَعْلَمُونَ أَنَّهُ الْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا الَّذِينَ كَفَرُوا فَيَقُولُونَ مَاذَا أَرَادَ اللَّهُ بِهَٰذَا مَثَلًا ۘ يُضِلُّ بِهِ كَثِيرًا وَيَهْدِي بِهِ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِ إِلَّا الْفَاسِقِينَ',
+    '2:27': 'الَّذِينَ يَنقُضُونَ عَهْدَ اللَّهِ مِن بَعْدِ مِيثَاقِهِ وَيَقْطَعُونَ مَا أَمَرَ اللَّهُ بِهِ أَن يُوصَلَ وَيُفْسِدُونَ فِي الْأَرْضِ ۚ أُولَٰئِكَ هُمُ الْخَاسِرُونَ',
+    '2:28': 'كَيْفَ تَكْفُرُونَ بِاللَّهِ وَكُنتُمْ أَمْوَاتًا فَأَحْيَاكُمْ ۖ ثُمَّ يُمِيتُكُمْ ثُمَّ يُحْيِيكُمْ ثُمَّ إِلَيْهِ تُرْجَعُونَ',
+    '2:29': 'هُوَ الَّذِي خَلَقَ لَكُم مَّا فِي الْأَرْضِ جَمِيعًا ثُمَّ اسْتَوَىٰ إِلَى السَّمَاءِ فَسَوَّاهُنَّ سَبْعَ سَمَاوَاتٍ ۚ وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ',
+    '2:30': 'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً ۖ قَالُوا أَتَجْعَلُ فِيهَا مَن يُفْسِدُ فِيهَا وَيَسْفِكُ الدِّمَاءَ وَنَحْنُ نُسَبِّحُ بِحَمْدِكَ وَنُقَدِّسُ لَكَ ۖ قَالَ إِنِّي أَعْلَمُ مَا لَا تَعْلَمُونَ',
+    '2:31': 'وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا ثُمَّ عَرَضَهُمْ عَلَى الْمَلَائِكَةِ فَقَالَ أَنبِئُونِي بِأَسْمَاءِ هَٰؤُلَاءِ إِن كُنتُمْ صَادِقِينَ',
+    '2:32': 'قَالُوا سُبْحَانَكَ لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا ۖ إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ',
+    '2:33': 'قَالَ يَا آدَمُ أَنبِئْهُم بِأَسْمَائِهِمْ ۖ فَلَمَّا أَنبَأَهُم بِأَسْمَائِهِمْ قَالَ أَلَمْ أَقُل لَّكُمْ إِنِّي أَعْلَمُ غَيْبَ السَّمَاوَاتِ وَالْأَرْضِ وَأَعْلَمُ مَا تُبْدُونَ وَمَا كُنتُمْ تَكْتُمُونَ',
+    '2:34': 'وَإِذْ قُلْنَا لِلْمَلَائِكَةِ اسْجُدُوا لِآدَمَ فَسَجَدُوا إِلَّا إِبْلِيسَ أَبَىٰ وَاسْتَكْبَرَ وَكَانَ مِنَ الْكَافِرِينَ',
+    '2:35': 'وَقُلْنَا يَا آدَمُ اسْكُنْ أَنتَ وَزَوْجُكَ الْجَنَّةَ وَكُلَا مِنْهَا رَغَدًا حَيْثُ شِئْتُمَا وَلَا تَقْرَبَا هَٰذِهِ الشَّجَرَةَ فَتَكُونَا مِنَ الظَّالِمِينَ',
+    '2:36': 'فَأَزَلَّهُمَا الشَّيْطَانُ عَنْهَا فَأَخْرَجَهُمَا مِمَّا كَانَا فِيهِ ۖ وَقُلْنَا اهْبِطُوا بَعْضُكُمْ لِبَعْضٍ عَدُوٌّ ۖ وَلَكُمْ فِي الْأَرْضِ مُسْتَقَرٌّ وَمَتَاعٌ إِلَىٰ حِينٍ',
+    '2:37': 'فَتَلَقَّىٰ آدَمُ مِن رَّبِّهِ كَلِمَاتٍ فَتَابَ عَلَيْهِ ۚ إِنَّهُ هُوَ التَّوَّابُ الرَّحِيمُ',
+    '2:38': 'قُلْنَا اهْبِطُوا مِنْهَا جَمِيعًا ۖ فَإِمَّا يَأْتِيَنَّكُم مِّنِّي هُدًى فَمَن تَبِعَ هُدَايَ فَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ',
+    '2:39': 'وَالَّذِينَ كَفَرُوا وَكَذَّبُوا بِآيَاتِنَا أُولَٰئِكَ أَصْحَابُ النَّارِ ۖ هُمْ فِيهَا خَالِدُونَ',
+    '2:40': 'يَا بَنِي إِسْرَائِيلَ اذْكُرُوا نِعْمَتِيَ الَّتِي أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا بِعَهْدِي أُوفِ بِعَهْدِكُمْ وَإِيَّايَ فَارْهَبُونِ',
+    '2:41': 'وَآمِنُوا بِمَا أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوا أَوَّلَ كَافِرٍ بِهِ ۖ وَلَا تَشْتَرُوا بِآيَاتِي ثَمَنًا قَلِيلًا وَإِيَّايَ فَاتَّقُونِ',
+
+    // ... продолжение для 2:42 – 2:141 (здесь нужно дописать все аяты)
+
+    // ===== СУРА 112: АЛЬ-ИХЛЯС =====
+    '112:1': 'قُلْ هُوَ اللَّهُ أَحَدٌ',
+    '112:2': 'اللَّهُ الصَّمَدُ',
+    '112:3': 'لَمْ يَلِدْ وَلَمْ يُولَدْ',
+    '112:4': 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',
+
+    // ===== СУРА 113: АЛЬ-ФАЛЯК =====
+    '113:1': 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ',
+    '113:2': 'مِن شَرِّ مَا خَلَقَ',
+    '113:3': 'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ',
+    '113:4': 'وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ',
+    '113:5': 'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ',
+
+    // ===== СУРА 114: АН-НАС =====
+    '114:1': 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
+    '114:2': 'مَلِكِ النَّاسِ',
+    '114:3': 'إِلَٰهِ النَّاسِ',
+    '114:4': 'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
+    '114:5': 'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ',
+    '114:6': 'مِنَ الْجِنَّةِ وَالنَّاسِ'
+};
+
+// ================================================================
+//  2. ГРУППИРОВКА ПО ДЖУЗАМ
+// ================================================================
+
+const JUZ_AYATS = {
+    1: ['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7', '2:1', '2:2', '2:3', '2:4', '2:5', '2:6', '2:7', '2:8', '2:9', '2:10', '2:11', '2:12', '2:13', '2:14', '2:15', '2:16', '2:17', '2:18', '2:19', '2:20', '2:21', '2:22', '2:23', '2:24', '2:25', '2:26', '2:27', '2:28', '2:29', '2:30', '2:31', '2:32', '2:33', '2:34', '2:35', '2:36', '2:37', '2:38', '2:39', '2:40', '2:41'],
+    // ... 2-29 джузы (нужно добавить)
+    30: ['112:1', '112:2', '112:3', '112:4', '113:1', '113:2', '113:3', '113:4', '113:5', '114:1', '114:2', '114:3', '114:4', '114:5', '114:6']
+};
+
+// ================================================================
+//  3. ГРУППИРОВКА ПО СУРАМ
+// ================================================================
+
+const SURAH_AYATS = {
+    1: ['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7'],
+    2: ['2:1', '2:2', '2:3', '2:4', '2:5', '2:6', '2:7', '2:8', '2:9', '2:10', '2:11', '2:12', '2:13', '2:14', '2:15', '2:16', '2:17', '2:18', '2:19', '2:20', '2:21', '2:22', '2:23', '2:24', '2:25', '2:26', '2:27', '2:28', '2:29', '2:30', '2:31', '2:32', '2:33', '2:34', '2:35', '2:36', '2:37', '2:38', '2:39', '2:40', '2:41'],
+    // ... остальные суры
+    112: ['112:1', '112:2', '112:3', '112:4'],
+    113: ['113:1', '113:2', '113:3', '113:4', '113:5'],
+    114: ['114:1', '114:2', '114:3', '114:4', '114:5', '114:6']
+};
+/* ================================================================
+   style.css — ВЕСЬ ДИЗАЙН
+   Меняйте цвета, шрифты, отступы здесь — данные не пострадают
+   ================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    transition: all 0.4s ease;
+    min-height: 100vh;
+}
+
+/* ===== СВЕТЛАЯ ТЕМА ===== */
+body.light {
+    background: #f5efe8;
+}
+
+body.light .arabic-salam {
+    color: #7a5a3a;
+}
+
+body.light .arabic-verse {
+    color: #3d2b1f;
+}
+
+body.light .arabic-verse small {
+    color: #9a8a7a;
+}
+
+body.light .welcome-description {
+    color: #8a7a6a;
+}
+
+body.light .choose-page h2 {
+    color: #3d2b1f;
+}
+
+body.light .choose-page p {
+    color: #8a7a6a;
+}
+
+body.light .choose-card {
+    color: #3d2b1f;
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light .choose-card:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+body.light .select-page h2 {
+    color: #3d2b1f;
+}
+
+body.light .select-page p {
+    color: #8a7a6a;
+}
+
+body.light .number-btn {
+    color: #6a5a4a;
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light .number-btn:hover {
+    background: rgba(212, 175, 55, 0.08);
+    color: #3d2b1f;
+}
+
+body.light .test-page .ayah-text {
+    color: #3d2b1f;
+    background: rgba(255, 248, 240, 0.3);
+}
+
+body.light .test-page .options label {
+    color: #5a4a3a;
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light .test-page .options label:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+body.light .test-page .feedback.correct {
+    color: #28a745;
+}
+
+body.light .test-page .feedback.wrong {
+    color: #dc3545;
+}
+
+body.light .btn-secondary {
+    color: #8a7a6a;
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.light .bismillah {
+    color: #d4af37;
+    opacity: 0.6;
+}
+
+body.light .divider-line {
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+}
+
+body.light .divider-icon {
+    color: rgba(212, 175, 55, 0.2);
+}
+
+body.light .hint-text {
+    color: #8a7a6a;
+}
+
+body.light .question-block {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light .result-detail {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+/* ===== ТЁМНАЯ ТЕМА ===== */
+body.dark {
+    background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
+}
+
+body.dark .arabic-salam {
+    color: #d4af37;
+}
+
+body.dark .arabic-verse {
+    color: #ffffff;
+}
+
+body.dark .arabic-verse small {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark .welcome-description {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark .choose-page h2 {
+    color: #ffffff;
+}
+
+body.dark .choose-page p {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark .choose-card {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+body.dark .choose-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark .select-page h2 {
+    color: #ffffff;
+}
+
+body.dark .select-page p {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark .number-btn {
+    color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .number-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+body.dark .test-page .ayah-text {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+body.dark .test-page .options label {
+    color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .test-page .options label:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark .test-page .feedback.correct {
+    color: #28a745;
+}
+
+body.dark .test-page .feedback.wrong {
+    color: #dc3545;
+}
+
+body.dark .btn-secondary {
+    color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+body.dark .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark .bismillah {
+    color: rgba(255, 215, 0, 0.2);
+}
+
+body.dark .divider-line {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+body.dark .divider-icon {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .hint-text {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark .question-block {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+body.dark .result-detail {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ===== КОНТЕЙНЕР ===== */
+.container {
+    max-width: 950px;
+    width: 100%;
+    height: 100%;
+    max-height: 860px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+/* ===== БИСМИЛЛЯ ===== */
+.bismillah {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 2;
+    transition: color 0.4s ease;
+    text-align: left;
+}
+
+/* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== */
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 20px;
+}
+
+body.light .theme-toggle {
+    color: #8a7a6a;
+}
+
+body.light .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.dark .theme-toggle {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.theme-toggle .icon {
+    font-size: 18px;
+}
+
+/* ===== СТРАНИЦЫ ===== */
+.page {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.page.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== ПРИВЕТСТВИЕ ===== */
+.welcome-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.salam-block {
+    width: 100%;
+}
+
+.arabic-salam {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 52px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    transition: color 0.4s ease;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0 14px 0;
+    width: 100%;
+}
+
+.divider-line {
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    transition: background 0.4s ease;
+}
+
+.divider-icon {
+    font-size: 16px;
+    letter-spacing: 4px;
+    transition: color 0.4s ease;
+}
+
+.verse-block {
+    width: 100%;
+    padding: 4px 0;
+}
+
+.arabic-verse {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1.8;
+    padding: 12px 0;
+    transition: color 0.4s ease;
+}
+
+.arabic-verse small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+    transition: color 0.4s ease;
+}
+
+.welcome-description {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: color 0.4s ease;
+    margin: 8px 0 16px 0;
+}
+
+/* ===== КНОПКИ ===== */
+.btn-primary {
+    background: linear-gradient(145deg, #c9a87c, #b8942e);
+    color: #ffffff;
+    border: none;
+    padding: 16px 60px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+    background: linear-gradient(145deg, #d4b488, #c9a87c);
+}
+
+.btn-secondary {
+    padding: 14px 40px;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    display: inline-block;
+    margin-top: 16px;
+    border: 1px solid;
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+/* ===== ВЫБОР РАЗДЕЛА ===== */
+.choose-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.choose-page h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    transition: color 0.4s ease;
+}
+
+.choose-page p {
+    font-size: 17px;
+    margin-bottom: 20px;
+    transition: color 0.4s ease;
+}
+
+.choose-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.choose-card {
+    border-radius: 20px;
+    padding: 38px 48px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    text-align: center;
+    background: transparent;
+    border: 1px solid;
+}
+
+.choose-card:hover {
+    transform: translateY(-4px);
+}
+
+.choose-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* ===== ВЫБОР НОМЕРА ===== */
+.select-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.select-page h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    transition: color 0.4s ease;
+}
+
+.select-page p {
+    font-size: 17px;
+    margin-bottom: 16px;
+    transition: color 0.4s ease;
+}
+
+.number-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-height: 340px;
+    overflow-y: auto;
+    padding: 8px 4px;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.number-grid::-webkit-scrollbar {
+    width: 4px;
+}
+
+.number-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+
+.number-grid::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+}
+
+.number-btn {
+    border-radius: 14px;
+    padding: 14px 22px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    min-width: 56px;
+    border: 1px solid;
+    background: transparent;
+}
+
+.number-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ===== ТЕСТ ===== */
+.test-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 10px 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    min-height: 400px;
+}
+
+.test-page .test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 4px;
+    font-size: 14px;
+    color: #8a7a6a;
+    transition: color 0.4s ease;
+    flex-shrink: 0;
+}
+
+.test-page .test-header strong {
+    font-weight: 600;
+}
+
+.questions-container {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 8px;
+}
+
+.question-block {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid;
+    margin-bottom: 8px;
+    transition: border-color 0.4s ease;
+}
+
+.question-block:last-child {
+    border-bottom: none;
+}
+
+.question-number {
+    font-size: 13px;
+    color: #9a8a7a;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    transition: color 0.4s ease;
+    text-align: left;
+}
+
+.ayah-text {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.8;
+    padding: 16px 20px;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    text-align: right;
+    direction: rtl;
+    margin-bottom: 12px;
+}
+
+.ayah-text .highlight-missing {
+    background: rgba(220, 53, 69, 0.12);
+    padding: 2px 12px;
+    border-radius: 6px;
+    border-bottom: 2px solid #dc3545;
+    color: #dc3545;
+    font-weight: 700;
+    min-width: 40px;
+    display: inline-block;
+    text-align: center;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.options label {
+    display: block;
+    padding: 10px 16px;
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 22px;
+    text-align: right;
+    direction: rtl;
+    border: 1px solid;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.options input[type="radio"] {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%) scale(1.1);
+    accent-color: #c9a87c;
+}
+
+.options label.correct-answer {
+    background: rgba(40, 167, 69, 0.12) !important;
+    color: #28a745 !important;
+    border-color: rgba(40, 167, 69, 0.2) !important;
+}
+
+.options label.wrong-answer {
+    background: rgba(220, 53, 69, 0.12) !important;
+    color: #dc3545 !important;
+    border-color: rgba(220, 53, 69, 0.2) !important;
+}
+
+.feedback {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 6px;
+    text-align: left;
+}
+
+.feedback.correct {
+    color: #28a745;
+}
+
+.feedback.wrong {
+    color: #dc3545;
+}
+
+.btn-hint {
+    background: transparent;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #c9a87c;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    margin-top: 4px;
+}
+
+.btn-hint:hover {
+    background: rgba(212, 175, 55, 0.08);
+    transform: translateY(-1px);
+}
+
+.hint-text {
+    font-size: 14px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: left;
+    transition: color 0.4s ease;
+    background: rgba(212, 175, 55, 0.04);
+}
+
+.result-block {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 16px;
+    text-align: center;
+    display: none;
+    margin: 8px 0;
+    flex-shrink: 0;
+}
+
+body.light .result-block {
+    background: rgba(255, 248, 240, 0.3);
+}
+
+body.dark .result-block {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.result-block .score {
+    font-size: 32px;
+    font-weight: 700;
+    transition: color 0.4s ease;
+}
+
+body.light .result-block .score {
+    color: #3d2b1f;
+}
+
+body.dark .result-block .score {
+    color: #ffffff;
+}
+
+.result-detail {
+    padding: 8px 0;
+    border-bottom: 1px solid;
+    text-align: left;
+    font-size: 14px;
+}
+
+.result-detail:last-child {
+    border-bottom: none;
+}
+
+.test-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.test-buttons .btn-secondary {
+    margin-top: 0;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        padding: 12px 16px;
+        max-height: none;
+        min-height: auto;
+    }
+
+    .arabic-salam {
+        font-size: 32px;
+    }
+
+    .arabic-verse {
+        font-size: 22px;
+    }
+
+    .divider-line {
+        max-width: 40px;
+    }
+
+    .btn-primary {
+        padding: 14px 40px;
+        font-size: 16px;
+    }
+
+    .choose-card {
+        padding: 24px 28px;
+        min-width: 140px;
+    }
+
+    .choose-card h3 {
+        font-size: 19px;
+    }
+
+    .choose-grid {
+        gap: 16px;
+    }
+
+    .number-btn {
+        padding: 12px 16px;
+        font-size: 15px;
+        min-width: 46px;
+    }
+
+    .bismillah {
+        font-size: 20px;
+    }
+
+    .theme-toggle {
+        font-size: 12px;
+    }
+
+    .welcome-description {
+        font-size: 15px;
+    }
+
+    .choose-page h2 {
+        font-size: 22px;
+    }
+
+    .select-page h2 {
+        font-size: 22px;
+    }
+
+    .test-page .ayah-text {
+        font-size: 22px;
+        padding: 12px 14px;
+    }
+
+    .options label {
+        font-size: 18px;
+        padding: 8px 14px;
+    }
+
+    .test-buttons .btn-secondary {
+        padding: 12px 28px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 10px;
+    }
+
+    .arabic-salam {
+        font-size: 26px;
+    }
+
+    .arabic-verse {
+        font-size: 18px;
+    }
+
+    .choose-card {
+        padding: 18px 20px;
+        min-width: 110px;
+    }
+
+    .choose-card h3 {
+        font-size: 16px;
+    }
+
+    .number-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+        min-width: 40px;
+    }
+
+    .btn-primary {
+        padding: 12px 28px;
+        font-size: 14px;
+    }
+
+    .test-page .ayah-text {
+        font-size: 18px;
+        padding: 10px 12px;
+    }
+
+    .options label {
+        font-size: 15px;
+        padding: 6px 12px;
+    }
+}
+// ================================================================
+//  script.js — ВСЯ ЛОГИКА РАБОТЫ ТЕСТА
+//  Этот файл не нужно менять при добавлении новых аятов
+// ================================================================
+
+// ================================================================
+//  ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+// ================================================================
+
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function getRandomWord(ayahText) {
+    const words = ayahText.split(' ');
+    if (words.length < 3) return null;
+    const minIdx = 2;
+    const maxIdx = words.length - 2;
+    if (minIdx > maxIdx) return null;
+    const randomIdx = Math.floor(Math.random() * (maxIdx - minIdx + 1)) + minIdx;
+    return {
+        word: words[randomIdx],
+        index: randomIdx,
+        words: words
+    };
+}
+
+function generateDistractors(correctWord, allWords) {
+    const distractors = [];
+    const pool = allWords.filter(w => w !== correctWord && w.length > 2 && w.length < 15);
+    shuffleArray(pool);
+    for (let i = 0; i < Math.min(3, pool.length); i++) {
+        distractors.push(pool[i]);
+    }
+    while (distractors.length < 3) {
+        distractors.push('_______');
+    }
+    return distractors;
+}
+
+function generateQuestions(ayahKeys) {
+    const questions = [];
+    const allWords = Object.values(REAL_AYATS).flatMap(text => text.split(' '));
+    
+    for (const key of ayahKeys) {
+        if (!REAL_AYATS[key]) continue;
+        
+        const ayahText = REAL_AYATS[key];
+        const randomResult = getRandomWord(ayahText);
+        if (!randomResult) continue;
+        
+        const { word: correctWord, index: wordIndex, words } = randomResult;
+        const wordsWithBlank = [...words];
+        wordsWithBlank[wordIndex] = '______';
+        const textWithBlank = wordsWithBlank.join(' ');
+        const options = generateDistractors(correctWord, allWords);
+        const shuffledOptions = shuffleArray([correctWord, ...options]);
+        const [surahNum, ayahNum] = key.split(':').map(Number);
+        
+        questions.push({
+            text: textWithBlank,
+            correct: correctWord,
+            options: shuffledOptions,
+            source: `Сура ${surahNum}, аят ${ayahNum}`,
+            fullAyah: ayahText,
+            surah: surahNum,
+            ayah: ayahNum
+        });
+    }
+    return questions;
+}
+
+// ================================================================
+//  ФОРМИРОВАНИЕ ДАННЫХ ДЛЯ ТЕСТОВ
+// ================================================================
+
+const TEST_DATA = {
+    juz: {},
+    surah: {}
+};
+
+for (const [juzNum, ayahKeys] of Object.entries(JUZ_AYATS)) {
+    const questions = generateQuestions(ayahKeys);
+    if (questions.length > 0) {
+        TEST_DATA.juz[juzNum] = {
+            label: `Джуз ${juzNum}`,
+            questions: questions.slice(0, 20)
+        };
+    }
+}
+
+for (const [surahNum, ayahKeys] of Object.entries(SURAH_AYATS)) {
+    const questions = generateQuestions(ayahKeys);
+    if (questions.length > 0) {
+        TEST_DATA.surah[surahNum] = {
+            label: `Сура ${surahNum}`,
+            questions: questions.slice(0, 20)
+        };
+    }
+}
+
+// ================================================================
+//  ТЕМА
+// ================================================================
+
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const themeLabel = document.getElementById('themeLabel');
+const savedTheme = localStorage.getItem('quran-theme') || 'light';
+document.body.classList.add(savedTheme);
+updateThemeUI(savedTheme);
+
+themeToggle.addEventListener('click', function() {
+    const isLight = document.body.classList.contains('light');
+    const newTheme = isLight ? 'dark' : 'light';
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(newTheme);
+    localStorage.setItem('quran-theme', newTheme);
+    updateThemeUI(newTheme);
+});
+
+function updateThemeUI(theme) {
+    if (theme === 'dark') {
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Светлая';
+    } else {
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Тёмная';
+    }
+}
+
+// ================================================================
+//  НАВИГАЦИЯ
+// ================================================================
+
+const pageWelcome = document.getElementById('pageWelcome');
+const pageChoose = document.getElementById('pageChoose');
+const pageSelect = document.getElementById('pageSelect');
+const pageTest = document.getElementById('pageTest');
+
+const btnWelcomeNext = document.getElementById('btnWelcomeNext');
+const btnChooseJuz = document.getElementById('btnChooseJuz');
+const btnChooseSurah = document.getElementById('btnChooseSurah');
+const btnChooseBack = document.getElementById('btnChooseBack');
+const btnSelectBack = document.getElementById('btnSelectBack');
+const btnTestBack = document.getElementById('btnTestBack');
+const btnTestHome = document.getElementById('btnTestHome');
+const checkBtn = document.getElementById('checkBtn');
+
+const numberGrid = document.getElementById('numberGrid');
+const selectTitle = document.getElementById('selectTitle');
+const selectSub = document.getElementById('selectSub');
+const testTitle = document.getElementById('testTitle');
+const testLabel = document.getElementById('testLabel');
+const progressText = document.getElementById('progressText');
+const questionsContainer = document.getElementById('questionsContainer');
+const resultBlock = document.getElementById('resultBlock');
+
+let currentMode = 'juz';
+let currentId = 1;
+let currentQuestions = [];
+let isTestCompleted = false;
+
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+btnWelcomeNext.addEventListener('click', () => showPage('pageChoose'));
+btnChooseBack.addEventListener('click', () => showPage('pageWelcome'));
+btnSelectBack.addEventListener('click', () => showPage('pageChoose'));
+btnTestBack.addEventListener('click', () => showPage('pageSelect'));
+btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
+
+// ================================================================
+//  ВЫБОР РАЗДЕЛА
+// ================================================================
+
+btnChooseJuz.addEventListener('click', function() {
+    currentMode = 'juz';
+    const ids = Object.keys(TEST_DATA.juz).map(Number);
+    if (ids.length === 0) {
+        alert('Джузы пока не добавлены.');
+        return;
+    }
+    selectTitle.textContent = 'Выберите джуз';
+    selectSub.textContent = 'Выберите номер джуза (1–30)';
+    renderNumbers(30, ids);
+    showPage('pageSelect');
+});
+
+btnChooseSurah.addEventListener('click', function() {
+    currentMode = 'surah';
+    const ids = Object.keys(TEST_DATA.surah).map(Number);
+    if (ids.length === 0) {
+        alert('Суры пока не добавлены.');
+        return;
+    }
+    selectTitle.textContent = 'Выберите суру';
+    selectSub.textContent = 'Выберите номер суры (1–114)';
+    renderNumbers(114, ids);
+    showPage('pageSelect');
+});
+
+function renderNumbers(count, availableIds) {
+    numberGrid.innerHTML = '';
+    for (let i = 1; i <= count; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'number-btn';
+        btn.textContent = i;
+        if (!availableIds.includes(i)) {
+            btn.style.opacity = '0.2';
+            btn.style.cursor = 'default';
+            btn.title = 'Скоро будет добавлено';
+        } else {
+            btn.addEventListener('click', function() {
+                currentId = i;
+                startTest();
+            });
+        }
+        numberGrid.appendChild(btn);
+    }
+}
+
+// ================================================================
+//  ЗАПУСК ТЕСТА
+// ================================================================
+
+function startTest() {
+    const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
+    if (!data || !data.questions || data.questions.length === 0) {
+        alert('Для этого раздела пока нет вопросов.');
+        return;
+    }
+
+    let questions = [...data.questions];
+    
+    if (currentMode === 'juz' && questions.length > 20) {
+        questions = questions.slice(0, 20);
+    }
+    
+    if (currentMode === 'surah' && questions.length > 20) {
+        questions = questions.slice(0, 20);
+    }
+
+    currentQuestions = shuffleArray(questions);
+    isTestCompleted = false;
+    const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
+    testTitle.textContent = label + currentId;
+    testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
+    renderQuestions();
+    resultBlock.style.display = 'none';
+    resultBlock.innerHTML = '';
+    checkBtn.style.display = 'inline-block';
+    showPage('pageTest');
+}
+
+// ================================================================
+//  РЕНДЕРИНГ ВОПРОСОВ
+// ================================================================
+
+function renderQuestions() {
+    let html = '';
+    currentQuestions.forEach((q, idx) => {
+        const parts = q.text.split('______');
+        let ayahHtml = '';
+        if (parts.length === 2) {
+            ayahHtml = parts[0] + '<span class="highlight-missing">______</span>' + parts[1];
+        } else {
+            ayahHtml = q.text;
+        }
+        
+        html += `
+            <div class="question-block" id="q${idx}">
+                <div class="question-number">Вопрос ${idx+1} из ${currentQuestions.length}</div>
+                <div class="ayah-text" dir="rtl">${ayahHtml}</div>
+                <div class="options" id="opts${idx}">
+                    ${q.options.map((opt, oi) => `
+                        <label id="lbl${idx}_${oi}">
+                            <input type="radio" name="q${idx}" value="${oi}">
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+                <button class="btn-hint" onclick="showHint(${idx})">📖 Подсказка</button>
+                <div class="hint-text" id="hint${idx}" style="display:none;">
+                    📍 ${q.source} — ${q.fullAyah}
+                </div>
+                <div class="feedback" id="fb${idx}"></div>
+            </div>
+        `;
+    });
+    questionsContainer.innerHTML = html;
+    updateProgress();
+
+    document.querySelectorAll('input[type="radio"]').forEach(el => {
+        el.addEventListener('change', updateProgress);
+    });
+}
+
+function showHint(idx) {
+    const hint = document.getElementById(`hint${idx}`);
+    if (hint.style.display === 'none') {
+        hint.style.display = 'block';
+    } else {
+        hint.style.display = 'none';
+    }
+}
+
+function updateProgress() {
+    const total = currentQuestions.length;
+    let answered = 0;
+    for (let i = 0; i < total; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected) answered++;
+    }
+    progressText.textContent = answered + ' из ' + total;
+}
+
+// ================================================================
+//  ПРОВЕРКА С ДЕТАЛЬНЫМИ РЕЗУЛЬТАТАМИ
+// ================================================================
+
+checkBtn.addEventListener('click', function() {
+    if (isTestCompleted) return;
+
+    let correct = 0;
+    const total = currentQuestions.length;
+    const results = [];
+
+    currentQuestions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        const fb = document.getElementById(`fb${idx}`);
+        const labels = document.querySelectorAll(`#opts${idx} label`);
+
+        labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
+
+        const userAnswer = selected ? q.options[parseInt(selected.value)] : null;
+        const isCorrect = userAnswer === q.correct;
+
+        if (isCorrect) {
+            correct++;
+            fb.className = 'feedback correct';
+            fb.textContent = '✅ Правильно';
+            if (selected) {
+                labels[parseInt(selected.value)].classList.add('correct-answer');
+            }
+        } else {
+            fb.className = 'feedback wrong';
+            let msg = `❌ Неправильно. Правильный ответ: "${q.correct}"`;
+            if (userAnswer) {
+                msg += ` (Ваш ответ: "${userAnswer}")`;
+            } else {
+                msg += ' (Вы не выбрали ответ)';
+            }
+            fb.textContent = msg;
+            if (selected) {
+                labels[parseInt(selected.value)].classList.add('wrong-answer');
+            }
+            for (let i = 0; i < labels.length; i++) {
+                if (q.options[i] === q.correct) {
+                    labels[i].classList.add('correct-answer');
+                }
+            }
+        }
+
+        results.push({
+            question: q,
+            userAnswer: userAnswer,
+            isCorrect: isCorrect,
+            correctAnswer: q.correct
+        });
+
+        document.querySelectorAll(`input[name="q${idx}"]`).forEach(el => el.disabled = true);
+    });
+
+    let resultHtml = `
+        <div style="text-align: center; margin-bottom: 16px;">
+            <div class="score">${correct} / ${total}</div>
+            <div style="font-size: 16px; opacity: 0.7;">${Math.round(correct/total*100)}% правильных ответов</div>
+        </div>
+        <div style="text-align: left; max-height: 350px; overflow-y: auto; padding: 4px 8px; border-radius: 8px; background: rgba(0,0,0,0.02);">
+    `;
+
+    results.forEach((r, idx) => {
+        const icon = r.isCorrect ? '✅' : '❌';
+        resultHtml += `
+            <div class="result-detail">
+                <div><strong>Вопрос ${idx+1}:</strong> ${icon} ${r.isCorrect ? 'Верно' : 'Неверно'}</div>
+                <div style="font-size: 13px; opacity: 0.7; direction: rtl; text-align: right; font-family: 'Noto Naskh Arabic', 'Amiri', serif;">
+                    ${r.question.fullAyah}
+                </div>
+                <div style="font-size: 13px; opacity: 0.7;">
+                    📖 ${r.question.source}
+                    ${!r.isCorrect ? ` — Ваш ответ: "${r.userAnswer || 'не выбран'}", правильный: "${r.correctAnswer}"` : ''}
+                </div>
+            </div>
+        `;
+    });
+
+    resultHtml += '</div>';
+    
+    resultBlock.innerHTML = resultHtml;
+    resultBlock.style.display = 'block';
+
+    isTestCompleted = true;
+    checkBtn.style.display = 'none';
+    resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
