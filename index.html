@@ -16,11 +16,71 @@
             justify-content: center;
             align-items: center;
             padding: 24px;
-            background: #f5efe8;
             position: relative;
+            transition: all 0.4s ease;
         }
 
-        body::before {
+        /* ===== СВЕТЛАЯ ТЕМА (по умолчанию) ===== */
+        body.light {
+            background: #f5efe8;
+        }
+        body.light .container {
+            background: rgba(255, 252, 248, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        }
+        body.light .arabic-salam { color: #7a5a3a; }
+        body.light .arabic-verse { color: #3d2b1f; background: rgba(255, 248, 240, 0.5); border-color: rgba(212, 175, 55, 0.08); }
+        body.light .arabic-verse small { color: #9a8a7a; }
+        body.light .welcome-description { color: #8a7a6a; }
+        body.light .choose-page h2 { color: #3d2b1f; }
+        body.light .choose-page p { color: #8a7a6a; }
+        body.light .choose-card { background: rgba(255, 248, 240, 0.5); border-color: rgba(212, 175, 55, 0.08); color: #3d2b1f; }
+        body.light .choose-card:hover { background: rgba(255, 248, 240, 0.8); border-color: rgba(212, 175, 55, 0.2); }
+        body.light .choose-card p { color: #9a8a7a; }
+        body.light .select-page h2 { color: #3d2b1f; }
+        body.light .select-page p { color: #8a7a6a; }
+        body.light .number-btn { background: rgba(255, 248, 240, 0.5); border-color: rgba(212, 175, 55, 0.06); color: #6a5a4a; }
+        body.light .number-btn:hover { background: rgba(212, 175, 55, 0.08); color: #3d2b1f; }
+        body.light .test-page h2 { color: #3d2b1f; }
+        body.light .test-page p { color: #8a7a6a; }
+        body.light .btn-secondary { background: rgba(0, 0, 0, 0.03); color: #8a7a6a; border-color: rgba(0, 0, 0, 0.04); }
+        body.light .btn-secondary:hover { background: rgba(0, 0, 0, 0.06); color: #5a4a3a; }
+        body.light .bismillah { color: rgba(212, 175, 55, 0.25); }
+        body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent); }
+        body.light .divider-icon { color: rgba(212, 175, 55, 0.3); }
+
+        /* ===== ТЁМНАЯ ТЕМА ===== */
+        body.dark {
+            background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
+        }
+        body.dark .container {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+        }
+        body.dark .arabic-salam { color: #d4af37; }
+        body.dark .arabic-verse { color: #ffffff; background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); }
+        body.dark .arabic-verse small { color: rgba(255, 255, 255, 0.3); }
+        body.dark .welcome-description { color: rgba(255, 255, 255, 0.4); }
+        body.dark .choose-page h2 { color: #ffffff; }
+        body.dark .choose-page p { color: rgba(255, 255, 255, 0.4); }
+        body.dark .choose-card { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); color: #ffffff; }
+        body.dark .choose-card:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.12); }
+        body.dark .choose-card p { color: rgba(255, 255, 255, 0.3); }
+        body.dark .select-page h2 { color: #ffffff; }
+        body.dark .select-page p { color: rgba(255, 255, 255, 0.4); }
+        body.dark .number-btn { background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.6); }
+        body.dark .number-btn:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+        body.dark .test-page h2 { color: #ffffff; }
+        body.dark .test-page p { color: rgba(255, 255, 255, 0.4); }
+        body.dark .btn-secondary { background: rgba(255, 255, 255, 0.02); color: rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.04); }
+        body.dark .btn-secondary:hover { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.6); }
+        body.dark .bismillah { color: rgba(255, 255, 255, 0.15); }
+        body.dark .divider-line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent); }
+        body.dark .divider-icon { color: rgba(255, 255, 255, 0.15); }
+
+        body.light::before {
             content: '';
             position: fixed;
             top: 0;
@@ -33,8 +93,21 @@
             pointer-events: none;
             z-index: 0;
         }
+        body.dark::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 L35 20 L50 20 L38 30 L42 45 L30 35 L18 45 L22 30 L10 20 L25 20 Z" fill="rgba(255,255,255,0.03)"/><path d="M30 15 L33 25 L43 25 L35 31 L38 41 L30 35 L22 41 L25 31 L17 25 L27 25 Z" fill="rgba(255,255,255,0.02)"/></svg>');
+            background-repeat: repeat;
+            background-size: 120px 120px;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-        body::after {
+        body.light::after {
             content: '';
             position: fixed;
             top: 0;
@@ -47,20 +120,31 @@
             pointer-events: none;
             z-index: 0;
         }
+        body.dark::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(88, 70, 200, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(0, 91, 158, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
         .container {
             max-width: 800px;
             width: 100%;
-            background: rgba(255, 252, 248, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 50px 44px;
             border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
             position: relative;
             z-index: 1;
             text-align: center;
+            transition: all 0.4s ease;
         }
         .container::before {
             content: '';
@@ -69,9 +153,61 @@
             left: 20%;
             right: 20%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
             border-radius: 100%;
         }
+        body.light .container::before {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+        }
+        body.dark .container::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+        }
+
+        /* ===== БАСМАЛЛА В УГЛУ ===== */
+        .bismillah {
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        /* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== */
+        .theme-toggle {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        body.light .theme-toggle {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.06);
+            color: #8a7a6a;
+        }
+        body.light .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+        body.dark .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .theme-toggle .icon { font-size: 16px; }
 
         .page { display: none; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
@@ -86,10 +222,10 @@
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 44px;
             font-weight: 600;
-            color: #7a5a3a;
             line-height: 1.6;
             text-shadow: 0 2px 20px rgba(212, 175, 55, 0.05);
             letter-spacing: 1px;
+            transition: color 0.4s ease;
         }
 
         .divider {
@@ -103,39 +239,41 @@
             flex: 1;
             max-width: 60px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: background 0.4s ease;
         }
-        .divider-icon { font-size: 16px; color: rgba(212, 175, 55, 0.3); letter-spacing: 4px; }
+        .divider-icon {
+            font-size: 16px;
+            letter-spacing: 4px;
+            transition: color 0.4s ease;
+        }
 
         .verse-block { padding: 8px 10px 16px 10px; }
         .arabic-verse {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 26px;
             font-weight: 500;
-            color: #3d2b1f;
             line-height: 2;
             padding: 24px 32px;
-            background: rgba(255, 248, 240, 0.5);
             border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.08);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s ease;
         }
         .arabic-verse small {
             display: block;
             font-family: 'Inter', sans-serif;
             font-size: 14px;
             font-weight: 400;
-            color: #9a8a7a;
             margin-top: 12px;
             letter-spacing: 0.5px;
+            transition: color 0.4s ease;
         }
 
         .welcome-description {
             font-size: 16px;
-            color: #8a7a6a;
             margin: 18px 0 28px 0;
             font-weight: 400;
             letter-spacing: 0.3px;
+            transition: color 0.4s ease;
         }
 
         .btn-primary {
@@ -160,9 +298,6 @@
         }
 
         .btn-secondary {
-            background: rgba(0, 0, 0, 0.03);
-            color: #8a7a6a;
-            border: 1px solid rgba(0, 0, 0, 0.04);
             padding: 12px 30px;
             font-size: 16px;
             font-weight: 500;
@@ -172,12 +307,10 @@
             font-family: 'Inter', sans-serif;
             display: inline-block;
             margin-top: 16px;
+            border: 1px solid;
+            transition: all 0.4s ease;
         }
-        .btn-secondary:hover {
-            background: rgba(0, 0, 0, 0.06);
-            color: #5a4a3a;
-            transform: translateY(-2px);
-        }
+        .btn-secondary:hover { transform: translateY(-2px); }
 
         /* ========================================================= */
         /*  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                 */
@@ -187,13 +320,13 @@
         .choose-page h2 {
             font-size: 24px;
             font-weight: 600;
-            color: #3d2b1f;
             margin-bottom: 8px;
+            transition: color 0.4s ease;
         }
         .choose-page p {
             font-size: 15px;
-            color: #8a7a6a;
             margin-bottom: 30px;
+            transition: color 0.4s ease;
         }
         .choose-grid {
             display: flex;
@@ -202,35 +335,30 @@
             flex-wrap: wrap;
         }
         .choose-card {
-            background: rgba(255, 248, 240, 0.5);
-            border: 1px solid rgba(212, 175, 55, 0.08);
             border-radius: 18px;
             padding: 28px 32px;
             cursor: pointer;
             transition: all 0.3s ease;
             min-width: 170px;
             text-decoration: none;
-            color: #3d2b1f;
             text-align: center;
         }
         .choose-card:hover {
-            background: rgba(255, 248, 240, 0.8);
-            border-color: rgba(212, 175, 55, 0.2);
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
         .choose-card .icon { font-size: 38px; display: block; margin-bottom: 10px; opacity: 0.6; }
         .choose-card:hover .icon { opacity: 1; }
         .choose-card h3 { font-size: 18px; font-weight: 600; }
-        .choose-card p { font-size: 13px; color: #9a8a7a; margin-bottom: 0; }
+        .choose-card p { font-size: 13px; margin-bottom: 0; }
 
         /* ========================================================= */
         /*  СТРАНИЦА 3: ВЫБОР НОМЕРА                                 */
         /* ========================================================= */
 
         .select-page { padding: 20px 0 10px 0; }
-        .select-page h2 { font-size: 24px; font-weight: 600; color: #3d2b1f; margin-bottom: 8px; }
-        .select-page p { font-size: 15px; color: #8a7a6a; margin-bottom: 24px; }
+        .select-page h2 { font-size: 24px; font-weight: 600; margin-bottom: 8px; transition: color 0.4s ease; }
+        .select-page p { font-size: 15px; margin-bottom: 24px; transition: color 0.4s ease; }
         .number-grid {
             display: flex;
             flex-wrap: wrap;
@@ -245,32 +373,25 @@
         .number-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 10px; }
         .number-grid::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 10px; }
         .number-btn {
-            background: rgba(255, 248, 240, 0.5);
-            border: 1px solid rgba(212, 175, 55, 0.06);
             border-radius: 12px;
             padding: 12px 18px;
             font-size: 16px;
             font-weight: 600;
-            color: #6a5a4a;
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: 'Inter', sans-serif;
             min-width: 52px;
+            border: 1px solid;
         }
-        .number-btn:hover {
-            background: rgba(212, 175, 55, 0.08);
-            color: #3d2b1f;
-            border-color: rgba(212, 175, 55, 0.15);
-            transform: translateY(-2px);
-        }
+        .number-btn:hover { transform: translateY(-2px); }
 
         /* ========================================================= */
         /*  СТРАНИЦА 4: ТЕСТ (заглушка)                              */
         /* ========================================================= */
 
         .test-page { padding: 20px 0; }
-        .test-page h2 { font-size: 24px; font-weight: 600; color: #3d2b1f; margin-bottom: 16px; }
-        .test-page p { font-size: 16px; color: #8a7a6a; margin-bottom: 20px; }
+        .test-page h2 { font-size: 24px; font-weight: 600; margin-bottom: 16px; transition: color 0.4s ease; }
+        .test-page p { font-size: 16px; margin-bottom: 20px; transition: color 0.4s ease; }
 
         @media (max-width: 600px) {
             .container { padding: 28px 20px; border-radius: 24px; }
@@ -281,12 +402,23 @@
             .btn-primary { padding: 12px 32px; font-size: 14px; }
             .choose-card { padding: 20px 24px; min-width: 140px; }
             .number-btn { padding: 10px 14px; font-size: 14px; min-width: 44px; }
+            .bismillah { font-size: 14px; top: 14px; left: 16px; }
+            .theme-toggle { font-size: 11px; padding: 4px 10px; top: 14px; right: 16px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+
+    <!-- ===== БАСМАЛЛА В УГЛУ ===== -->
+    <div class="bismillah">﷽</div>
+
+    <!-- ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== -->
+    <button class="theme-toggle" id="themeToggle">
+        <span class="icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Тёмная</span>
+    </button>
 
     <!-- ============================================================ -->
     <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ (активна по умолчанию)              -->
@@ -325,12 +457,12 @@
             <div class="choose-grid">
                 <div class="choose-card" id="btnChooseJuz">
                     <span class="icon">☾</span>
-                    <h3>Джузы</h3>
+                    <h3>Джуз</h3>
                     <p>1–30</p>
                 </div>
                 <div class="choose-card" id="btnChooseSurah">
                     <span class="icon">☰</span>
-                    <h3>Суры</h3>
+                    <h3>Сура</h3>
                     <p>1–114</p>
                 </div>
             </div>
@@ -364,6 +496,38 @@
 </div>
 
 <script>
+    // ============================================================
+    //  ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
+    // ============================================================
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    // Проверяем сохранённую тему
+    const savedTheme = localStorage.getItem('quran-theme') || 'light';
+    document.body.classList.add(savedTheme);
+    updateThemeUI(savedTheme);
+
+    themeToggle.addEventListener('click', function() {
+        const isLight = document.body.classList.contains('light');
+        const newTheme = isLight ? 'dark' : 'light';
+        document.body.classList.remove('light', 'dark');
+        document.body.classList.add(newTheme);
+        localStorage.setItem('quran-theme', newTheme);
+        updateThemeUI(newTheme);
+    });
+
+    function updateThemeUI(theme) {
+        if (theme === 'dark') {
+            themeIcon.textContent = '☀️';
+            themeLabel.textContent = 'Светлая';
+        } else {
+            themeIcon.textContent = '🌙';
+            themeLabel.textContent = 'Тёмная';
+        }
+    }
+
     // ============================================================
     //  НАВИГАЦИЯ
     // ============================================================
