@@ -9,10 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body {
-            height: 100%;
-            font-family: 'Inter', -apple-system, sans-serif;
-        }
+        html, body { height: 100%; font-family: 'Inter', -apple-system, sans-serif; }
         body {
             display: flex;
             justify-content: center;
@@ -23,55 +20,58 @@
             min-height: 100vh;
         }
 
-        /* ===== СВЕТЛАЯ ТЕМА ===== */
-        body.light {
-            background: #f5efe8;
-        }
+        body.light { background: #f5efe8; }
         body.light .arabic-salam { color: #7a5a3a; }
         body.light .arabic-verse { color: #3d2b1f; }
         body.light .arabic-verse small { color: #9a8a7a; }
         body.light .welcome-description { color: #8a7a6a; }
         body.light .choose-page h2 { color: #3d2b1f; }
         body.light .choose-page p { color: #8a7a6a; }
-        body.light .choose-card { color: #3d2b1f; border-color: rgba(0, 0, 0, 0.04); }
-        body.light .choose-card:hover { background: rgba(212, 175, 55, 0.05); }
+        body.light .choose-card { color: #3d2b1f; border-color: rgba(0,0,0,0.04); }
+        body.light .choose-card:hover { background: rgba(212,175,55,0.05); }
         body.light .select-page h2 { color: #3d2b1f; }
         body.light .select-page p { color: #8a7a6a; }
-        body.light .number-btn { color: #6a5a4a; border-color: rgba(0, 0, 0, 0.04); }
-        body.light .number-btn:hover { background: rgba(212, 175, 55, 0.08); color: #3d2b1f; }
-        body.light .test-page h2 { color: #3d2b1f; }
-        body.light .test-page p { color: #8a7a6a; }
-        body.light .btn-secondary { color: #8a7a6a; border-color: rgba(0, 0, 0, 0.04); }
-        body.light .btn-secondary:hover { background: rgba(0, 0, 0, 0.04); }
+        body.light .number-btn { color: #6a5a4a; border-color: rgba(0,0,0,0.04); }
+        body.light .number-btn:hover { background: rgba(212,175,55,0.08); color: #3d2b1f; }
+        body.light .test-page .question-title { color: #3d2b1f; }
+        body.light .test-page .ayah-text { color: #3d2b1f; background: rgba(255,248,240,0.3); }
+        body.light .test-page .options label { color: #5a4a3a; border-color: rgba(0,0,0,0.04); }
+        body.light .test-page .options label:hover { background: rgba(212,175,55,0.05); }
+        body.light .test-page .feedback.correct { color: #28a745; }
+        body.light .test-page .feedback.wrong { color: #dc3545; }
+        body.light .btn-secondary { color: #8a7a6a; border-color: rgba(0,0,0,0.04); }
+        body.light .btn-secondary:hover { background: rgba(0,0,0,0.04); }
         body.light .bismillah { color: #d4af37; opacity: 0.6; }
-        body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent); }
-        body.light .divider-icon { color: rgba(212, 175, 55, 0.2); }
+        body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); }
+        body.light .divider-icon { color: rgba(212,175,55,0.2); }
 
-        /* ===== ТЁМНАЯ ТЕМА ===== */
         body.dark {
             background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
         }
         body.dark .arabic-salam { color: #d4af37; }
         body.dark .arabic-verse { color: #ffffff; }
-        body.dark .arabic-verse small { color: rgba(255, 255, 255, 0.3); }
-        body.dark .welcome-description { color: rgba(255, 255, 255, 0.4); }
+        body.dark .arabic-verse small { color: rgba(255,255,255,0.3); }
+        body.dark .welcome-description { color: rgba(255,255,255,0.4); }
         body.dark .choose-page h2 { color: #ffffff; }
-        body.dark .choose-page p { color: rgba(255, 255, 255, 0.4); }
-        body.dark .choose-card { color: #ffffff; border-color: rgba(255, 255, 255, 0.04); }
-        body.dark .choose-card:hover { background: rgba(255, 255, 255, 0.05); }
+        body.dark .choose-page p { color: rgba(255,255,255,0.4); }
+        body.dark .choose-card { color: #ffffff; border-color: rgba(255,255,255,0.04); }
+        body.dark .choose-card:hover { background: rgba(255,255,255,0.05); }
         body.dark .select-page h2 { color: #ffffff; }
-        body.dark .select-page p { color: rgba(255, 255, 255, 0.4); }
-        body.dark .number-btn { color: rgba(255, 255, 255, 0.6); border-color: rgba(255, 255, 255, 0.06); }
-        body.dark .number-btn:hover { background: rgba(255, 255, 255, 0.06); color: #ffffff; }
-        body.dark .test-page h2 { color: #ffffff; }
-        body.dark .test-page p { color: rgba(255, 255, 255, 0.4); }
-        body.dark .btn-secondary { color: rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.04); }
-        body.dark .btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
-        body.dark .bismillah { color: rgba(255, 215, 0, 0.2); }
-        body.dark .divider-line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent); }
-        body.dark .divider-icon { color: rgba(255, 255, 255, 0.1); }
+        body.dark .select-page p { color: rgba(255,255,255,0.4); }
+        body.dark .number-btn { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
+        body.dark .number-btn:hover { background: rgba(255,255,255,0.06); color: #ffffff; }
+        body.dark .test-page .question-title { color: #ffffff; }
+        body.dark .test-page .ayah-text { color: #ffffff; background: rgba(255,255,255,0.03); }
+        body.dark .test-page .options label { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
+        body.dark .test-page .options label:hover { background: rgba(255,255,255,0.04); }
+        body.dark .test-page .feedback.correct { color: #28a745; }
+        body.dark .test-page .feedback.wrong { color: #dc3545; }
+        body.dark .btn-secondary { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.04); }
+        body.dark .btn-secondary:hover { background: rgba(255,255,255,0.04); }
+        body.dark .bismillah { color: rgba(255,215,0,0.2); }
+        body.dark .divider-line { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); }
+        body.dark .divider-icon { color: rgba(255,255,255,0.1); }
 
-        /* ===== КОНТЕЙНЕР ===== */
         .container {
             max-width: 950px;
             width: 100%;
@@ -88,7 +88,6 @@
             transition: all 0.4s ease;
         }
 
-        /* ===== БАСМАЛЛА ===== */
         .bismillah {
             position: absolute;
             top: 0;
@@ -102,7 +101,6 @@
             text-align: left;
         }
 
-        /* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== */
         .theme-toggle {
             position: absolute;
             top: 0;
@@ -122,9 +120,9 @@
             border-radius: 20px;
         }
         body.light .theme-toggle { color: #8a7a6a; }
-        body.light .theme-toggle:hover { background: rgba(0, 0, 0, 0.04); }
-        body.dark .theme-toggle { color: rgba(255, 255, 255, 0.3); }
-        body.dark .theme-toggle:hover { background: rgba(255, 255, 255, 0.04); }
+        body.light .theme-toggle:hover { background: rgba(0,0,0,0.04); }
+        body.dark .theme-toggle { color: rgba(255,255,255,0.3); }
+        body.dark .theme-toggle:hover { background: rgba(255,255,255,0.04); }
         .theme-toggle .icon { font-size: 18px; }
 
         .page {
@@ -139,10 +137,6 @@
         }
         .page.active { display: flex; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ========================================================= */
-        /*  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                   */
-        /* ========================================================= */
 
         .welcome-content {
             display: flex;
@@ -248,10 +242,6 @@
         }
         .btn-secondary:hover { transform: translateY(-2px); }
 
-        /* ========================================================= */
-        /*  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                 */
-        /* ========================================================= */
-
         .choose-page {
             display: flex;
             flex-direction: column;
@@ -288,16 +278,10 @@
             background: transparent;
             border: 1px solid;
         }
-        body.light .choose-card { border-color: rgba(0, 0, 0, 0.04); }
-        body.dark .choose-card { border-color: rgba(255, 255, 255, 0.04); }
-        .choose-card:hover {
-            transform: translateY(-4px);
-        }
+        body.light .choose-card { border-color: rgba(0,0,0,0.04); }
+        body.dark .choose-card { border-color: rgba(255,255,255,0.04); }
+        .choose-card:hover { transform: translateY(-4px); }
         .choose-card h3 { font-size: 22px; font-weight: 600; }
-
-        /* ========================================================= */
-        /*  СТРАНИЦА 3: ВЫБОР НОМЕРА                                 */
-        /* ========================================================= */
 
         .select-page {
             display: flex;
@@ -323,7 +307,7 @@
         }
         .number-grid::-webkit-scrollbar { width: 4px; }
         .number-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 10px; }
-        .number-grid::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 10px; }
+        .number-grid::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.2); border-radius: 10px; }
         .number-btn {
             border-radius: 14px;
             padding: 14px 22px;
@@ -339,7 +323,7 @@
         .number-btn:hover { transform: translateY(-2px); }
 
         /* ========================================================= */
-        /*  СТРАНИЦА 4: ТЕСТ                                          */
+        /*  СТРАНИЦА ТЕСТА                                             */
         /* ========================================================= */
 
         .test-page {
@@ -347,12 +331,131 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             width: 100%;
             padding: 10px 0;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        .test-page h2 { font-size: 28px; font-weight: 600; transition: color 0.4s ease; }
-        .test-page p { font-size: 18px; transition: color 0.4s ease; }
+        .test-page .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 4px;
+            font-size: 14px;
+            color: #8a7a6a;
+            transition: color 0.4s ease;
+        }
+        body.dark .test-page .test-header { color: rgba(255,255,255,0.4); }
+        .test-page .test-header strong { font-weight: 600; }
+
+        .question-block {
+            width: 100%;
+            padding: 8px 0;
+        }
+        .question-number {
+            font-size: 13px;
+            color: #9a8a7a;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            transition: color 0.4s ease;
+        }
+        body.dark .question-number { color: rgba(255,255,255,0.3); }
+        .ayah-text {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 1.8;
+            padding: 16px 20px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 12px;
+        }
+        .ayah-text .highlight-missing {
+            background: rgba(220,53,69,0.12);
+            padding: 2px 12px;
+            border-radius: 6px;
+            border-bottom: 2px solid #dc3545;
+            color: #dc3545;
+            font-weight: 700;
+            min-width: 40px;
+            display: inline-block;
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+        }
+        .options label {
+            display: block;
+            padding: 10px 16px;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 22px;
+            text-align: right;
+            direction: rtl;
+            border: 1px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        .options input[type="radio"] {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%) scale(1.1);
+            accent-color: #c9a87c;
+        }
+        .options label.correct-answer {
+            background: rgba(40,167,69,0.12) !important;
+            color: #28a745 !important;
+            border-color: rgba(40,167,69,0.2) !important;
+        }
+        .options label.wrong-answer {
+            background: rgba(220,53,69,0.12) !important;
+            color: #dc3545 !important;
+            border-color: rgba(220,53,69,0.2) !important;
+        }
+        .feedback {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 6px;
+        }
+        .feedback.correct { color: #28a745; }
+        .feedback.wrong { color: #dc3545; }
+
+        .result-block {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            text-align: center;
+            display: none;
+            margin: 8px 0;
+        }
+        body.light .result-block { background: rgba(255,248,240,0.3); }
+        body.dark .result-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
+        .result-block .score {
+            font-size: 32px;
+            font-weight: 700;
+            transition: color 0.4s ease;
+        }
+        body.light .result-block .score { color: #3d2b1f; }
+        body.dark .result-block .score { color: #ffffff; }
+
+        .test-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 6px;
+        }
+        .test-buttons .btn-secondary { margin-top: 0; }
 
         @media (max-width: 600px) {
             body { padding: 12px; }
@@ -371,7 +474,9 @@
             .welcome-description { font-size: 15px; }
             .choose-page h2 { font-size: 22px; }
             .select-page h2 { font-size: 22px; }
-            .test-page h2 { font-size: 22px; }
+            .test-page .ayah-text { font-size: 22px; padding: 12px 14px; }
+            .options label { font-size: 18px; padding: 8px 14px; }
+            .test-buttons .btn-secondary { padding: 12px 28px; font-size: 15px; }
         }
         @media (max-width: 400px) {
             .container { padding: 10px; }
@@ -381,6 +486,8 @@
             .choose-card h3 { font-size: 16px; }
             .number-btn { padding: 10px 12px; font-size: 13px; min-width: 40px; }
             .btn-primary { padding: 12px 28px; font-size: 14px; }
+            .test-page .ayah-text { font-size: 18px; padding: 10px 12px; }
+            .options label { font-size: 15px; padding: 6px 12px; }
         }
     </style>
 </head>
@@ -388,17 +495,15 @@
 
 <div class="container">
 
-    <!-- ===== БАСМАЛЛА ===== -->
     <div class="bismillah">﷽</div>
 
-    <!-- ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== -->
     <button class="theme-toggle" id="themeToggle">
         <span class="icon" id="themeIcon">🌙</span>
         <span id="themeLabel">Тёмная</span>
     </button>
 
     <!-- ============================================================ -->
-    <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ (активна по умолчанию)              -->
+    <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                      -->
     <!-- ============================================================ -->
     <div class="page active" id="pageWelcome">
         <div class="welcome-content">
@@ -407,20 +512,17 @@
                     ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
                 </div>
             </div>
-
             <div class="divider">
                 <span class="divider-line"></span>
                 <span class="divider-icon">✦</span>
                 <span class="divider-line"></span>
             </div>
-
             <div class="verse-block">
                 <div class="arabic-verse">
-                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
                     <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
                 </div>
             </div>
-
             <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
             <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
         </div>
@@ -434,12 +536,8 @@
             <h2>Выберите раздел</h2>
             <p>Выберите джуз или суру для начала тестирования</p>
             <div class="choose-grid">
-                <div class="choose-card" id="btnChooseJuz">
-                    <h3>Джуз</h3>
-                </div>
-                <div class="choose-card" id="btnChooseSurah">
-                    <h3>Сура</h3>
-                </div>
+                <div class="choose-card" id="btnChooseJuz"><h3>Джуз</h3></div>
+                <div class="choose-card" id="btnChooseSurah"><h3>Сура</h3></div>
             </div>
             <button class="btn-secondary" id="btnChooseBack">← Назад</button>
         </div>
@@ -458,31 +556,113 @@
     </div>
 
     <!-- ============================================================ -->
-    <!--  СТРАНИЦА 4: ТЕСТ (заглушка)                                 -->
+    <!--  СТРАНИЦА 4: ТЕСТ                                             -->
     <!-- ============================================================ -->
     <div class="page" id="pageTest">
         <div class="test-page">
-            <h2 id="testTitle">Тест</h2>
-            <p>Здесь будут вопросы для проверки знаний</p>
-            <button class="btn-secondary" id="btnTestBack">🏠 На главную</button>
+            <div class="test-header">
+                <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
+                <span id="progressText">0 из 0</span>
+            </div>
+            <div id="questionsContainer"></div>
+            <div class="result-block" id="resultBlock">
+                <div class="score" id="scoreDisplay">0 / 0</div>
+            </div>
+            <div class="test-buttons">
+                <button class="btn-secondary" id="btnTestBack">← Назад</button>
+                <button class="btn-secondary" id="btnTestHome">🏠 На главную</button>
+                <button class="btn-secondary" id="checkBtn">✅ Проверить</button>
+            </div>
         </div>
     </div>
 
 </div>
 
 <script>
-    // ============================================================
-    //  ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
-    // ============================================================
+    // ================================================================
+    //  ====== БЛОК ДАННЫХ (легко заменяемый) ======
+    //  Добавляйте сюда новые джузы и суры.
+    //  Структура: { type: 'juz' или 'surah', id: число, label: 'Название', questions: [ { text, correct, options } ] }
+    // ================================================================
 
+    const TEST_DATA = {
+        juz: {
+            1: {
+                label: 'Джуз 1',
+                questions: [
+                    {
+                        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________',
+                        correct: 'عَالَمِينَ',
+                        options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ']
+                    },
+                    {
+                        text: 'مَالِكِ يَوْمِ _____________',
+                        correct: 'الدِّينِ',
+                        options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ']
+                    },
+                    {
+                        text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________',
+                        correct: 'عِينُ',
+                        options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ']
+                    },
+                    {
+                        text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________',
+                        correct: 'قِيمَ',
+                        options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ']
+                    },
+                    {
+                        text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________',
+                        correct: 'الِّينَ',
+                        options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ']
+                    }
+                ]
+            }
+        },
+        surah: {
+            1: {
+                label: 'Аль-Фатиха',
+                questions: [
+                    {
+                        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________',
+                        correct: 'عَالَمِينَ',
+                        options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ']
+                    },
+                    {
+                        text: 'مَالِكِ يَوْمِ _____________',
+                        correct: 'الدِّينِ',
+                        options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ']
+                    },
+                    {
+                        text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________',
+                        correct: 'عِينُ',
+                        options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ']
+                    },
+                    {
+                        text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________',
+                        correct: 'قِيمَ',
+                        options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ']
+                    },
+                    {
+                        text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________',
+                        correct: 'الِّينَ',
+                        options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ']
+                    }
+                ]
+            }
+        }
+    };
+
+    // ================================================================
+    //  ====== КОНЕЦ БЛОКА ДАННЫХ ======
+    // ================================================================
+
+    // ===== ТЕМА =====
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
-
     const savedTheme = localStorage.getItem('quran-theme') || 'light';
     document.body.classList.add(savedTheme);
     updateThemeUI(savedTheme);
-
     themeToggle.addEventListener('click', function() {
         const isLight = document.body.classList.contains('light');
         const newTheme = isLight ? 'dark' : 'light';
@@ -491,21 +671,12 @@
         localStorage.setItem('quran-theme', newTheme);
         updateThemeUI(newTheme);
     });
-
     function updateThemeUI(theme) {
-        if (theme === 'dark') {
-            themeIcon.textContent = '☀️';
-            themeLabel.textContent = 'Светлая';
-        } else {
-            themeIcon.textContent = '🌙';
-            themeLabel.textContent = 'Тёмная';
-        }
+        if (theme === 'dark') { themeIcon.textContent = '☀️'; themeLabel.textContent = 'Светлая'; }
+        else { themeIcon.textContent = '🌙'; themeLabel.textContent = 'Тёмная'; }
     }
 
-    // ============================================================
-    //  НАВИГАЦИЯ
-    // ============================================================
-
+    // ===== НАВИГАЦИЯ =====
     const pageWelcome = document.getElementById('pageWelcome');
     const pageChoose = document.getElementById('pageChoose');
     const pageSelect = document.getElementById('pageSelect');
@@ -517,10 +688,23 @@
     const btnChooseBack = document.getElementById('btnChooseBack');
     const btnSelectBack = document.getElementById('btnSelectBack');
     const btnTestBack = document.getElementById('btnTestBack');
+    const btnTestHome = document.getElementById('btnTestHome');
+    const checkBtn = document.getElementById('checkBtn');
+
     const numberGrid = document.getElementById('numberGrid');
     const selectTitle = document.getElementById('selectTitle');
     const selectSub = document.getElementById('selectSub');
     const testTitle = document.getElementById('testTitle');
+    const testLabel = document.getElementById('testLabel');
+    const progressText = document.getElementById('progressText');
+    const questionsContainer = document.getElementById('questionsContainer');
+    const resultBlock = document.getElementById('resultBlock');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+
+    let currentMode = 'juz';
+    let currentId = 1;
+    let currentQuestions = [];
+    let isTestCompleted = false;
 
     function showPage(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -528,57 +712,165 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    btnWelcomeNext.addEventListener('click', function() {
-        showPage('pageChoose');
-    });
+    btnWelcomeNext.addEventListener('click', () => showPage('pageChoose'));
+    btnChooseBack.addEventListener('click', () => showPage('pageWelcome'));
+    btnSelectBack.addEventListener('click', () => showPage('pageChoose'));
+    btnTestBack.addEventListener('click', () => showPage('pageSelect'));
+    btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
 
-    btnChooseBack.addEventListener('click', function() {
-        showPage('pageWelcome');
-    });
-
-    btnSelectBack.addEventListener('click', function() {
-        showPage('pageChoose');
-    });
-
-    btnTestBack.addEventListener('click', function() {
-        showPage('pageWelcome');
-    });
-
-    // ============================================================
-    //  ВЫБОР ДЖУЗА / СУРЫ
-    // ============================================================
-
-    let currentMode = 'juz';
-
+    // ===== ВЫБОР РАЗДЕЛА =====
     btnChooseJuz.addEventListener('click', function() {
         currentMode = 'juz';
+        const ids = Object.keys(TEST_DATA.juz).map(Number);
+        if (ids.length === 0) {
+            alert('Джузы пока не добавлены.');
+            return;
+        }
         selectTitle.textContent = 'Выберите джуз';
         selectSub.textContent = 'Выберите номер джуза (1–30)';
-        renderNumbers(30);
+        renderNumbers(30, ids);
         showPage('pageSelect');
     });
 
     btnChooseSurah.addEventListener('click', function() {
         currentMode = 'surah';
+        const ids = Object.keys(TEST_DATA.surah).map(Number);
+        if (ids.length === 0) {
+            alert('Суры пока не добавлены.');
+            return;
+        }
         selectTitle.textContent = 'Выберите суру';
         selectSub.textContent = 'Выберите номер суры (1–114)';
-        renderNumbers(114);
+        renderNumbers(114, ids);
         showPage('pageSelect');
     });
 
-    function renderNumbers(count) {
+    function renderNumbers(count, availableIds) {
         numberGrid.innerHTML = '';
         for (let i = 1; i <= count; i++) {
             const btn = document.createElement('button');
             btn.className = 'number-btn';
             btn.textContent = i;
-            btn.addEventListener('click', function() {
-                const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
-                testTitle.textContent = label + i;
-                showPage('pageTest');
-            });
+            if (!availableIds.includes(i)) {
+                btn.style.opacity = '0.2';
+                btn.style.cursor = 'default';
+                btn.title = 'Скоро будет добавлено';
+            } else {
+                btn.addEventListener('click', function() {
+                    currentId = i;
+                    startTest();
+                });
+            }
             numberGrid.appendChild(btn);
         }
+    }
+
+    // ===== ЗАПУСК ТЕСТА =====
+    function startTest() {
+        const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
+        if (!data || !data.questions || data.questions.length === 0) {
+            alert('Для этого раздела пока нет вопросов.');
+            return;
+        }
+        currentQuestions = shuffleArray([...data.questions]);
+        isTestCompleted = false;
+        const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
+        testTitle.textContent = label + currentId;
+        testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
+        renderQuestions();
+        resultBlock.style.display = 'none';
+        checkBtn.style.display = 'inline-block';
+        showPage('pageTest');
+    }
+
+    // ===== РЕНДЕРИНГ ВОПРОСОВ =====
+    function renderQuestions() {
+        let html = '';
+        currentQuestions.forEach((q, idx) => {
+            const ayahHtml = q.text.replace('_____________', '<span class="highlight-missing">______</span>');
+            html += `
+                <div class="question-block" id="q${idx}">
+                    <div class="question-number">Вопрос ${idx+1} из ${currentQuestions.length}</div>
+                    <div class="ayah-text">${ayahHtml}</div>
+                    <div class="options" id="opts${idx}">
+                        ${q.options.map((opt, oi) => `
+                            <label id="lbl${idx}_${oi}">
+                                <input type="radio" name="q${idx}" value="${oi}">
+                                ${opt}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="fb${idx}"></div>
+                </div>
+            `;
+        });
+        questionsContainer.innerHTML = html;
+        updateProgress();
+
+        document.querySelectorAll('input[type="radio"]').forEach(el => {
+            el.addEventListener('change', updateProgress);
+        });
+    }
+
+    function updateProgress() {
+        const total = currentQuestions.length;
+        let answered = 0;
+        for (let i = 0; i < total; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected) answered++;
+        }
+        progressText.textContent = answered + ' из ' + total;
+    }
+
+    // ===== ПРОВЕРКА =====
+    checkBtn.addEventListener('click', function() {
+        if (isTestCompleted) return;
+
+        let correct = 0;
+        const total = currentQuestions.length;
+
+        currentQuestions.forEach((q, idx) => {
+            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+            const fb = document.getElementById(`fb${idx}`);
+            const labels = document.querySelectorAll(`#opts${idx} label`);
+
+            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
+
+            if (selected) {
+                const val = parseInt(selected.value);
+                if (q.options[val] === q.correct) {
+                    correct++;
+                    fb.className = 'feedback correct';
+                    fb.textContent = '✅ Правильно';
+                    labels[val].classList.add('correct-answer');
+                } else {
+                    fb.className = 'feedback wrong';
+                    fb.textContent = '❌ Неправильно';
+                    labels[val].classList.add('wrong-answer');
+                }
+            } else {
+                fb.className = 'feedback wrong';
+                fb.textContent = '❌ Ответ не выбран';
+            }
+
+            document.querySelectorAll(`input[name="q${idx}"]`).forEach(el => el.disabled = true);
+        });
+
+        resultBlock.style.display = 'block';
+        scoreDisplay.textContent = correct + ' / ' + total;
+
+        isTestCompleted = true;
+        checkBtn.style.display = 'none';
+        resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // ===== ВСПОМОГАТЕЛЬНЫЕ =====
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
     }
 </script>
 
