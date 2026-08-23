@@ -4,23 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изучение Корана</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             min-height: 100vh;
-            padding: 24px;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            padding-top: 40px;
-            background: linear-gradient(160deg, #0d1b2a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            align-items: center;
+            padding: 24px;
+            background: #f5efe8;
             position: relative;
         }
+
+        /* === ФОН С ИСЛАМСКИМ УЗОРОМ === */
         body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 L35 20 L50 20 L38 30 L42 45 L30 35 L18 45 L22 30 L10 20 L25 20 Z" fill="rgba(212,175,55,0.04)"/><path d="M30 15 L33 25 L43 25 L35 31 L38 41 L30 35 L22 41 L25 31 L17 25 L27 25 Z" fill="rgba(212,175,55,0.03)"/></svg>');
+            background-repeat: repeat;
+            background-size: 120px 120px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* === ДЕКОРАТИВНЫЙ ГРАДИЕНТ === */
+        body::after {
             content: '';
             position: fixed;
             top: 0;
@@ -29,24 +45,25 @@
             bottom: 0;
             background: 
                 radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 30%, rgba(46, 204, 113, 0.03) 0%, transparent 40%);
+                radial-gradient(ellipse at 80% 50%, rgba(193, 154, 107, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(255, 248, 240, 0.4) 0%, transparent 40%);
             pointer-events: none;
             z-index: 0;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 252, 248, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 40px 44px;
+            padding: 50px 44px;
             border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
             position: relative;
             z-index: 1;
+            text-align: center;
         }
         .container::before {
             content: '';
@@ -55,72 +72,27 @@
             left: 20%;
             right: 20%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
             border-radius: 100%;
         }
 
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 28px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .header .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: rgba(212, 175, 55, 0.5);
-            font-family: 'Amiri', serif;
-            letter-spacing: 2px;
-        }
-
-        .header .badge {
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.15);
-            background: rgba(212, 175, 55, 0.04);
-            padding: 4px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(212, 175, 55, 0.06);
-        }
-
-        .page { display: none; animation: fadeIn 0.6s ease; }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
         /* ========================================================= */
-        /*  ПРИВЕТСТВЕННАЯ СТРАНИЦА — ЭСТЕТИКА МЕККИ                */
+        /*  ПРИВЕТСТВЕННАЯ СТРАНИЦА                                   */
         /* ========================================================= */
 
-        .welcome-page {
-            text-align: center;
-            padding: 30px 0 20px 0;
-        }
-
-        /* 1. КРУПНОЕ КАЛЛИГРАФИЧЕСКОЕ ПРИВЕТСТВИЕ */
         .salam-block {
-            padding: 20px 0 16px 0;
+            padding: 10px 0 16px 0;
         }
         .arabic-salam {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 48px;
+            font-size: 44px;
             font-weight: 600;
-            color: #d4af37;
-            line-height: 1.5;
-            text-shadow: 0 4px 40px rgba(212, 175, 55, 0.08);
-            letter-spacing: 2px;
-        }
-        .arabic-salam br {
-            display: none;
+            color: #7a5a3a;
+            line-height: 1.6;
+            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.05);
+            letter-spacing: 1px;
         }
 
-        /* 2. ДЕКОРАТИВНЫЙ РАЗДЕЛИТЕЛЬ */
         .divider {
             display: flex;
             align-items: center;
@@ -132,45 +104,51 @@
             flex: 1;
             max-width: 60px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
         }
         .divider-icon {
             font-size: 16px;
-            color: rgba(212, 175, 55, 0.15);
+            color: rgba(212, 175, 55, 0.3);
             letter-spacing: 4px;
         }
 
-        /* 3. АЯТ */
         .verse-block {
             padding: 8px 10px 16px 10px;
         }
         .arabic-verse {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 500;
-            color: #ffffff;
+            color: #3d2b1f;
             line-height: 2;
             padding: 24px 32px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 248, 240, 0.5);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
         .arabic-verse small {
             display: block;
             font-family: 'Inter', sans-serif;
             font-size: 14px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.3);
+            color: #9a8a7a;
             margin-top: 12px;
             letter-spacing: 0.5px;
         }
 
+        .welcome-description {
+            font-size: 16px;
+            color: #8a7a6a;
+            margin: 18px 0 28px 0;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
         .btn-primary {
-            background: linear-gradient(145deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.04));
-            color: #d4af37;
-            border: 1px solid rgba(212, 175, 55, 0.12);
+            background: linear-gradient(145deg, #c9a87c, #b8942e);
+            color: #ffffff;
+            border: none;
             padding: 14px 50px;
             font-size: 16px;
             font-weight: 600;
@@ -179,392 +157,66 @@
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
             display: inline-block;
-            margin-top: 12px;
             letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
         }
         .btn-primary:hover {
-            background: rgba(212, 175, 55, 0.08);
-            border-color: rgba(212, 175, 55, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.05);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            display: inline-block;
-        }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; transform: translateY(-2px); }
-
-        .btn-back {
-            background: rgba(255, 255, 255, 0.02);
-            color: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            display: inline-block;
-            margin-top: 8px;
-        }
-        .btn-back:hover { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
-
-        /* ========================================================= */
-        /*  ОСТАЛЬНЫЕ СТРАНИЦЫ                                       */
-        /* ========================================================= */
-
-        .choose-page { text-align: center; padding: 20px 0 10px 0; }
-        .choose-page h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-        .choose-page p {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 30px;
-        }
-        .choose-grid {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .choose-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 18px;
-            padding: 28px 32px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 170px;
-            text-decoration: none;
-            color: #ffffff;
-            text-align: center;
-            backdrop-filter: blur(8px);
-        }
-        .choose-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-        }
-        .choose-card .icon {
-            font-size: 38px;
-            display: block;
-            margin-bottom: 10px;
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-        }
-        .choose-card:hover .icon {
-            opacity: 1;
-        }
-        .choose-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .choose-card p {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.3);
-            margin-bottom: 0;
-        }
-
-        .select-page { text-align: center; padding: 20px 0 10px 0; }
-        .select-page h2 { font-size: 24px; font-weight: 600; color: #ffffff; margin-bottom: 8px; }
-        .select-page p { font-size: 15px; color: rgba(255, 255, 255, 0.4); margin-bottom: 24px; }
-        .number-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 8px 4px;
-            margin-bottom: 20px;
-        }
-        .number-grid::-webkit-scrollbar { width: 4px; }
-        .number-grid::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); border-radius: 10px; }
-        .number-grid::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .number-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 12px 18px;
-            font-size: 16px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            min-width: 52px;
-        }
-        .number-btn:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; border-color: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
-        .number-btn.active { background: rgba(212, 175, 55, 0.08); border-color: rgba(212, 175, 55, 0.15); color: #d4af37; }
-
-        .test-page { padding: 10px 0; }
-        .test-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding: 12px 18px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .test-header .info { display: flex; align-items: center; gap: 20px; font-size: 14px; color: rgba(255, 255, 255, 0.4); }
-        .test-header .info strong { color: rgba(255, 255, 255, 0.8); font-weight: 600; }
-        .test-header .progress-text { font-size: 14px; color: rgba(255, 255, 255, 0.3); }
-
-        .progress-container { background: rgba(255, 255, 255, 0.04); border-radius: 20px; height: 4px; margin-bottom: 24px; overflow: hidden; }
-        .progress-bar { height: 100%; background: linear-gradient(90deg, #d4af37, #f5d680); border-radius: 20px; width: 0%; transition: width 0.5s ease; }
-
-        .question {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 28px 30px;
-            margin-bottom: 18px;
-            border-radius: 20px;
-            border-left: 4px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s ease;
-            animation: fadeIn 0.3s ease;
-        }
-        .question.correct { border-left-color: #28a745; background: rgba(40, 167, 69, 0.06); }
-        .question.wrong { border-left-color: #dc3545; background: rgba(220, 53, 69, 0.06); }
-
-        .question-number {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.2);
-            font-weight: 400;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .hint-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 12px;
-        }
-
-        .hint-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 30px;
-            padding: 6px 16px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .hint-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.6);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        .hint-btn .icon { font-size: 16px; }
-
-        .hint-text {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.3);
-            text-align: right;
-            direction: rtl;
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            margin-bottom: 12px;
-            display: none;
-        }
-        .hint-text.visible { display: block; }
-
-        .ayah-text {
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: #ffffff;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            text-align: right;
-            direction: rtl;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .ayah-text .highlight-missing {
-            background: rgba(220, 53, 69, 0.15);
-            padding: 2px 12px;
-            border-radius: 6px;
-            border-bottom: 2px solid #dc3545;
-            color: #dc3545;
-            font-weight: 700;
-            min-width: 40px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .options label {
-            display: block;
-            padding: 10px 16px 10px 44px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 12px;
-            transition: all 0.15s;
-            position: relative;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.6);
-            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 22px;
-            text-align: right;
-            direction: rtl;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 6px;
-        }
-        .options label:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.08); }
-        .options input[type="radio"] {
-            margin-left: 12px;
-            transform: scale(1.1);
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%) scale(1.1);
-            accent-color: #d4af37;
-        }
-        .options input[type="radio"]:disabled { cursor: not-allowed; }
-
-        .options label.correct-answer {
-            background: rgba(40, 167, 69, 0.12) !important;
-            border-radius: 12px;
-            color: #28a745;
-            border-color: rgba(40, 167, 69, 0.2);
-        }
-        .options label.wrong-answer {
-            background: rgba(220, 53, 69, 0.12) !important;
-            border-radius: 12px;
-            color: #dc3545;
-            border-color: rgba(220, 53, 69, 0.2);
-        }
-        .feedback { font-weight: 500; font-size: 14px; margin-top: 8px; }
-        .feedback.correct { color: #28a745; }
-        .feedback.wrong { color: #dc3545; }
-
-        .result-block {
-            margin-top: 28px;
-            padding: 28px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            display: none;
-        }
-        .result-block .score { font-size: 48px; font-weight: 700; color: #ffffff; }
-        .result-block .detail { font-size: 18px; margin-top: 4px; color: rgba(255, 255, 255, 0.4); font-weight: 400; }
-        .result-block .pass-status { font-size: 22px; font-weight: 600; margin-top: 12px; padding: 10px; border-radius: 12px; }
-        .result-block .pass-status.pass { color: #28a745; background: rgba(40, 167, 69, 0.1); }
-        .result-block .pass-status.fail { color: #dc3545; background: rgba(220, 53, 69, 0.1); }
-        .result-block .motivation {
-            font-size: 16px;
-            margin-top: 12px;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            font-weight: 400;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .btn {
-            flex: 1;
-            min-width: 160px;
-            padding: 14px 25px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            text-align: center;
-            text-decoration: none;
-        }
-        .btn-check {
-            background: linear-gradient(145deg, #d4af37, #b8942e);
-            color: #ffffff;
-        }
-        .btn-check:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2); }
-        .btn-check:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        .btn-reset {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .btn-reset:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; transform: translateY(-2px); }
-
-        .btn-home {
-            background: rgba(255, 255, 255, 0.02);
-            color: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            flex: 0.5;
-            min-width: 120px;
-        }
-        .btn-home:hover { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
-
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.1);
-            font-weight: 400;
-            letter-spacing: 0.3px;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+            background: linear-gradient(145deg, #d4b488, #c9a87c);
         }
 
         @media (max-width: 600px) {
-            .container { padding: 20px 18px; border-radius: 24px; }
-            .header { flex-direction: column; align-items: flex-start; gap: 8px; }
-            .header .logo { font-size: 22px; }
-            .btn-group { flex-direction: column; }
-            .btn { min-width: unset; }
-            .btn-home { flex: 1; }
-            .arabic-salam { font-size: 32px; }
+            .container { padding: 28px 20px; border-radius: 24px; }
+            .arabic-salam { font-size: 30px; }
+            .arabic-verse { font-size: 20px; padding: 16px 18px; }
             .arabic-salam br { display: block; }
-            .arabic-verse { font-size: 22px; padding: 16px 18px; }
-            .ayah-text { font-size: 22px; padding: 10px 12px; }
-            .options label { font-size: 18px; padding: 8px 14px 8px 38px; }
-            .choose-card { padding: 20px 24px; min-width: 140px; }
-            .number-btn { padding: 10px 14px; font-size: 14px; min-width: 44px; }
             .divider-line { max-width: 30px; }
+            .btn-primary { padding: 12px 32px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
+
+<div class="container">
+
+    <!-- 1. ПРИВЕТСТВИЕ -->
+    <div class="salam-block">
+        <div class="arabic-salam">
+            ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+        </div>
+    </div>
+
+    <!-- 2. РАЗДЕЛИТЕЛЬ -->
+    <div class="divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">✦</span>
+        <span class="divider-line"></span>
+    </div>
+
+    <!-- 3. АЯТ -->
+    <div class="verse-block">
+        <div class="arabic-verse">
+            وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+            <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+        </div>
+    </div>
+
+    <!-- 4. ОПИСАНИЕ И КНОПКА -->
+    <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+    <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
+
+</div>
+
+<script>
+    document.getElementById('btnWelcomeNext').addEventListener('click', function() {
+        alert('Переход к выбору джуза/суры...');
+        // Здесь будет логика перехода
+    });
+</script>
+
+</body>
+</html>
 
 <div class="container">
     <div class="header">
