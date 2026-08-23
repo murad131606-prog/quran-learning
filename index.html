@@ -46,6 +46,7 @@
         body.light .divider-icon { color: rgba(212,175,55,0.2); }
         body.light .hint-text { color: #8a7a6a; }
         body.light .question-block { border-bottom-color: rgba(0,0,0,0.06); }
+        body.light .result-detail { border-bottom-color: rgba(0,0,0,0.06); }
 
         body.dark {
             background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
@@ -75,6 +76,7 @@
         body.dark .divider-icon { color: rgba(255,255,255,0.1); }
         body.dark .hint-text { color: rgba(255,255,255,0.4); }
         body.dark .question-block { border-bottom-color: rgba(255,255,255,0.04); }
+        body.dark .result-detail { border-bottom-color: rgba(255,255,255,0.04); }
 
         .container {
             max-width: 950px;
@@ -497,6 +499,14 @@
         body.light .result-block .score { color: #3d2b1f; }
         body.dark .result-block .score { color: #ffffff; }
 
+        .result-detail {
+            padding: 8px 0;
+            border-bottom: 1px solid;
+            text-align: left;
+            font-size: 14px;
+        }
+        .result-detail:last-child { border-bottom: none; }
+
         .test-buttons {
             display: flex;
             gap: 14px;
@@ -615,9 +625,7 @@
                 <span id="progressText">0 из 0</span>
             </div>
             <div class="questions-container" id="questionsContainer"></div>
-            <div class="result-block" id="resultBlock">
-                <div class="score" id="scoreDisplay">0 / 0</div>
-            </div>
+            <div class="result-block" id="resultBlock"></div>
             <div class="test-buttons">
                 <button class="btn-secondary" id="btnTestBack">← Назад</button>
                 <button class="btn-secondary" id="btnTestHome">🏠 На главную</button>
@@ -630,121 +638,187 @@
 
 <script>
     // ================================================================
-    //  ====== БЛОК ДАННЫХ ======
+    //  ====== БЛОК ДАННЫХ (реальные аяты из Корана) ======
     // ================================================================
 
-    const TEST_DATA = {
-        juz: {
-            1: {
-                label: 'Джуз 1',
-                questions: [
-                    {
-                        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________',
-                        correct: 'عَالَمِينَ',
-                        options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ'],
-                        source: 'Сура Аль-Фатиха, аят 2'
-                    },
-                    {
-                        text: 'مَالِكِ يَوْمِ _____________',
-                        correct: 'الدِّينِ',
-                        options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ'],
-                        source: 'Сура Аль-Фатиха, аят 3'
-                    },
-                    {
-                        text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________',
-                        correct: 'عِينُ',
-                        options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ'],
-                        source: 'Сура Аль-Фатиха, аят 4'
-                    },
-                    {
-                        text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________',
-                        correct: 'قِيمَ',
-                        options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ'],
-                        source: 'Сура Аль-Фатиха, аят 5'
-                    },
-                    {
-                        text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________',
-                        correct: 'الِّينَ',
-                        options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ'],
-                        source: 'Сура Аль-Фатиха, аят 6'
-                    },
-                    {
-                        text: 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّ_____________',
-                        correct: 'قِينَ',
-                        options: ['قِينَ', 'قُونَ', 'قَانَ', 'قَيْنَ'],
-                        source: 'Сура Аль-Бакара, аят 2'
-                    },
-                    {
-                        text: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنْ_____________',
-                        correct: 'فِقُونَ',
-                        options: ['فِقُونَ', 'فُونَ', 'فِقَانَ', 'فِقِينَ'],
-                        source: 'Сура Аль-Бакара, аят 3'
-                    },
-                    {
-                        text: 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِ_____________',
-                        correct: 'نُونَ',
-                        options: ['نُونَ', 'نَانَ', 'نِينَ', 'نُونَ'],
-                        source: 'Сура Аль-Бакара, аят 4'
-                    },
-                    {
-                        text: 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَٰئِكَ هُمُ الْمُفْلِ_____________',
-                        correct: 'حُونَ',
-                        options: ['حُونَ', 'حَانَ', 'حِينَ', 'حُونَ'],
-                        source: 'Сура Аль-Бакара, аят 5'
-                    },
-                    {
-                        text: 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِ_____________',
-                        correct: 'نُونَ',
-                        options: ['نُونَ', 'نَانَ', 'نِينَ', 'نُونَ'],
-                        source: 'Сура Аль-Бакара, аят 6'
-                    }
-                ]
-            }
-        },
-        surah: {
-            1: {
-                label: 'Аль-Фатиха',
-                questions: [
-                    {
-                        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________',
-                        correct: 'عَالَمِينَ',
-                        options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ'],
-                        source: 'Сура Аль-Фатиха, аят 2'
-                    },
-                    {
-                        text: 'مَالِكِ يَوْمِ _____________',
-                        correct: 'الدِّينِ',
-                        options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ'],
-                        source: 'Сура Аль-Фатиха, аят 3'
-                    },
-                    {
-                        text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________',
-                        correct: 'عِينُ',
-                        options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ'],
-                        source: 'Сура Аль-Фатиха, аят 4'
-                    },
-                    {
-                        text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________',
-                        correct: 'قِيمَ',
-                        options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ'],
-                        source: 'Сура Аль-Фатиха, аят 5'
-                    },
-                    {
-                        text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________',
-                        correct: 'الِّينَ',
-                        options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ'],
-                        source: 'Сура Аль-Фатиха, аят 6'
-                    }
-                ]
-            }
-        }
+    // РЕАЛЬНЫЕ АЯТЫ из Корана (взяты с quran-online.ru)
+    const REAL_AYATS = {
+        // Сура Аль-Фатиха (1)
+        '1:2': 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
+        '1:3': 'الرَّحْمَٰنِ الرَّحِيمِ',
+        '1:4': 'مَالِكِ يَوْمِ الدِّينِ',
+        '1:5': 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+        '1:6': 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
+        '1:7': 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
+        
+        // Сура Аль-Бакара (2) - первые аяты
+        '2:2': 'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ',
+        '2:3': 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ',
+        '2:4': 'وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ',
+        '2:5': 'أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ',
+        '2:6': 'إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ',
+        '2:7': 'خَتَمَ اللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰ أَبْصَارِهِمْ غِشَاوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ',
+        '2:8': 'وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ وَمَا هُم بِمُؤْمِنِينَ',
+        '2:9': 'يُخَادِعُونَ اللَّهَ وَالَّذِينَ آمَنُوا وَمَا يَخْدَعُونَ إِلَّا أَنفُسَهُمْ وَمَا يَشْعُرُونَ',
+        '2:10': 'فِي قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ اللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌ بِمَا كَانُوا يَكْذِبُونَ',
+        '2:11': 'وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا فِي الْأَرْضِ قَالُوا إِنَّمَا نَحْنُ مُصْلِحُونَ',
+        '2:12': 'أَلَا إِنَّهُمْ هُمُ الْمُفْسِدُونَ وَلَٰكِن لَّا يَشْعُرُونَ',
+        '2:13': 'وَإِذَا قِيلَ لَهُمْ آمِنُوا كَمَا آمَنَ النَّاسُ قَالُوا أَنُؤْمِنُ كَمَا آمَنَ السُّفَهَاءُ ۗ أَلَا إِنَّهُمْ هُمُ السُّفَهَاءُ وَلَٰكِن لَّا يَعْلَمُونَ',
+        '2:14': 'وَإِذَا لَقُوا الَّذِينَ آمَنُوا قَالُوا آمَنَّا وَإِذَا خَلَوْا إِلَىٰ شَيَاطِينِهِمْ قَالُوا إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِئُونَ',
+        '2:15': 'اللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِي طُغْيَانِهِمْ يَعْمَهُونَ',
+        '2:16': 'أُولَٰئِكَ الَّذِينَ اشْتَرَوُا الضَّلَالَةَ بِالْهُدَىٰ فَمَا رَبِحَت تِّجَارَتُهُمْ وَمَا كَانُوا مُهْتَدِينَ',
+        '2:17': 'مَّثَلُهُمْ كَمَثَلِ الَّذِي اسْتَوْقَدَ نَارًا فَلَمَّا أَضَاءَتْ مَا حَوْلَهُ ذَهَبَ اللَّهُ بِنُورِهِمْ وَتَرَكَهُمْ فِي ظُلُمَاتٍ لَّا يُبْصِرُونَ',
+        '2:18': 'صُمٌّ بُكْمٌ عُمْيٌ فَهُمْ لَا يَرْجِعُونَ',
+        '2:19': 'أَوْ كَصَيِّبٍ مِّنَ السَّمَاءِ فِيهِ ظُلُمَاتٌ وَرَعْدٌ وَبَرْقٌ يَجْعَلُونَ أَصَابِعَهُمْ فِي آذَانِهِم مِّنَ الصَّوَاعِقِ حَذَرَ الْمَوْتِ ۚ وَاللَّهُ مُحِيطٌ بِالْكَافِرِينَ',
+        '2:20': 'يَكَادُ الْبَرْقُ يَخْطَفُ أَبْصَارَهُمْ ۖ كُلَّمَا أَضَاءَ لَهُم مَّشَوْا فِيهِ وَإِذَا أَظْلَمَ عَلَيْهِمْ قَامُوا ۚ وَلَوْ شَاءَ اللَّهُ لَذَهَبَ بِسَمْعِهِمْ وَأَبْصَارِهِمْ ۚ إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ',
+        
+        // Сура Аль-Ихляс (112)
+        '112:1': 'قُلْ هُوَ اللَّهُ أَحَدٌ',
+        '112:2': 'اللَّهُ الصَّمَدُ',
+        '112:3': 'لَمْ يَلِدْ وَلَمْ يُولَدْ',
+        '112:4': 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',
+        
+        // Сура Ан-Нас (114)
+        '114:1': 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
+        '114:2': 'مَلِكِ النَّاسِ',
+        '114:3': 'إِلَٰهِ النَّاسِ',
+        '114:4': 'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
+        '114:5': 'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ',
+        '114:6': 'مِنَ الْجِنَّةِ وَالنَّاسِ'
+    };
+
+    // Группировка аятов по джузам (упрощённо, для демонстрации)
+    const JUZ_AYATS = {
+        1: ['1:2', '1:3', '1:4', '1:5', '1:6', '1:7', '2:2', '2:3', '2:4', '2:5', '2:6', '2:7', '2:8', '2:9', '2:10', '2:11', '2:12', '2:13', '2:14', '2:15', '2:16', '2:17', '2:18', '2:19', '2:20'],
+        30: ['112:1', '112:2', '112:3', '112:4', '114:1', '114:2', '114:3', '114:4', '114:5', '114:6']
+    };
+
+    // Группировка по сурам
+    const SURAH_AYATS = {
+        1: ['1:2', '1:3', '1:4', '1:5', '1:6', '1:7'],
+        2: ['2:2', '2:3', '2:4', '2:5', '2:6', '2:7', '2:8', '2:9', '2:10', '2:11', '2:12', '2:13', '2:14', '2:15', '2:16', '2:17', '2:18', '2:19', '2:20'],
+        112: ['112:1', '112:2', '112:3', '112:4'],
+        114: ['114:1', '114:2', '114:3', '114:4', '114:5', '114:6']
     };
 
     // ================================================================
-    //  ====== КОНЕЦ БЛОКА ДАННЫХ ======
+    //  ====== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ======
     // ================================================================
 
-    // ===== ТЕМА =====
+    // Случайное перемешивание массива
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // Выбор случайного слова из аята (кроме первых 2-х)
+    function getRandomWord(ayahText) {
+        const words = ayahText.split(' ');
+        if (words.length < 3) return null;
+        // Берём случайное слово, кроме первых двух и последнего
+        const minIdx = 2;
+        const maxIdx = words.length - 2;
+        if (minIdx > maxIdx) return null;
+        const randomIdx = Math.floor(Math.random() * (maxIdx - minIdx + 1)) + minIdx;
+        return {
+            word: words[randomIdx],
+            index: randomIdx,
+            words: words
+        };
+    }
+
+    // Генерация дистракторов (похожих слов)
+    function generateDistractors(correctWord, allWords) {
+        const distractors = [];
+        const pool = allWords.filter(w => w !== correctWord && w.length > 2 && w.length < 15);
+        shuffleArray(pool);
+        for (let i = 0; i < Math.min(3, pool.length); i++) {
+            distractors.push(pool[i]);
+        }
+        // Если не хватило, добавляем заглушки
+        while (distractors.length < 3) {
+            distractors.push('_______');
+        }
+        return distractors;
+    }
+
+    // Создание вопросов из списка аятов
+    function generateQuestions(ayahKeys) {
+        const questions = [];
+        const allWords = Object.values(REAL_AYATS).flatMap(text => text.split(' '));
+        
+        for (const key of ayahKeys) {
+            if (!REAL_AYATS[key]) continue;
+            
+            const ayahText = REAL_AYATS[key];
+            const randomResult = getRandomWord(ayahText);
+            if (!randomResult) continue;
+            
+            const { word: correctWord, index: wordIndex, words } = randomResult;
+            
+            // Создаём текст с пропуском
+            const wordsWithBlank = [...words];
+            wordsWithBlank[wordIndex] = '______';
+            const textWithBlank = wordsWithBlank.join(' ');
+            
+            // Генерируем варианты
+            const options = generateDistractors(correctWord, allWords);
+            // Добавляем правильный ответ и перемешиваем
+            const shuffledOptions = shuffleArray([correctWord, ...options]);
+            
+            const [surahNum, ayahNum] = key.split(':').map(Number);
+            
+            questions.push({
+                text: textWithBlank,
+                correct: correctWord,
+                options: shuffledOptions,
+                source: `Сура ${surahNum}, аят ${ayahNum}`,
+                fullAyah: ayahText,
+                surah: surahNum,
+                ayah: ayahNum
+            });
+        }
+        return questions;
+    }
+
+    // ================================================================
+    //  ====== ФОРМИРОВАНИЕ ДАННЫХ ДЛЯ ТЕСТОВ ======
+    // ================================================================
+
+    const TEST_DATA = {
+        juz: {},
+        surah: {}
+    };
+
+    // Заполняем джузы
+    for (const [juzNum, ayahKeys] of Object.entries(JUZ_AYATS)) {
+        const questions = generateQuestions(ayahKeys);
+        if (questions.length > 0) {
+            TEST_DATA.juz[juzNum] = {
+                label: `Джуз ${juzNum}`,
+                questions: questions.slice(0, 20) // максимум 20 вопросов
+            };
+        }
+    }
+
+    // Заполняем суры
+    for (const [surahNum, ayahKeys] of Object.entries(SURAH_AYATS)) {
+        const questions = generateQuestions(ayahKeys);
+        if (questions.length > 0) {
+            TEST_DATA.surah[surahNum] = {
+                label: `Сура ${surahNum}`,
+                questions: questions.slice(0, 20) // максимум 20 вопросов
+            };
+        }
+    }
+
+    // ================================================================
+    //  ====== ТЕМА ======
+    // ================================================================
+
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
@@ -764,7 +838,10 @@
         else { themeIcon.textContent = '🌙'; themeLabel.textContent = 'Тёмная'; }
     }
 
-    // ===== НАВИГАЦИЯ =====
+    // ================================================================
+    //  ====== НАВИГАЦИЯ ======
+    // ================================================================
+
     const pageWelcome = document.getElementById('pageWelcome');
     const pageChoose = document.getElementById('pageChoose');
     const pageSelect = document.getElementById('pageSelect');
@@ -787,7 +864,6 @@
     const progressText = document.getElementById('progressText');
     const questionsContainer = document.getElementById('questionsContainer');
     const resultBlock = document.getElementById('resultBlock');
-    const scoreDisplay = document.getElementById('scoreDisplay');
 
     let currentMode = 'juz';
     let currentId = 1;
@@ -806,7 +882,10 @@
     btnTestBack.addEventListener('click', () => showPage('pageSelect'));
     btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
 
-    // ===== ВЫБОР РАЗДЕЛА =====
+    // ================================================================
+    //  ====== ВЫБОР РАЗДЕЛА ======
+    // ================================================================
+
     btnChooseJuz.addEventListener('click', function() {
         currentMode = 'juz';
         const ids = Object.keys(TEST_DATA.juz).map(Number);
@@ -853,7 +932,10 @@
         }
     }
 
-    // ===== ЗАПУСК ТЕСТА =====
+    // ================================================================
+    //  ====== ЗАПУСК ТЕСТА ======
+    // ================================================================
+
     function startTest() {
         const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
         if (!data || !data.questions || data.questions.length === 0) {
@@ -862,16 +944,13 @@
         }
 
         let questions = [...data.questions];
-
-        // Если это сура и вопросов > 20, берём только 20
-        if (currentMode === 'surah' && questions.length > 20) {
-            questions = questions.slice(0, 20);
-        }
-
-        // Если это джуз, берём ровно 20
+        
+        // Для джуза — ровно 20 вопросов
         if (currentMode === 'juz') {
-            // Если меньше 20, дополняем из других джузов
-            if (questions.length < 20) {
+            if (questions.length > 20) {
+                questions = questions.slice(0, 20);
+            } else if (questions.length < 20) {
+                // Дополняем из других джузов
                 const allJuz = Object.values(TEST_DATA.juz);
                 for (const j of allJuz) {
                     if (questions.length >= 20) break;
@@ -884,10 +963,11 @@
                     }
                 }
             }
-            // Если больше 20 — обрезаем
-            if (questions.length > 20) {
-                questions = questions.slice(0, 20);
-            }
+        }
+        
+        // Для суры — все аяты, но не более 20
+        if (currentMode === 'surah' && questions.length > 20) {
+            questions = questions.slice(0, 20);
         }
 
         currentQuestions = shuffleArray(questions);
@@ -897,16 +977,25 @@
         testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
         renderQuestions();
         resultBlock.style.display = 'none';
+        resultBlock.innerHTML = '';
         checkBtn.style.display = 'inline-block';
         showPage('pageTest');
     }
 
-    // ===== РЕНДЕРИНГ ВОПРОСОВ =====
+    // ================================================================
+    //  ====== РЕНДЕРИНГ ВОПРОСОВ ======
+    // ================================================================
+
     function renderQuestions() {
         let html = '';
         currentQuestions.forEach((q, idx) => {
-            const parts = q.text.split('_____________');
-            let ayahHtml = parts[0] + '<span class="highlight-missing">______</span>' + (parts[1] || '');
+            const parts = q.text.split('______');
+            let ayahHtml = '';
+            if (parts.length === 2) {
+                ayahHtml = parts[0] + '<span class="highlight-missing">______</span>' + parts[1];
+            } else {
+                ayahHtml = q.text;
+            }
             
             html += `
                 <div class="question-block" id="q${idx}">
@@ -922,7 +1011,7 @@
                     </div>
                     <button class="btn-hint" onclick="showHint(${idx})">📖 Подсказка</button>
                     <div class="hint-text" id="hint${idx}" style="display:none;">
-                        📍 ${q.source || 'Источник не указан'}
+                        📍 ${q.source} — ${q.fullAyah}
                     </div>
                     <div class="feedback" id="fb${idx}"></div>
                 </div>
@@ -955,12 +1044,16 @@
         progressText.textContent = answered + ' из ' + total;
     }
 
-    // ===== ПРОВЕРКА =====
+    // ================================================================
+    //  ====== ПРОВЕРКА С ДЕТАЛЬНЫМИ РЕЗУЛЬТАТАМИ ======
+    // ================================================================
+
     checkBtn.addEventListener('click', function() {
         if (isTestCompleted) return;
 
         let correct = 0;
         const total = currentQuestions.length;
+        const results = [];
 
         currentQuestions.forEach((q, idx) => {
             const selected = document.querySelector(`input[name="q${idx}"]:checked`);
@@ -969,28 +1062,28 @@
 
             labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
 
-            if (selected) {
-                const val = parseInt(selected.value);
-                if (q.options[val] === q.correct) {
-                    correct++;
-                    fb.className = 'feedback correct';
-                    fb.textContent = '✅ Правильно';
-                    labels[val].classList.add('correct-answer');
-                } else {
-                    fb.className = 'feedback wrong';
-                    fb.textContent = '❌ Неправильно. Правильный ответ: ' + q.correct;
-                    labels[val].classList.add('wrong-answer');
-                    // Показываем правильный ответ
-                    for (let i = 0; i < labels.length; i++) {
-                        if (q.options[i] === q.correct) {
-                            labels[i].classList.add('correct-answer');
-                        }
-                    }
+            const userAnswer = selected ? q.options[parseInt(selected.value)] : null;
+            const isCorrect = userAnswer === q.correct;
+
+            if (isCorrect) {
+                correct++;
+                fb.className = 'feedback correct';
+                fb.textContent = '✅ Правильно';
+                if (selected) {
+                    labels[parseInt(selected.value)].classList.add('correct-answer');
                 }
             } else {
                 fb.className = 'feedback wrong';
-                fb.textContent = '❌ Ответ не выбран. Правильный ответ: ' + q.correct;
-                // Показываем правильный ответ
+                let msg = `❌ Неправильно. Правильный ответ: "${q.correct}"`;
+                if (userAnswer) {
+                    msg += ` (Ваш ответ: "${userAnswer}")`;
+                } else {
+                    msg += ' (Вы не выбрали ответ)';
+                }
+                fb.textContent = msg;
+                if (selected) {
+                    labels[parseInt(selected.value)].classList.add('wrong-answer');
+                }
                 for (let i = 0; i < labels.length; i++) {
                     if (q.options[i] === q.correct) {
                         labels[i].classList.add('correct-answer');
@@ -998,25 +1091,50 @@
                 }
             }
 
+            results.push({
+                question: q,
+                userAnswer: userAnswer,
+                isCorrect: isCorrect,
+                correctAnswer: q.correct
+            });
+
             document.querySelectorAll(`input[name="q${idx}"]`).forEach(el => el.disabled = true);
         });
 
+        // ===== ПОКАЗЫВАЕМ ДЕТАЛЬНЫЕ РЕЗУЛЬТАТЫ =====
+        let resultHtml = `
+            <div style="text-align: center; margin-bottom: 16px;">
+                <div class="score">${correct} / ${total}</div>
+                <div style="font-size: 16px; opacity: 0.7;">${Math.round(correct/total*100)}% правильных ответов</div>
+            </div>
+            <div style="text-align: left; max-height: 350px; overflow-y: auto; padding: 4px 8px; border-radius: 8px; background: rgba(0,0,0,0.02);">
+        `;
+
+        results.forEach((r, idx) => {
+            const icon = r.isCorrect ? '✅' : '❌';
+            resultHtml += `
+                <div class="result-detail">
+                    <div><strong>Вопрос ${idx+1}:</strong> ${icon} ${r.isCorrect ? 'Верно' : 'Неверно'}</div>
+                    <div style="font-size: 13px; opacity: 0.7; direction: rtl; text-align: right; font-family: 'Noto Naskh Arabic', 'Amiri', serif;">
+                        ${r.question.fullAyah}
+                    </div>
+                    <div style="font-size: 13px; opacity: 0.7;">
+                        📖 ${r.question.source}
+                        ${!r.isCorrect ? ` — Ваш ответ: "${r.userAnswer || 'не выбран'}", правильный: "${r.correctAnswer}"` : ''}
+                    </div>
+                </div>
+            `;
+        });
+
+        resultHtml += '</div>';
+        
+        resultBlock.innerHTML = resultHtml;
         resultBlock.style.display = 'block';
-        scoreDisplay.textContent = correct + ' / ' + total;
 
         isTestCompleted = true;
         checkBtn.style.display = 'none';
         resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
-
-    // ===== ВСПОМОГАТЕЛЬНЫЕ =====
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
 </script>
 
 </body>
