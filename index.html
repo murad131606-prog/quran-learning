@@ -20,7 +20,6 @@
             position: relative;
         }
 
-        /* === ФОН С ИСЛАМСКИМ УЗОРОМ === */
         body::before {
             content: '';
             position: fixed;
@@ -35,7 +34,6 @@
             z-index: 0;
         }
 
-        /* === ДЕКОРАТИВНЫЙ ГРАДИЕНТ === */
         body::after {
             content: '';
             position: fixed;
@@ -76,13 +74,15 @@
             border-radius: 100%;
         }
 
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
         /* ========================================================= */
-        /*  ПРИВЕТСТВЕННАЯ СТРАНИЦА                                   */
+        /*  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                   */
         /* ========================================================= */
 
-        .salam-block {
-            padding: 10px 0 16px 0;
-        }
+        .salam-block { padding: 10px 0 16px 0; }
         .arabic-salam {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 44px;
@@ -106,15 +106,9 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
         }
-        .divider-icon {
-            font-size: 16px;
-            color: rgba(212, 175, 55, 0.3);
-            letter-spacing: 4px;
-        }
+        .divider-icon { font-size: 16px; color: rgba(212, 175, 55, 0.3); letter-spacing: 4px; }
 
-        .verse-block {
-            padding: 8px 10px 16px 10px;
-        }
+        .verse-block { padding: 8px 10px 16px 10px; }
         .arabic-verse {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 26px;
@@ -166,13 +160,125 @@
             background: linear-gradient(145deg, #d4b488, #c9a87c);
         }
 
+        .btn-back {
+            background: rgba(0, 0, 0, 0.03);
+            color: #8a7a6a;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            margin-top: 16px;
+        }
+        .btn-back:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: #5a4a3a;
+            transform: translateY(-2px);
+        }
+
+        /* ========================================================= */
+        /*  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                 */
+        /* ========================================================= */
+
+        .choose-page { padding: 20px 0 10px 0; }
+        .choose-page h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #3d2b1f;
+            margin-bottom: 8px;
+        }
+        .choose-page p {
+            font-size: 15px;
+            color: #8a7a6a;
+            margin-bottom: 30px;
+        }
+        .choose-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .choose-card {
+            background: rgba(255, 248, 240, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            border-radius: 18px;
+            padding: 28px 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 170px;
+            text-decoration: none;
+            color: #3d2b1f;
+            text-align: center;
+        }
+        .choose-card:hover {
+            background: rgba(255, 248, 240, 0.8);
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+        .choose-card .icon { font-size: 38px; display: block; margin-bottom: 10px; opacity: 0.6; }
+        .choose-card:hover .icon { opacity: 1; }
+        .choose-card h3 { font-size: 18px; font-weight: 600; }
+        .choose-card p { font-size: 13px; color: #9a8a7a; margin-bottom: 0; }
+
+        /* ========================================================= */
+        /*  СТРАНИЦА 3: ВЫБОР НОМЕРА                                 */
+        /* ========================================================= */
+
+        .select-page { padding: 20px 0 10px 0; }
+        .select-page h2 { font-size: 24px; font-weight: 600; color: #3d2b1f; margin-bottom: 8px; }
+        .select-page p { font-size: 15px; color: #8a7a6a; margin-bottom: 24px; }
+        .number-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 8px 4px;
+            margin-bottom: 20px;
+        }
+        .number-grid::-webkit-scrollbar { width: 4px; }
+        .number-grid::-webkit-scrollbar-track { background: rgba(0,0,0,0.03); border-radius: 10px; }
+        .number-grid::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.2); border-radius: 10px; }
+        .number-btn {
+            background: rgba(255, 248, 240, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6a5a4a;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            min-width: 52px;
+        }
+        .number-btn:hover {
+            background: rgba(212, 175, 55, 0.08);
+            color: #3d2b1f;
+            border-color: rgba(212, 175, 55, 0.15);
+            transform: translateY(-2px);
+        }
+        .number-btn.active {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: rgba(212, 175, 55, 0.2);
+            color: #7a5a3a;
+        }
+
         @media (max-width: 600px) {
             .container { padding: 28px 20px; border-radius: 24px; }
             .arabic-salam { font-size: 30px; }
-            .arabic-verse { font-size: 20px; padding: 16px 18px; }
             .arabic-salam br { display: block; }
+            .arabic-verse { font-size: 20px; padding: 16px 18px; }
             .divider-line { max-width: 30px; }
             .btn-primary { padding: 12px 32px; font-size: 14px; }
+            .choose-card { padding: 20px 24px; min-width: 140px; }
+            .number-btn { padding: 10px 14px; font-size: 14px; min-width: 44px; }
         }
     </style>
 </head>
@@ -180,39 +286,156 @@
 
 <div class="container">
 
-    <!-- 1. ПРИВЕТСТВИЕ -->
-    <div class="salam-block">
-        <div class="arabic-salam">
-            ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ (активна по умолчанию)              -->
+    <!-- ============================================================ -->
+    <div class="page active" id="pageWelcome">
+        <div class="salam-block">
+            <div class="arabic-salam">
+                ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+            </div>
+        </div>
+
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="verse-block">
+            <div class="arabic-verse">
+                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+            </div>
+        </div>
+
+        <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+        <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                    -->
+    <!-- ============================================================ -->
+    <div class="page" id="pageChoose">
+        <div class="choose-page">
+            <h2>📖 Выберите раздел</h2>
+            <p>Выберите джуз или суру для начала тестирования</p>
+            <div class="choose-grid">
+                <div class="choose-card" id="btnChooseJuz">
+                    <span class="icon">☾</span>
+                    <h3>Джузы</h3>
+                    <p>1–30</p>
+                </div>
+                <div class="choose-card" id="btnChooseSurah">
+                    <span class="icon">☰</span>
+                    <h3>Суры</h3>
+                    <p>1–114</p>
+                </div>
+            </div>
+            <button class="btn-back" id="btnChooseBack">← Назад</button>
         </div>
     </div>
 
-    <!-- 2. РАЗДЕЛИТЕЛЬ -->
-    <div class="divider">
-        <span class="divider-line"></span>
-        <span class="divider-icon">✦</span>
-        <span class="divider-line"></span>
-    </div>
-
-    <!-- 3. АЯТ -->
-    <div class="verse-block">
-        <div class="arabic-verse">
-            وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-            <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 3: ВЫБОР НОМЕРА                                    -->
+    <!-- ============================================================ -->
+    <div class="page" id="pageSelect">
+        <div class="select-page">
+            <h2 id="selectTitle">Выберите джуз</h2>
+            <p id="selectSub">Выберите номер джуза (1–30)</p>
+            <div class="number-grid" id="numberGrid"></div>
+            <button class="btn-back" id="btnSelectBack">← Назад</button>
         </div>
     </div>
 
-    <!-- 4. ОПИСАНИЕ И КНОПКА -->
-    <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
-    <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 4: ТЕСТ (пока заглушка)                            -->
+    <!-- ============================================================ -->
+    <div class="page" id="pageTest">
+        <div class="test-page">
+            <h2 id="testTitle">Тест</h2>
+            <p>Здесь будут вопросы...</p>
+            <button class="btn-back" id="homeBtn">🏠 На главную</button>
+        </div>
+    </div>
 
 </div>
 
 <script>
-    document.getElementById('btnWelcomeNext').addEventListener('click', function() {
-        alert('Переход к выбору джуза/суры...');
-        // Здесь будет логика перехода
+    // ============================================================
+    //  НАВИГАЦИЯ
+    // ============================================================
+
+    const pageWelcome = document.getElementById('pageWelcome');
+    const pageChoose = document.getElementById('pageChoose');
+    const pageSelect = document.getElementById('pageSelect');
+    const pageTest = document.getElementById('pageTest');
+
+    const btnWelcomeNext = document.getElementById('btnWelcomeNext');
+    const btnChooseJuz = document.getElementById('btnChooseJuz');
+    const btnChooseSurah = document.getElementById('btnChooseSurah');
+    const btnChooseBack = document.getElementById('btnChooseBack');
+    const btnSelectBack = document.getElementById('btnSelectBack');
+    const homeBtn = document.getElementById('homeBtn');
+    const numberGrid = document.getElementById('numberGrid');
+    const selectTitle = document.getElementById('selectTitle');
+    const selectSub = document.getElementById('selectSub');
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    btnWelcomeNext.addEventListener('click', function() {
+        showPage('pageChoose');
     });
+
+    btnChooseBack.addEventListener('click', function() {
+        showPage('pageWelcome');
+    });
+
+    btnSelectBack.addEventListener('click', function() {
+        showPage('pageChoose');
+    });
+
+    homeBtn.addEventListener('click', function() {
+        showPage('pageWelcome');
+    });
+
+    // ============================================================
+    //  ВЫБОР ДЖУЗА / СУРЫ
+    // ============================================================
+
+    btnChooseJuz.addEventListener('click', function() {
+        selectTitle.textContent = 'Выберите джуз';
+        selectSub.textContent = 'Выберите номер джуза (1–30)';
+        renderNumbers(30);
+        showPage('pageSelect');
+    });
+
+    btnChooseSurah.addEventListener('click', function() {
+        selectTitle.textContent = 'Выберите суру';
+        selectSub.textContent = 'Выберите номер суры (1–114)';
+        renderNumbers(114);
+        showPage('pageSelect');
+    });
+
+    function renderNumbers(count) {
+        numberGrid.innerHTML = '';
+        for (let i = 1; i <= count; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'number-btn';
+            btn.textContent = i;
+            btn.addEventListener('click', function() {
+                // Запуск теста (заглушка)
+                document.getElementById('testTitle').textContent = 
+                    (selectTitle.textContent.includes('джуз') ? 'Джуз ' : 'Сура ') + i;
+                showPage('pageTest');
+            });
+            numberGrid.appendChild(btn);
+        }
+    }
 </script>
 
 </body>
