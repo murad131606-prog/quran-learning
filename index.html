@@ -14,10 +14,11 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 24px;
             background: #f5efe8;
             position: relative;
+            padding-top: 40px;
         }
 
         body::before {
@@ -43,8 +44,7 @@
             bottom: 0;
             background: 
                 radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(193, 154, 107, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(255, 248, 240, 0.4) 0%, transparent 40%);
+                radial-gradient(ellipse at 80% 50%, rgba(193, 154, 107, 0.05) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -55,7 +55,7 @@
             background: rgba(255, 252, 248, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 50px 44px;
+            padding: 40px 44px 50px 44px;
             border-radius: 32px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.03);
@@ -82,6 +82,7 @@
         /*  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                   */
         /* ========================================================= */
 
+        .welcome-page { padding: 10px 0; }
         .salam-block { padding: 10px 0 16px 0; }
         .arabic-salam {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
@@ -160,7 +161,7 @@
             background: linear-gradient(145deg, #d4b488, #c9a87c);
         }
 
-        .btn-back {
+        .btn-secondary {
             background: rgba(0, 0, 0, 0.03);
             color: #8a7a6a;
             border: 1px solid rgba(0, 0, 0, 0.04);
@@ -174,7 +175,7 @@
             display: inline-block;
             margin-top: 16px;
         }
-        .btn-back:hover {
+        .btn-secondary:hover {
             background: rgba(0, 0, 0, 0.06);
             color: #5a4a3a;
             transform: translateY(-2px);
@@ -270,6 +271,14 @@
             color: #7a5a3a;
         }
 
+        /* ========================================================= */
+        /*  СТРАНИЦА 4: ТЕСТ (заглушка)                              */
+        /* ========================================================= */
+
+        .test-page { padding: 20px 0; }
+        .test-page h2 { font-size: 24px; font-weight: 600; color: #3d2b1f; margin-bottom: 16px; }
+        .test-page p { font-size: 16px; color: #8a7a6a; margin-bottom: 20px; }
+
         @media (max-width: 600px) {
             .container { padding: 28px 20px; border-radius: 24px; }
             .arabic-salam { font-size: 30px; }
@@ -290,27 +299,29 @@
     <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ (активна по умолчанию)              -->
     <!-- ============================================================ -->
     <div class="page active" id="pageWelcome">
-        <div class="salam-block">
-            <div class="arabic-salam">
-                ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+        <div class="welcome-page">
+            <div class="salam-block">
+                <div class="arabic-salam">
+                    ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+                </div>
             </div>
-        </div>
 
-        <div class="divider">
-            <span class="divider-line"></span>
-            <span class="divider-icon">✦</span>
-            <span class="divider-line"></span>
-        </div>
-
-        <div class="verse-block">
-            <div class="arabic-verse">
-                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">✦</span>
+                <span class="divider-line"></span>
             </div>
-        </div>
 
-        <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
-        <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
+            <div class="verse-block">
+                <div class="arabic-verse">
+                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                    <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+                </div>
+            </div>
+
+            <p class="welcome-description">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+            <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
+        </div>
     </div>
 
     <!-- ============================================================ -->
@@ -332,7 +343,7 @@
                     <p>1–114</p>
                 </div>
             </div>
-            <button class="btn-back" id="btnChooseBack">← Назад</button>
+            <button class="btn-secondary" id="btnChooseBack">← Назад</button>
         </div>
     </div>
 
@@ -344,18 +355,18 @@
             <h2 id="selectTitle">Выберите джуз</h2>
             <p id="selectSub">Выберите номер джуза (1–30)</p>
             <div class="number-grid" id="numberGrid"></div>
-            <button class="btn-back" id="btnSelectBack">← Назад</button>
+            <button class="btn-secondary" id="btnSelectBack">← Назад</button>
         </div>
     </div>
 
     <!-- ============================================================ -->
-    <!--  СТРАНИЦА 4: ТЕСТ (пока заглушка)                            -->
+    <!--  СТРАНИЦА 4: ТЕСТ (заглушка)                                 -->
     <!-- ============================================================ -->
     <div class="page" id="pageTest">
         <div class="test-page">
             <h2 id="testTitle">Тест</h2>
-            <p>Здесь будут вопросы...</p>
-            <button class="btn-back" id="homeBtn">🏠 На главную</button>
+            <p>Здесь будут вопросы для проверки знаний</p>
+            <button class="btn-secondary" id="btnTestBack">🏠 На главную</button>
         </div>
     </div>
 
@@ -376,10 +387,11 @@
     const btnChooseSurah = document.getElementById('btnChooseSurah');
     const btnChooseBack = document.getElementById('btnChooseBack');
     const btnSelectBack = document.getElementById('btnSelectBack');
-    const homeBtn = document.getElementById('homeBtn');
+    const btnTestBack = document.getElementById('btnTestBack');
     const numberGrid = document.getElementById('numberGrid');
     const selectTitle = document.getElementById('selectTitle');
     const selectSub = document.getElementById('selectSub');
+    const testTitle = document.getElementById('testTitle');
 
     function showPage(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -399,7 +411,7 @@
         showPage('pageChoose');
     });
 
-    homeBtn.addEventListener('click', function() {
+    btnTestBack.addEventListener('click', function() {
         showPage('pageWelcome');
     });
 
@@ -407,7 +419,10 @@
     //  ВЫБОР ДЖУЗА / СУРЫ
     // ============================================================
 
+    let currentMode = 'juz';
+
     btnChooseJuz.addEventListener('click', function() {
+        currentMode = 'juz';
         selectTitle.textContent = 'Выберите джуз';
         selectSub.textContent = 'Выберите номер джуза (1–30)';
         renderNumbers(30);
@@ -415,6 +430,7 @@
     });
 
     btnChooseSurah.addEventListener('click', function() {
+        currentMode = 'surah';
         selectTitle.textContent = 'Выберите суру';
         selectSub.textContent = 'Выберите номер суры (1–114)';
         renderNumbers(114);
@@ -428,9 +444,8 @@
             btn.className = 'number-btn';
             btn.textContent = i;
             btn.addEventListener('click', function() {
-                // Запуск теста (заглушка)
-                document.getElementById('testTitle').textContent = 
-                    (selectTitle.textContent.includes('джуз') ? 'Джуз ' : 'Сура ') + i;
+                const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
+                testTitle.textContent = label + i;
                 showPage('pageTest');
             });
             numberGrid.appendChild(btn);
