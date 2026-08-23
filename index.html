@@ -6,29 +6,47 @@
     <title>Изучение Корана</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
             min-height: 100vh;
             padding: 24px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding-top: 40px;
+            background: linear-gradient(160deg, #0d1b2a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            position: relative;
         }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 30%, rgba(46, 204, 113, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .container {
             max-width: 900px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 40px 44px;
             border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
             position: relative;
+            z-index: 1;
         }
         .container::before {
             content: '';
@@ -36,8 +54,8 @@
             top: 0;
             left: 20%;
             right: 20%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
             border-radius: 100%;
         }
 
@@ -47,7 +65,7 @@
             justify-content: space-between;
             margin-bottom: 28px;
             padding-bottom: 18px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             flex-wrap: wrap;
             gap: 12px;
         }
@@ -55,79 +73,121 @@
         .header .logo {
             font-size: 28px;
             font-weight: 700;
-            color: #ffffff;
+            color: rgba(212, 175, 55, 0.5);
             font-family: 'Amiri', serif;
             letter-spacing: 2px;
         }
 
         .header .badge {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.15);
+            background: rgba(212, 175, 55, 0.04);
             padding: 4px 14px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.06);
         }
 
-        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page { display: none; animation: fadeIn 0.6s ease; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
-        .welcome-page { text-align: center; padding: 30px 0 20px 0; }
-        .welcome-page .arabic-salam {
-            font-family: 'Amiri', serif;
-            font-size: 38px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        /* ========================================================= */
+        /*  ПРИВЕТСТВЕННАЯ СТРАНИЦА — ЭСТЕТИКА МЕККИ                */
+        /* ========================================================= */
+
+        .welcome-page {
+            text-align: center;
+            padding: 30px 0 20px 0;
         }
-        .welcome-page .arabic-verse {
-            font-family: 'Amiri', serif;
-            font-size: 32px;
-            font-weight: 700;
+
+        /* 1. КРУПНОЕ КАЛЛИГРАФИЧЕСКОЕ ПРИВЕТСТВИЕ */
+        .salam-block {
+            padding: 20px 0 16px 0;
+        }
+        .arabic-salam {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: #d4af37;
+            line-height: 1.5;
+            text-shadow: 0 4px 40px rgba(212, 175, 55, 0.08);
+            letter-spacing: 2px;
+        }
+        .arabic-salam br {
+            display: none;
+        }
+
+        /* 2. ДЕКОРАТИВНЫЙ РАЗДЕЛИТЕЛЬ */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 16px 0 18px 0;
+        }
+        .divider-line {
+            flex: 1;
+            max-width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+        }
+        .divider-icon {
+            font-size: 16px;
+            color: rgba(212, 175, 55, 0.15);
+            letter-spacing: 4px;
+        }
+
+        /* 3. АЯТ */
+        .verse-block {
+            padding: 8px 10px 16px 10px;
+        }
+        .arabic-verse {
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 28px;
+            font-weight: 500;
             color: #ffffff;
             line-height: 2;
-            margin-bottom: 12px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 24px 32px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
         }
-        .welcome-page .arabic-verse small {
+        .arabic-verse small {
             display: block;
-            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.3);
-            font-family: 'Inter', sans-serif;
-            margin-top: 8px;
-            letter-spacing: 1px;
-        }
-        .welcome-page p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 30px;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary {
-            background: linear-gradient(145deg, #0066cc, #004d99);
-            color: #ffffff;
-            border: none;
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.04));
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.12);
             padding: 14px 50px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             border-radius: 40px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
             display: inline-block;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 102, 204, 0.3); }
+        .btn-primary:hover {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.05);
+        }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.04);
@@ -159,6 +219,10 @@
             margin-top: 8px;
         }
         .btn-back:hover { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
+
+        /* ========================================================= */
+        /*  ОСТАЛЬНЫЕ СТРАНИЦЫ                                       */
+        /* ========================================================= */
 
         .choose-page { text-align: center; padding: 20px 0 10px 0; }
         .choose-page h2 {
@@ -248,7 +312,7 @@
             min-width: 52px;
         }
         .number-btn:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; border-color: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
-        .number-btn.active { background: rgba(0, 102, 204, 0.15); border-color: #0066cc; color: #ffffff; }
+        .number-btn.active { background: rgba(212, 175, 55, 0.08); border-color: rgba(212, 175, 55, 0.15); color: #d4af37; }
 
         .test-page { padding: 10px 0; }
         .test-header {
@@ -268,7 +332,7 @@
         .test-header .progress-text { font-size: 14px; color: rgba(255, 255, 255, 0.3); }
 
         .progress-container { background: rgba(255, 255, 255, 0.04); border-radius: 20px; height: 4px; margin-bottom: 24px; overflow: hidden; }
-        .progress-bar { height: 100%; background: linear-gradient(90deg, #0066cc, #4da6e8); border-radius: 20px; width: 0%; transition: width 0.5s ease; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, #d4af37, #f5d680); border-radius: 20px; width: 0%; transition: width 0.5s ease; }
 
         .question {
             background: rgba(255, 255, 255, 0.03);
@@ -316,16 +380,14 @@
             color: rgba(255, 255, 255, 0.6);
             border-color: rgba(255, 255, 255, 0.1);
         }
-        .hint-btn .icon {
-            font-size: 16px;
-        }
+        .hint-btn .icon { font-size: 16px; }
 
         .hint-text {
             font-size: 13px;
             color: rgba(255, 255, 255, 0.3);
             text-align: right;
             direction: rtl;
-            font-family: 'Amiri', serif;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             padding: 6px 14px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 8px;
@@ -333,13 +395,10 @@
             margin-bottom: 12px;
             display: none;
         }
-        .hint-text.visible {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
+        .hint-text.visible { display: block; }
 
         .ayah-text {
-            font-family: 'Amiri', serif;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 28px;
             font-weight: 400;
             color: #ffffff;
@@ -374,7 +433,7 @@
             position: relative;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.6);
-            font-family: 'Amiri', serif;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 22px;
             text-align: right;
             direction: rtl;
@@ -389,7 +448,7 @@
             left: 14px;
             top: 50%;
             transform: translateY(-50%) scale(1.1);
-            accent-color: #0066cc;
+            accent-color: #d4af37;
         }
         .options input[type="radio"]:disabled { cursor: not-allowed; }
 
@@ -456,10 +515,10 @@
             text-decoration: none;
         }
         .btn-check {
-            background: linear-gradient(145deg, #0066cc, #004d99);
+            background: linear-gradient(145deg, #d4af37, #b8942e);
             color: #ffffff;
         }
-        .btn-check:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 102, 204, 0.3); }
+        .btn-check:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2); }
         .btn-check:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
         .btn-reset {
@@ -494,12 +553,14 @@
             .btn-group { flex-direction: column; }
             .btn { min-width: unset; }
             .btn-home { flex: 1; }
-            .welcome-page .arabic-salam { font-size: 28px; }
-            .welcome-page .arabic-verse { font-size: 24px; padding: 14px; }
+            .arabic-salam { font-size: 32px; }
+            .arabic-salam br { display: block; }
+            .arabic-verse { font-size: 22px; padding: 16px 18px; }
             .ayah-text { font-size: 22px; padding: 10px 12px; }
             .options label { font-size: 18px; padding: 8px 14px 8px 38px; }
             .choose-card { padding: 20px 24px; min-width: 140px; }
             .number-btn { padding: 10px 14px; font-size: 14px; min-width: 44px; }
+            .divider-line { max-width: 30px; }
         }
     </style>
 </head>
@@ -511,22 +572,43 @@
         <span class="badge">Изучение Корана</span>
     </div>
 
-    <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+    <!-- ============================================================ -->
+    <!--  БЛОК: ПРИВЕТСТВЕННАЯ СТРАНИЦА (НОВЫЙ ДИЗАЙН)               -->
+    <!-- ============================================================ -->
     <div class="page active" id="pageWelcome">
         <div class="welcome-page">
-            <div class="arabic-salam">
-                ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+            
+            <!-- 1. ПРИВЕТСТВИЕ (крупное, каллиграфическое) -->
+            <div class="salam-block">
+                <div class="arabic-salam">
+                    ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+                </div>
             </div>
-            <div class="arabic-verse">
-                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+
+            <!-- 2. ДЕКОРАТИВНЫЙ РАЗДЕЛИТЕЛЬ -->
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">✦</span>
+                <span class="divider-line"></span>
             </div>
-            <p>Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
-            <button class="btn-primary" id="btnWelcomeNext">Далее →</button>
+
+            <!-- 3. АЯТ (с переводом) -->
+            <div class="verse-block">
+                <div class="arabic-verse">
+                    وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                    <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+                </div>
+            </div>
+
+            <!-- 4. КНОПКА -->
+            <button class="btn-primary" id="btnWelcomeNext">Начать изучение →</button>
+
         </div>
     </div>
 
-    <!-- ===== СТРАНИЦА 2: ВЫБОР РАЗДЕЛА ===== -->
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                   -->
+    <!-- ============================================================ -->
     <div class="page" id="pageChoose">
         <div class="choose-page">
             <h2>📖 Выберите раздел</h2>
@@ -547,7 +629,9 @@
         </div>
     </div>
 
-    <!-- ===== СТРАНИЦА 3: ВЫБОР НОМЕРА ===== -->
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 3: ВЫБОР НОМЕРА                                   -->
+    <!-- ============================================================ -->
     <div class="page" id="pageSelect">
         <div class="select-page">
             <h2 id="selectTitle">Выберите джуз</h2>
@@ -557,7 +641,9 @@
         </div>
     </div>
 
-    <!-- ===== СТРАНИЦА 4: ТЕСТ ===== -->
+    <!-- ============================================================ -->
+    <!--  СТРАНИЦА 4: ТЕСТ                                            -->
+    <!-- ============================================================ -->
     <div class="page" id="pageTest">
         <div class="test-page">
             <div class="test-header">
