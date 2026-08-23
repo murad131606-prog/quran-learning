@@ -17,6 +17,7 @@
             align-items: center;
             padding: 24px;
             position: relative;
+            overflow: hidden;
             transition: all 0.4s ease;
         }
 
@@ -46,9 +47,10 @@
         body.light .test-page p { color: #8a7a6a; }
         body.light .btn-secondary { background: rgba(0, 0, 0, 0.03); color: #8a7a6a; border-color: rgba(0, 0, 0, 0.04); }
         body.light .btn-secondary:hover { background: rgba(0, 0, 0, 0.06); color: #5a4a3a; }
-        body.light .bismillah { color: rgba(212, 175, 55, 0.25); }
+        body.light .bismillah { color: #d4af37; opacity: 0.6; }
         body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent); }
         body.light .divider-icon { color: rgba(212, 175, 55, 0.3); }
+        body.light .floating-name { color: rgba(212, 175, 55, 0.08); }
 
         /* ===== ТЁМНАЯ ТЕМА ===== */
         body.dark {
@@ -76,62 +78,37 @@
         body.dark .test-page p { color: rgba(255, 255, 255, 0.4); }
         body.dark .btn-secondary { background: rgba(255, 255, 255, 0.02); color: rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.04); }
         body.dark .btn-secondary:hover { background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.6); }
-        body.dark .bismillah { color: rgba(255, 255, 255, 0.15); }
+        body.dark .bismillah { color: rgba(255, 215, 0, 0.25); }
         body.dark .divider-line { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent); }
         body.dark .divider-icon { color: rgba(255, 255, 255, 0.15); }
+        body.dark .floating-name { color: rgba(255, 255, 255, 0.04); }
 
-        body.light::before {
-            content: '';
+        /* ===== ФОН С ИМЕНАМИ АЛЛАХА ===== */
+        .floating-names {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 L35 20 L50 20 L38 30 L42 45 L30 35 L18 45 L22 30 L10 20 L25 20 Z" fill="rgba(212,175,55,0.04)"/><path d="M30 15 L33 25 L43 25 L35 31 L38 41 L30 35 L22 41 L25 31 L17 25 L27 25 Z" fill="rgba(212,175,55,0.03)"/></svg>');
-            background-repeat: repeat;
-            background-size: 120px 120px;
-            pointer-events: none;
             z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
-        body.dark::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 L35 20 L50 20 L38 30 L42 45 L30 35 L18 45 L22 30 L10 20 L25 20 Z" fill="rgba(255,255,255,0.03)"/><path d="M30 15 L33 25 L43 25 L35 31 L38 41 L30 35 L22 41 L25 31 L17 25 L27 25 Z" fill="rgba(255,255,255,0.02)"/></svg>');
-            background-repeat: repeat;
-            background-size: 120px 120px;
-            pointer-events: none;
-            z-index: 0;
+        .floating-name {
+            position: absolute;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            font-size: 28px;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: floatName linear infinite;
+            transition: color 0.4s ease;
+            letter-spacing: 2px;
         }
-
-        body.light::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(193, 154, 107, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        body.dark::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 30% 50%, rgba(88, 70, 200, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(0, 91, 158, 0.06) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
+        @keyframes floatName {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
         }
 
         .container {
@@ -168,8 +145,8 @@
             top: 18px;
             left: 24px;
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 24px;
+            font-weight: 700;
             letter-spacing: 1px;
             z-index: 2;
             transition: color 0.4s ease;
@@ -347,8 +324,6 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
-        .choose-card .icon { font-size: 38px; display: block; margin-bottom: 10px; opacity: 0.6; }
-        .choose-card:hover .icon { opacity: 1; }
         .choose-card h3 { font-size: 18px; font-weight: 600; }
         .choose-card p { font-size: 13px; margin-bottom: 0; }
 
@@ -402,12 +377,16 @@
             .btn-primary { padding: 12px 32px; font-size: 14px; }
             .choose-card { padding: 20px 24px; min-width: 140px; }
             .number-btn { padding: 10px 14px; font-size: 14px; min-width: 44px; }
-            .bismillah { font-size: 14px; top: 14px; left: 16px; }
+            .bismillah { font-size: 18px; top: 14px; left: 16px; }
             .theme-toggle { font-size: 11px; padding: 4px 10px; top: 14px; right: 16px; }
+            .floating-name { font-size: 18px; }
         }
     </style>
 </head>
 <body>
+
+<!-- ===== ФОН С ИМЕНАМИ АЛЛАХА ===== -->
+<div class="floating-names" id="floatingNames"></div>
 
 <div class="container">
 
@@ -452,16 +431,14 @@
     <!-- ============================================================ -->
     <div class="page" id="pageChoose">
         <div class="choose-page">
-            <h2>📖 Выберите раздел</h2>
+            <h2>Выберите раздел</h2>
             <p>Выберите джуз или суру для начала тестирования</p>
             <div class="choose-grid">
                 <div class="choose-card" id="btnChooseJuz">
-                    <span class="icon">☾</span>
                     <h3>Джуз</h3>
                     <p>1–30</p>
                 </div>
                 <div class="choose-card" id="btnChooseSurah">
-                    <span class="icon">☰</span>
                     <h3>Сура</h3>
                     <p>1–114</p>
                 </div>
@@ -497,6 +474,41 @@
 
 <script>
     // ============================================================
+    //  ИМЕНА АЛЛАХА ДЛЯ ФОНА
+    // ============================================================
+
+    const namesOfAllah = [
+        'الرَّحْمَٰنُ', 'الرَّحِيمُ', 'الْمَلِكُ', 'الْقُدُّوسُ', 'السَّلَامُ',
+        'الْمُؤْمِنُ', 'الْمُهَيْمِنُ', 'الْعَزِيزُ', 'الْجَبَّارُ', 'الْمُتَكَبِّرُ',
+        'الْخَالِقُ', 'الْبَارِئُ', 'الْمُصَوِّرُ', 'الْغَفَّارُ', 'الْقَهَّارُ',
+        'الْوَهَّابُ', 'الرَّزَّاقُ', 'الْفَتَّاحُ', 'الْعَلِيمُ', 'الْقَابِضُ',
+        'الْبَاسِطُ', 'الْخَافِضُ', 'الرَّافِعُ', 'الْمُعِزُّ', 'الْمُذِلُّ',
+        'السَّمِيعُ', 'الْبَصِيرُ', 'الْحَكَمُ', 'الْعَدْلُ', 'اللَّطِيفُ',
+        'الْخَبِيرُ', 'الْحَلِيمُ', 'الْعَظِيمُ', 'الْغَفُورُ', 'الشَّكُورُ',
+        'الْعَلِيُّ', 'الْكَبِيرُ', 'الْحَفِيظُ', 'الْمُقِيتُ', 'الْحَسِيبُ',
+        'الْجَلِيلُ', 'الْكَرِيمُ', 'الرَّقِيبُ', 'الْمُجِيبُ', 'الْوَاسِعُ',
+        'الْحَكِيمُ', 'الْوَدُودُ', 'الْمَجِيدُ', 'الْبَاعِثُ', 'الشَّهِيدُ'
+    ];
+
+    function createFloatingNames() {
+        const container = document.getElementById('floatingNames');
+        const count = 20;
+        for (let i = 0; i < count; i++) {
+            const name = namesOfAllah[Math.floor(Math.random() * namesOfAllah.length)];
+            const el = document.createElement('span');
+            el.className = 'floating-name';
+            el.textContent = name;
+            el.style.left = Math.random() * 95 + '%';
+            el.style.fontSize = (20 + Math.random() * 24) + 'px';
+            const duration = 25 + Math.random() * 35;
+            el.style.animationDuration = duration + 's';
+            el.style.animationDelay = (Math.random() * 20) + 's';
+            container.appendChild(el);
+        }
+    }
+    createFloatingNames();
+
+    // ============================================================
     //  ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
     // ============================================================
 
@@ -504,7 +516,6 @@
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
 
-    // Проверяем сохранённую тему
     const savedTheme = localStorage.getItem('quran-theme') || 'light';
     document.body.classList.add(savedTheme);
     updateThemeUI(savedTheme);
