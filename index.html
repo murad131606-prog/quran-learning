@@ -44,6 +44,7 @@
         body.light .bismillah { color: #d4af37; opacity: 0.6; }
         body.light .divider-line { background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); }
         body.light .divider-icon { color: rgba(212,175,55,0.2); }
+        body.light .hint-text { color: #9a8a7a; border-color: rgba(0,0,0,0.04); }
 
         body.dark {
             background: linear-gradient(145deg, #0b1a2e 0%, #1a1040 45%, #2d1b69 100%);
@@ -71,6 +72,7 @@
         body.dark .bismillah { color: rgba(255,215,0,0.2); }
         body.dark .divider-line { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); }
         body.dark .divider-icon { color: rgba(255,255,255,0.1); }
+        body.dark .hint-text { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.04); }
 
         .container {
             max-width: 950px;
@@ -331,9 +333,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
             width: 100%;
-            padding: 10px 0;
+            padding: 8px 0;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -344,36 +346,77 @@
             width: 100%;
             padding: 0 4px;
             font-size: 14px;
-            color: #8a7a6a;
             transition: color 0.4s ease;
         }
+        body.light .test-page .test-header { color: #8a7a6a; }
         body.dark .test-page .test-header { color: rgba(255,255,255,0.4); }
         .test-page .test-header strong { font-weight: 600; }
 
         .question-block {
             width: 100%;
-            padding: 8px 0;
+            padding: 4px 0;
+            margin-bottom: 4px;
         }
         .question-number {
             font-size: 13px;
-            color: #9a8a7a;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             letter-spacing: 0.5px;
             font-weight: 400;
+            text-align: right;
             transition: color 0.4s ease;
         }
+        body.light .question-number { color: #9a8a7a; }
         body.dark .question-number { color: rgba(255,255,255,0.3); }
+
+        /* Кнопка подсказки */
+        .hint-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 4px;
+        }
+        .hint-btn {
+            background: transparent;
+            border: none;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        body.light .hint-btn { color: #9a8a7a; }
+        body.light .hint-btn:hover { background: rgba(0,0,0,0.04); }
+        body.dark .hint-btn { color: rgba(255,255,255,0.3); }
+        body.dark .hint-btn:hover { background: rgba(255,255,255,0.04); }
+        .hint-btn .icon { font-size: 14px; }
+
+        .hint-text {
+            font-size: 13px;
+            text-align: right;
+            direction: rtl;
+            font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid;
+            margin-bottom: 6px;
+            display: none;
+        }
+        .hint-text.visible { display: block; animation: fadeIn 0.3s ease; }
+
         .ayah-text {
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 28px;
             font-weight: 500;
             line-height: 1.8;
-            padding: 16px 20px;
-            border-radius: 16px;
+            padding: 14px 18px;
+            border-radius: 14px;
             transition: all 0.4s ease;
             text-align: right;
             direction: rtl;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         .ayah-text .highlight-missing {
             background: rgba(220,53,69,0.12);
@@ -389,12 +432,12 @@
         .options {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             width: 100%;
         }
         .options label {
             display: block;
-            padding: 10px 16px;
+            padding: 8px 16px;
             font-family: 'Noto Naskh Arabic', 'Amiri', serif;
             font-size: 22px;
             text-align: right;
@@ -425,23 +468,24 @@
         .feedback {
             font-size: 14px;
             font-weight: 500;
-            margin-top: 6px;
+            margin-top: 4px;
+            text-align: right;
         }
         .feedback.correct { color: #28a745; }
         .feedback.wrong { color: #dc3545; }
 
         .result-block {
             width: 100%;
-            padding: 16px 20px;
+            padding: 14px 20px;
             border-radius: 16px;
             text-align: center;
             display: none;
-            margin: 8px 0;
+            margin: 6px 0;
         }
         body.light .result-block { background: rgba(255,248,240,0.3); }
         body.dark .result-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
         .result-block .score {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             transition: color 0.4s ease;
         }
@@ -450,12 +494,12 @@
 
         .test-buttons {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 6px;
+            margin-top: 4px;
         }
-        .test-buttons .btn-secondary { margin-top: 0; }
+        .test-buttons .btn-secondary { margin-top: 0; padding: 12px 32px; font-size: 15px; }
 
         @media (max-width: 600px) {
             body { padding: 12px; }
@@ -476,7 +520,7 @@
             .select-page h2 { font-size: 22px; }
             .test-page .ayah-text { font-size: 22px; padding: 12px 14px; }
             .options label { font-size: 18px; padding: 8px 14px; }
-            .test-buttons .btn-secondary { padding: 12px 28px; font-size: 15px; }
+            .test-buttons .btn-secondary { padding: 10px 24px; font-size: 14px; }
         }
         @media (max-width: 400px) {
             .container { padding: 10px; }
@@ -488,6 +532,7 @@
             .btn-primary { padding: 12px 28px; font-size: 14px; }
             .test-page .ayah-text { font-size: 18px; padding: 10px 12px; }
             .options label { font-size: 15px; padding: 6px 12px; }
+            .test-buttons .btn-secondary { padding: 8px 16px; font-size: 12px; }
         }
     </style>
 </head>
@@ -502,9 +547,7 @@
         <span id="themeLabel">Тёмная</span>
     </button>
 
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 1: ПРИВЕТСТВИЕ                                      -->
-    <!-- ============================================================ -->
+    <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
     <div class="page active" id="pageWelcome">
         <div class="welcome-content">
             <div class="salam-block">
@@ -528,9 +571,7 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 2: ВЫБОР РАЗДЕЛА                                    -->
-    <!-- ============================================================ -->
+    <!-- ===== СТРАНИЦА 2: ВЫБОР РАЗДЕЛА ===== -->
     <div class="page" id="pageChoose">
         <div class="choose-page">
             <h2>Выберите раздел</h2>
@@ -543,9 +584,7 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 3: ВЫБОР НОМЕРА                                    -->
-    <!-- ============================================================ -->
+    <!-- ===== СТРАНИЦА 3: ВЫБОР НОМЕРА ===== -->
     <div class="page" id="pageSelect">
         <div class="select-page">
             <h2 id="selectTitle">Выберите джуз</h2>
@@ -555,9 +594,7 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!--  СТРАНИЦА 4: ТЕСТ                                             -->
-    <!-- ============================================================ -->
+    <!-- ===== СТРАНИЦА 4: ТЕСТ ===== -->
     <div class="page" id="pageTest">
         <div class="test-page">
             <div class="test-header">
@@ -581,8 +618,6 @@
 <script>
     // ================================================================
     //  ====== БЛОК ДАННЫХ (легко заменяемый) ======
-    //  Добавляйте сюда новые джузы и суры.
-    //  Структура: { type: 'juz' или 'surah', id: число, label: 'Название', questions: [ { text, correct, options } ] }
     // ================================================================
 
     const TEST_DATA = {
@@ -590,31 +625,11 @@
             1: {
                 label: 'Джуз 1',
                 questions: [
-                    {
-                        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________',
-                        correct: 'عَالَمِينَ',
-                        options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ']
-                    },
-                    {
-                        text: 'مَالِكِ يَوْمِ _____________',
-                        correct: 'الدِّينِ',
-                        options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ']
-                    },
-                    {
-                        text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________',
-                        correct: 'عِينُ',
-                        options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ']
-                    },
-                    {
-                        text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________',
-                        correct: 'قِيمَ',
-                        options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ']
-                    },
-                    {
-                        text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________',
-                        correct: 'الِّينَ',
-                        options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ']
-                    }
+                    { text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________', correct: 'عَالَمِينَ', options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ'] },
+                    { text: 'مَالِكِ يَوْمِ _____________', correct: 'الدِّينِ', options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ'] },
+                    { text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________', correct: 'عِينُ', options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ'] },
+                    { text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________', correct: 'قِيمَ', options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ'] },
+                    { text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________', correct: 'الِّينَ', options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ'] }
                 ]
             }
         },
@@ -622,31 +637,11 @@
             1: {
                 label: 'Аль-Фатиха',
                 questions: [
-                    {
-                        text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________',
-                        correct: 'عَالَمِينَ',
-                        options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ']
-                    },
-                    {
-                        text: 'مَالِكِ يَوْمِ _____________',
-                        correct: 'الدِّينِ',
-                        options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ']
-                    },
-                    {
-                        text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________',
-                        correct: 'عِينُ',
-                        options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ']
-                    },
-                    {
-                        text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________',
-                        correct: 'قِيمَ',
-                        options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ']
-                    },
-                    {
-                        text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________',
-                        correct: 'الِّينَ',
-                        options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ']
-                    }
+                    { text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ الْحَمْدُ لِلَّهِ رَبِّ الْ_____________', correct: 'عَالَمِينَ', options: ['عَالَمِينَ', 'عَابِدِينَ', 'عَاقِلِينَ', 'عَارِفِينَ'] },
+                    { text: 'مَالِكِ يَوْمِ _____________', correct: 'الدِّينِ', options: ['الدِّينِ', 'الْحَقِّ', 'الْعَدْلِ', 'الْفَضْلِ'] },
+                    { text: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَ_____________', correct: 'عِينُ', options: ['عِينُ', 'عُونُ', 'عَانُ', 'عَيْنُ'] },
+                    { text: 'اهْدِنَا الصِّرَاطَ الْمُسْتَ_____________', correct: 'قِيمَ', options: ['قِيمَ', 'قَائِمَ', 'قَيُومَ', 'قَوِيمَ'] },
+                    { text: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّ_____________', correct: 'الِّينَ', options: ['الِّينَ', 'الَّتِينَ', 'الَّذِينَ', 'الَّائِينَ'] }
                 ]
             }
         }
@@ -716,163 +711,4 @@
     btnChooseBack.addEventListener('click', () => showPage('pageWelcome'));
     btnSelectBack.addEventListener('click', () => showPage('pageChoose'));
     btnTestBack.addEventListener('click', () => showPage('pageSelect'));
-    btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
-
-    // ===== ВЫБОР РАЗДЕЛА =====
-    btnChooseJuz.addEventListener('click', function() {
-        currentMode = 'juz';
-        const ids = Object.keys(TEST_DATA.juz).map(Number);
-        if (ids.length === 0) {
-            alert('Джузы пока не добавлены.');
-            return;
-        }
-        selectTitle.textContent = 'Выберите джуз';
-        selectSub.textContent = 'Выберите номер джуза (1–30)';
-        renderNumbers(30, ids);
-        showPage('pageSelect');
-    });
-
-    btnChooseSurah.addEventListener('click', function() {
-        currentMode = 'surah';
-        const ids = Object.keys(TEST_DATA.surah).map(Number);
-        if (ids.length === 0) {
-            alert('Суры пока не добавлены.');
-            return;
-        }
-        selectTitle.textContent = 'Выберите суру';
-        selectSub.textContent = 'Выберите номер суры (1–114)';
-        renderNumbers(114, ids);
-        showPage('pageSelect');
-    });
-
-    function renderNumbers(count, availableIds) {
-        numberGrid.innerHTML = '';
-        for (let i = 1; i <= count; i++) {
-            const btn = document.createElement('button');
-            btn.className = 'number-btn';
-            btn.textContent = i;
-            if (!availableIds.includes(i)) {
-                btn.style.opacity = '0.2';
-                btn.style.cursor = 'default';
-                btn.title = 'Скоро будет добавлено';
-            } else {
-                btn.addEventListener('click', function() {
-                    currentId = i;
-                    startTest();
-                });
-            }
-            numberGrid.appendChild(btn);
-        }
-    }
-
-    // ===== ЗАПУСК ТЕСТА =====
-    function startTest() {
-        const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
-        if (!data || !data.questions || data.questions.length === 0) {
-            alert('Для этого раздела пока нет вопросов.');
-            return;
-        }
-        currentQuestions = shuffleArray([...data.questions]);
-        isTestCompleted = false;
-        const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
-        testTitle.textContent = label + currentId;
-        testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
-        renderQuestions();
-        resultBlock.style.display = 'none';
-        checkBtn.style.display = 'inline-block';
-        showPage('pageTest');
-    }
-
-    // ===== РЕНДЕРИНГ ВОПРОСОВ =====
-    function renderQuestions() {
-        let html = '';
-        currentQuestions.forEach((q, idx) => {
-            const ayahHtml = q.text.replace('_____________', '<span class="highlight-missing">______</span>');
-            html += `
-                <div class="question-block" id="q${idx}">
-                    <div class="question-number">Вопрос ${idx+1} из ${currentQuestions.length}</div>
-                    <div class="ayah-text">${ayahHtml}</div>
-                    <div class="options" id="opts${idx}">
-                        ${q.options.map((opt, oi) => `
-                            <label id="lbl${idx}_${oi}">
-                                <input type="radio" name="q${idx}" value="${oi}">
-                                ${opt}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="fb${idx}"></div>
-                </div>
-            `;
-        });
-        questionsContainer.innerHTML = html;
-        updateProgress();
-
-        document.querySelectorAll('input[type="radio"]').forEach(el => {
-            el.addEventListener('change', updateProgress);
-        });
-    }
-
-    function updateProgress() {
-        const total = currentQuestions.length;
-        let answered = 0;
-        for (let i = 0; i < total; i++) {
-            const selected = document.querySelector(`input[name="q${i}"]:checked`);
-            if (selected) answered++;
-        }
-        progressText.textContent = answered + ' из ' + total;
-    }
-
-    // ===== ПРОВЕРКА =====
-    checkBtn.addEventListener('click', function() {
-        if (isTestCompleted) return;
-
-        let correct = 0;
-        const total = currentQuestions.length;
-
-        currentQuestions.forEach((q, idx) => {
-            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-            const fb = document.getElementById(`fb${idx}`);
-            const labels = document.querySelectorAll(`#opts${idx} label`);
-
-            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
-
-            if (selected) {
-                const val = parseInt(selected.value);
-                if (q.options[val] === q.correct) {
-                    correct++;
-                    fb.className = 'feedback correct';
-                    fb.textContent = '✅ Правильно';
-                    labels[val].classList.add('correct-answer');
-                } else {
-                    fb.className = 'feedback wrong';
-                    fb.textContent = '❌ Неправильно';
-                    labels[val].classList.add('wrong-answer');
-                }
-            } else {
-                fb.className = 'feedback wrong';
-                fb.textContent = '❌ Ответ не выбран';
-            }
-
-            document.querySelectorAll(`input[name="q${idx}"]`).forEach(el => el.disabled = true);
-        });
-
-        resultBlock.style.display = 'block';
-        scoreDisplay.textContent = correct + ' / ' + total;
-
-        isTestCompleted = true;
-        checkBtn.style.display = 'none';
-        resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-
-    // ===== ВСПОМОГАТЕЛЬНЫЕ =====
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-</script>
-
-</body>
-</html>
+    btnTestHome.addEventListener
