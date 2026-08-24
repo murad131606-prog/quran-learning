@@ -4795,33 +4795,63 @@ const JUZ_AYATS = {
         // ================================================================
 
         function startTest() {
-            const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
-            if (!data || !data.questions || data.questions.length === 0) {
-                alert('Для этого раздела пока нет вопросов.');
-                return;
-            }
+    const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
+    if (!data || !data.questions || data.questions.length === 0) {
+        alert('Для этого раздела пока нет вопросов.');
+        return;
+    }
 
-            let questions = [...data.questions];
-            
-            if (currentMode === 'juz' && questions.length > 20) {
-                questions = questions.slice(0, 20);
+    let questions = [...data.questions];
+    
+    questions = shuffleArray(questions);
+    
+    if (currentMode === 'juz') {
+        const grouped = {};
+        questions.forEach(q => {
+            if (!grouped[q.surah]) grouped[q.surah] = [];
+            grouped[q.surah].push(q);
+        });
+        
+        const selected = [];
+        const surahs = Object.keys(grouped);
+        shuffleArray(surahs);
+        
+        const questionsPerSurah = surahs.length >= 5 ? 2 : 3;
+        
+        for (const surah of surahs) {
+            const surahQuestions = shuffleArray(grouped[surah]);
+            const count = Math.min(questionsPerSurah, surahQuestions.length);
+            for (let i = 0; i < count; i++) {
+                selected.push(surahQuestions[i]);
             }
-            
-            if (currentMode === 'surah' && questions.length > 20) {
-                questions = questions.slice(0, 20);
-            }
-
-            currentQuestions = shuffleArray(questions);
-            isTestCompleted = false;
-            const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
-            testTitle.textContent = label + currentId;
-            testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
-            renderQuestions();
-            resultBlock.style.display = 'none';
-            resultBlock.innerHTML = '';
-            checkBtn.style.display = 'inline-block';
-            showPage('pageTest');
         }
+        
+        if (selected.length < 15 && selected.length < questions.length) {
+            const remaining = questions.filter(q => !selected.includes(q));
+            const need = Math.min(20 - selected.length, remaining.length);
+            for (let i = 0; i < need; i++) {
+                selected.push(remaining[i]);
+            }
+        }
+        
+        questions = shuffleArray(selected);
+    }
+    
+    if (questions.length > 20) {
+        questions = questions.slice(0, 20);
+    }
+
+    currentQuestions = shuffleArray(questions);
+    isTestCompleted = false;
+    const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
+    testTitle.textContent = label + currentId;
+    testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
+    renderQuestions();
+    resultBlock.style.display = 'none';
+    resultBlock.innerHTML = '';
+    checkBtn.style.display = 'inline-block';
+    showPage('pageTest');
+}
 
         // ================================================================
         //  РЕНДЕРИНГ ВОПРОСОВ
