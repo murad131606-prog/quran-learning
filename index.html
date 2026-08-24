@@ -4802,22 +4802,25 @@ const JUZ_AYATS = {
     }
 
     let questions = [...data.questions];
-    
     questions = shuffleArray(questions);
-    
+
+    // Если выбран режим "Джуз", распределяем вопросы по сурам
     if (currentMode === 'juz') {
+        // 1. Группируем вопросы по сурам
         const grouped = {};
         questions.forEach(q => {
             if (!grouped[q.surah]) grouped[q.surah] = [];
             grouped[q.surah].push(q);
         });
-        
+
         const selected = [];
         const surahs = Object.keys(grouped);
         shuffleArray(surahs);
-        
+
+        // 2. Определяем, сколько вопросов брать из каждой суры
         const questionsPerSurah = surahs.length >= 5 ? 2 : 3;
-        
+
+        // 3. Выбираем вопросы из каждой суры
         for (const surah of surahs) {
             const surahQuestions = shuffleArray(grouped[surah]);
             const count = Math.min(questionsPerSurah, surahQuestions.length);
@@ -4825,7 +4828,8 @@ const JUZ_AYATS = {
                 selected.push(surahQuestions[i]);
             }
         }
-        
+
+        // 4. Если вопросов меньше 15, добираем из оставшихся в этом же джузе
         if (selected.length < 15 && selected.length < questions.length) {
             const remaining = questions.filter(q => !selected.includes(q));
             const need = Math.min(20 - selected.length, remaining.length);
@@ -4833,10 +4837,12 @@ const JUZ_AYATS = {
                 selected.push(remaining[i]);
             }
         }
-        
+
+        // 5. Присваиваем итоговый массив вопросов
         questions = shuffleArray(selected);
     }
-    
+
+    // Ограничиваем количество вопросов до 20
     if (questions.length > 20) {
         questions = questions.slice(0, 20);
     }
