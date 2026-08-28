@@ -4777,7 +4777,26 @@ const JUZ_AYATS = {
             renderNumbers(114, ids);
             showPage('pageSelect');
         });
+// ====== КНОПКИ ВЫБОРА РЕЖИМА ======
+document.getElementById('btnChooseFill').addEventListener('click', function() {
+    testMode = 'fill';
+    document.getElementById('btnChooseFill').style.display = 'none';
+    document.getElementById('btnChooseNext').style.display = 'none';
+    document.getElementById('btnChooseJuz').style.display = 'block';
+    document.getElementById('btnChooseSurah').style.display = 'block';
+    document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
+    document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+});
 
+document.getElementById('btnChooseNext').addEventListener('click', function() {
+    testMode = 'next';
+    document.getElementById('btnChooseFill').style.display = 'none';
+    document.getElementById('btnChooseNext').style.display = 'none';
+    document.getElementById('btnChooseJuz').style.display = 'block';
+    document.getElementById('btnChooseSurah').style.display = 'block';
+    document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
+    document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+});
         function renderNumbers(count, availableIds) {
             numberGrid.innerHTML = '';
             for (let i = 1; i <= count; i++) {
