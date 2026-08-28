@@ -4816,28 +4816,7 @@ document.getElementById('btnChooseNext').addEventListener('click', function() {
                 numberGrid.appendChild(btn);
             }
         }
-// Выбор режима "Дополнить аят"
-document.getElementById('btnChooseFill').addEventListener('click', function() {
-    testMode = 'fill';
-    // Показываем выбор между джузом и сурой
-    document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
-    document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
-    document.getElementById('btnChooseJuz').style.display = 'inline-block';
-    document.getElementById('btnChooseSurah').style.display = 'inline-block';
-    document.getElementById('btnChooseFill').style.display = 'none';
-    document.getElementById('btnChooseNext').style.display = 'none';
-});
 
-// Выбор режима "Угадай следующий аят"
-document.getElementById('btnChooseNext').addEventListener('click', function() {
-    testMode = 'next';
-    document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
-    document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
-    document.getElementById('btnChooseJuz').style.display = 'inline-block';
-    document.getElementById('btnChooseSurah').style.display = 'inline-block';
-    document.getElementById('btnChooseFill').style.display = 'none';
-    document.getElementById('btnChooseNext').style.display = 'none';
-});
         // ================================================================
         //  ЗАПУСК ТЕСТА
         // ================================================================
