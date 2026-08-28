@@ -4861,8 +4861,8 @@ document.getElementById('btnChooseBack').addEventListener('click', function() {
             }
         }
 
-       // ================================================================
-//  ЗАПУСК ТЕСТА (ИСПРАВЛЕННАЯ ВЕРСИЯ - ЗАМЕНИТЬ СУЩЕСТВУЮЩУЮ)
+      // ================================================================
+//  ЗАПУСК ТЕСТА (ИСПРАВЛЕННАЯ ВЕРСИЯ)
 // ================================================================
 
 function startTest() {
@@ -4880,41 +4880,35 @@ function startTest() {
     }
 
     let questions = [...data.questions];
-    questions = shuffleArray(questions);
-
-    // ДЛЯ ДЖУЗОВ - берем вопросы РАВНОМЕРНО из всех сур джуза
+    
+    // ============ ДЛЯ ДЖУЗОВ - ПЕРЕМЕШИВАЕМ ПО СУРАМ ============
     if (currentMode === 'juz') {
+        // Группируем вопросы по сурам
         const grouped = {};
         questions.forEach(q => {
-            const surahKey = q.surah; // используем surah из вопроса
-            if (!grouped[surahKey]) grouped[surahKey] = [];
-            grouped[surahKey].push(q);
+            if (!grouped[q.surah]) grouped[q.surah] = [];
+            grouped[q.surah].push(q);
         });
 
-        const selected = [];
+        // Получаем список сур и перемешиваем их
         const surahs = Object.keys(grouped);
         shuffleArray(surahs);
         
-        // Если сур мало (1-2), берем по 3-4 вопроса из каждой
-        let questionsPerSurah = 2;
-        if (surahs.length <= 2) {
-            questionsPerSurah = 4;
-        } else if (surahs.length <= 4) {
-            questionsPerSurah = 3;
-        }
-
-        // Сначала равномерно распределяем вопросы
+        // Берем из каждой суры по 2 вопроса (или сколько есть)
+        const selected = [];
         for (const surah of surahs) {
             const surahQuestions = shuffleArray(grouped[surah]);
-            const count = Math.min(questionsPerSurah, surahQuestions.length);
+            // Берем максимум 2 вопроса из каждой суры
+            const count = Math.min(2, surahQuestions.length);
             for (let i = 0; i < count; i++) {
                 selected.push(surahQuestions[i]);
             }
         }
 
-        // Если набрали меньше 15 вопросов, добавляем еще из оставшихся
-        if (selected.length < 15 && selected.length < questions.length) {
+        // Если набрали меньше 15 вопросов, добираем из оставшихся
+        if (selected.length < 15) {
             const remaining = questions.filter(q => !selected.includes(q));
+            shuffleArray(remaining);
             const need = Math.min(20 - selected.length, remaining.length);
             for (let i = 0; i < need; i++) {
                 selected.push(remaining[i]);
@@ -4923,6 +4917,7 @@ function startTest() {
 
         questions = shuffleArray(selected);
     }
+    // ====================================================================
 
     // Ограничиваем до 20 вопросов
     if (questions.length > 20) {
@@ -4937,7 +4932,6 @@ function startTest() {
     testTitle.textContent = modeLabel + ': ' + label + currentId;
     testLabel.innerHTML = '📖 <strong>' + modeLabel + ': ' + label + currentId + '</strong>';
     
-    // Рендерим вопросы в зависимости от режима
     if (testMode === 'fill') {
         renderQuestions();
     } else {
