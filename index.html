@@ -549,18 +549,24 @@
             </div>
         </div>
 
-        <!-- ===== СТРАНИЦА 2: ВЫБОР РАЗДЕЛА ===== -->
-        <div class="page" id="pageChoose">
-            <div class="choose-page">
-                <h2>Выберите раздел</h2>
-                <p>Выберите джуз или суру для начала тестирования</p>
-                <div class="choose-grid">
-                    <div class="choose-card" id="btnChooseJuz"><h3>Джуз</h3></div>
-                    <div class="choose-card" id="btnChooseSurah"><h3>Сура</h3></div>
-                </div>
-                <button class="btn-secondary" id="btnChooseBack">← Назад</button>
+        <!-- ===== СТРАНИЦА 2: ВЫБОР РЕЖИМА ===== -->
+<div class="page" id="pageChoose">
+    <div class="choose-page">
+        <h2>Выберите режим</h2>
+        <p>Выберите тип теста для проверки знаний</p>
+        <div class="choose-grid" style="gap:20px;">
+            <div class="choose-card" id="btnChooseFill">
+                <h3>📝 Дополнить аят</h3>
+                <p style="font-size:14px;opacity:0.7;margin-top:8px;">Вставьте пропущенное слово</p>
+            </div>
+            <div class="choose-card" id="btnChooseNext">
+                <h3>🔮 Угадай следующий аят</h3>
+                <p style="font-size:14px;opacity:0.7;margin-top:8px;">Выберите правильный следующий аят</p>
             </div>
         </div>
+        <button class="btn-secondary" id="btnChooseBack">← Назад</button>
+    </div>
+</div>
 
         <!-- ===== СТРАНИЦА 3: ВЫБОР НОМЕРА ===== -->
         <div class="page" id="pageSelect">
@@ -4727,6 +4733,7 @@ const JUZ_AYATS = {
         let currentId = 1;
         let currentQuestions = [];
         let isTestCompleted = false;
+        let testMode = 'fill'; // 'fill' - дополнить аят, 'next' - угадать следующий аят
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -4739,6 +4746,7 @@ const JUZ_AYATS = {
         btnSelectBack.addEventListener('click', () => showPage('pageChoose'));
         btnTestBack.addEventListener('click', () => showPage('pageSelect'));
         btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
+        
 
         // ================================================================
         //  ВЫБОР РАЗДЕЛА
@@ -4789,13 +4797,41 @@ const JUZ_AYATS = {
                 numberGrid.appendChild(btn);
             }
         }
+// Выбор режима "Дополнить аят"
+document.getElementById('btnChooseFill').addEventListener('click', function() {
+    testMode = 'fill';
+    // Показываем выбор между джузом и сурой
+    document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
+    document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+    document.getElementById('btnChooseJuz').style.display = 'inline-block';
+    document.getElementById('btnChooseSurah').style.display = 'inline-block';
+    document.getElementById('btnChooseFill').style.display = 'none';
+    document.getElementById('btnChooseNext').style.display = 'none';
+});
 
+// Выбор режима "Угадай следующий аят"
+document.getElementById('btnChooseNext').addEventListener('click', function() {
+    testMode = 'next';
+    document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
+    document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+    document.getElementById('btnChooseJuz').style.display = 'inline-block';
+    document.getElementById('btnChooseSurah').style.display = 'inline-block';
+    document.getElementById('btnChooseFill').style.display = 'none';
+    document.getElementById('btnChooseNext').style.display = 'none';
+});
         // ================================================================
         //  ЗАПУСК ТЕСТА
         // ================================================================
 
         function startTest() {
-    const data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
+    // Выбираем правильные данные в зависимости от режима
+    let data;
+    if (testMode === 'fill') {
+        data = currentMode === 'juz' ? TEST_DATA.juz[currentId] : TEST_DATA.surah[currentId];
+    } else {
+        data = currentMode === 'juz' ? TEST_DATA_NEXT.juz[currentId] : TEST_DATA_NEXT.surah[currentId];
+    }
+    
     if (!data || !data.questions || data.questions.length === 0) {
         alert('Для этого раздела пока нет вопросов.');
         return;
@@ -4842,10 +4878,19 @@ const JUZ_AYATS = {
 
     currentQuestions = shuffleArray(questions);
     isTestCompleted = false;
+    
+    const modeLabel = testMode === 'fill' ? 'Дополнить аят' : 'Угадай аят';
     const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
-    testTitle.textContent = label + currentId;
-    testLabel.innerHTML = '📖 <strong>' + label + currentId + '</strong>';
-    renderQuestions();
+    testTitle.textContent = modeLabel + ': ' + label + currentId;
+    testLabel.innerHTML = '📖 <strong>' + modeLabel + ': ' + label + currentId + '</strong>';
+    
+    // Рендерим вопросы в зависимости от режима
+    if (testMode === 'fill') {
+        renderQuestions();
+    } else {
+        renderNextAyahQuestions();
+    }
+    
     resultBlock.style.display = 'none';
     resultBlock.innerHTML = '';
     checkBtn.style.display = 'inline-block';
@@ -5005,6 +5050,114 @@ const JUZ_AYATS = {
             checkBtn.style.display = 'none';
             resultBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
+        // ================================================================
+//  ====== РЕЖИМ: УГАДАЙ СЛЕДУЮЩИЙ АЯТ ======
+// ================================================================
+
+function generateNextAyahQuestions(ayahKeys) {
+    const questions = [];
+    
+    for (let i = 0; i < ayahKeys.length; i++) {
+        const key = ayahKeys[i];
+        if (!REAL_AYATS[key]) continue;
+        
+        const [surahNum, ayahNum] = key.split(':').map(Number);
+        const nextKey = `${surahNum}:${ayahNum + 1}`;
+        const nextAyah = REAL_AYATS[nextKey];
+        
+        if (!nextAyah) continue;
+        
+        // 3 случайных аята из всего Корана
+        const distractors = [];
+        const pool = Object.values(REAL_AYATS).filter(a => a !== nextAyah);
+        shuffleArray(pool);
+        
+        for (let j = 0; j < 3 && j < pool.length; j++) {
+            distractors.push(pool[j]);
+        }
+        
+        const options = shuffleArray([nextAyah, ...distractors]);
+        
+        questions.push({
+            text: `Какой аят следует после этого?\n\n${REAL_AYATS[key]}`,
+            correct: nextAyah,
+            options: options,
+            source: `Сура ${surahNum}, аят ${ayahNum} → следующий аят`,
+            surah: surahNum,
+            ayah: ayahNum
+        });
+    }
+    return questions;
+}
+
+// Данные для нового режима
+const TEST_DATA_NEXT = {
+    juz: {},
+    surah: {}
+};
+
+// Заполняем для джузов
+for (const [juzNum, ayahKeys] of Object.entries(JUZ_AYATS)) {
+    const questions = generateNextAyahQuestions(ayahKeys);
+    if (questions.length > 0) {
+        TEST_DATA_NEXT.juz[juzNum] = {
+            label: `Джуз ${juzNum}`,
+            questions: questions.slice(0, 20)
+        };
+    }
+}
+
+// Заполняем для сур
+for (const [surahNum, ayahKeys] of Object.entries(SURAH_AYATS)) {
+    const questions = generateNextAyahQuestions(ayahKeys);
+    if (questions.length > 0) {
+        TEST_DATA_NEXT.surah[surahNum] = {
+            label: `Сура ${surahNum}`,
+            questions: questions.slice(0, 20)
+        };
+    }
+}
+
+function renderNextAyahQuestions() {
+    let html = '';
+    currentQuestions.forEach((q, idx) => {
+        html += `
+            <div class="question-block" id="q${idx}">
+                <div class="question-number">Вопрос ${idx+1} из ${currentQuestions.length}</div>
+                <div class="ayah-text" dir="rtl">${q.text.replace(/\n/g, '<br>')}</div>
+                <div class="options" id="opts${idx}">
+                    ${q.options.map((opt, oi) => `
+                        <label id="lbl${idx}_${oi}">
+                            <input type="radio" name="q${idx}" value="${oi}">
+                            <span dir="rtl">${opt}</span>
+                        </label>
+                    `).join('')}
+                </div>
+                <button class="btn-hint" onclick="showNextAyahHint(${idx})">📖 Подсказка</button>
+                <div class="hint-text" id="hint${idx}" style="display:none;">
+                    📍 ${q.source}
+                </div>
+                <div class="feedback" id="fb${idx}"></div>
+            </div>
+        `;
+    });
+    questionsContainer.innerHTML = html;
+    updateProgress();
+
+    document.querySelectorAll('input[type="radio"]').forEach(el => {
+        el.addEventListener('change', updateProgress);
+    });
+}
+
+function showNextAyahHint(idx) {
+    const hint = document.getElementById(`hint${idx}`);
+    if (hint.style.display === 'none') {
+        hint.textContent = `📍 ${currentQuestions[idx].source}`;
+        hint.style.display = 'block';
+    } else {
+        hint.style.display = 'none';
+    }
+}
     </script>
 </body>
 </html>
