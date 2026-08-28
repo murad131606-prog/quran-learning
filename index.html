@@ -549,20 +549,26 @@
             </div>
         </div>
 
-        <!-- ===== СТРАНИЦА 2: ВЫБОР РЕЖИМА ===== -->
+       
+<!-- ===== СТРАНИЦА 2: ВЫБОР РЕЖИМА ===== -->
 <div class="page" id="pageChoose">
     <div class="choose-page">
-        <h2>Выберите режим</h2>
-        <p>Выберите тип теста для проверки знаний</p>
+        <h2 id="chooseTitle">Выберите режим</h2>
+        <p id="chooseDesc">Выберите тип теста для проверки знаний</p>
         <div class="choose-grid" style="gap:20px;">
             <div class="choose-card" id="btnChooseFill">
                 <h3>📝 Дополнить аят</h3>
                 <p style="font-size:14px;opacity:0.7;margin-top:8px;">Вставьте пропущенное слово</p>
             </div>
             <div class="choose-card" id="btnChooseNext">
-                <h3>🔮 Угадай следующий аят</h3>
+                <h3>🎯 Угадай следующий аят</h3>
                 <p style="font-size:14px;opacity:0.7;margin-top:8px;">Выберите правильный следующий аят</p>
             </div>
+        </div>
+        <!-- КНОПКИ ВЫБОРА РАЗДЕЛА (появляются после выбора режима) -->
+        <div id="selectModeButtons" style="display:none; margin-top:10px;">
+            <button class="btn-secondary" id="btnChooseJuz" style="margin:5px;">📖 Выбрать джуз</button>
+            <button class="btn-secondary" id="btnChooseSurah" style="margin:5px;">📖 Выбрать суру</button>
         </div>
         <button class="btn-secondary" id="btnChooseBack">← Назад</button>
     </div>
@@ -4780,10 +4786,11 @@ const JUZ_AYATS = {
 // ====== КНОПКИ ВЫБОРА РЕЖИМА ======
 document.getElementById('btnChooseFill').addEventListener('click', function() {
     testMode = 'fill';
+    // Скрываем карточки выбора режима
     document.getElementById('btnChooseFill').style.display = 'none';
     document.getElementById('btnChooseNext').style.display = 'none';
-    document.getElementById('btnChooseJuz').style.display = 'block';
-    document.getElementById('btnChooseSurah').style.display = 'block';
+    // Показываем кнопки выбора раздела
+    document.getElementById('selectModeButtons').style.display = 'block';
     document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
     document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
 });
@@ -4792,10 +4799,47 @@ document.getElementById('btnChooseNext').addEventListener('click', function() {
     testMode = 'next';
     document.getElementById('btnChooseFill').style.display = 'none';
     document.getElementById('btnChooseNext').style.display = 'none';
-    document.getElementById('btnChooseJuz').style.display = 'block';
-    document.getElementById('btnChooseSurah').style.display = 'block';
+    document.getElementById('selectModeButtons').style.display = 'block';
     document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
     document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+});
+
+// ====== КНОПКИ ВЫБОРА РАЗДЕЛА ======
+document.getElementById('btnChooseJuz').addEventListener('click', function() {
+    currentMode = 'juz';
+    const ids = Object.keys(TEST_DATA.juz).map(Number);
+    if (ids.length === 0) {
+        alert('Джузы пока не добавлены.');
+        return;
+    }
+    selectTitle.textContent = 'Выберите джуз';
+    selectSub.textContent = 'Выберите номер джуза (1–30)';
+    renderNumbers(30, ids);
+    showPage('pageSelect');
+});
+
+document.getElementById('btnChooseSurah').addEventListener('click', function() {
+    currentMode = 'surah';
+    const ids = Object.keys(TEST_DATA.surah).map(Number);
+    if (ids.length === 0) {
+        alert('Суры пока не добавлены.');
+        return;
+    }
+    selectTitle.textContent = 'Выберите суру';
+    selectSub.textContent = 'Выберите номер суры (1–114)';
+    renderNumbers(114, ids);
+    showPage('pageSelect');
+});
+
+// ====== КНОПКА НАЗАД НА СТРАНИЦЕ ВЫБОРА ======
+document.getElementById('btnChooseBack').addEventListener('click', function() {
+    // Возвращаем исходный вид страницы выбора
+    document.getElementById('btnChooseFill').style.display = 'block';
+    document.getElementById('btnChooseNext').style.display = 'block';
+    document.getElementById('selectModeButtons').style.display = 'none';
+    document.querySelector('.choose-page h2').textContent = 'Выберите режим';
+    document.querySelector('.choose-page p').textContent = 'Выберите тип теста для проверки знаний';
+    showPage('pageWelcome');
 });
         function renderNumbers(count, availableIds) {
             numberGrid.innerHTML = '';
@@ -4817,11 +4861,11 @@ document.getElementById('btnChooseNext').addEventListener('click', function() {
             }
         }
 
-        // ================================================================
-        //  ЗАПУСК ТЕСТА
-        // ================================================================
+       // ================================================================
+//  ЗАПУСК ТЕСТА (обновленная версия)
+// ================================================================
 
-        function startTest() {
+function startTest() {
     // Выбираем правильные данные в зависимости от режима
     let data;
     if (testMode === 'fill') {
@@ -4838,6 +4882,7 @@ document.getElementById('btnChooseNext').addEventListener('click', function() {
     let questions = [...data.questions];
     questions = shuffleArray(questions);
 
+    // Для джузов - берем по 1-2 вопроса из разных сур
     if (currentMode === 'juz') {
         const grouped = {};
         questions.forEach(q => {
@@ -4877,7 +4922,7 @@ document.getElementById('btnChooseNext').addEventListener('click', function() {
     currentQuestions = shuffleArray(questions);
     isTestCompleted = false;
     
-    const modeLabel = testMode === 'fill' ? 'Дополнить аят' : 'Угадай аят';
+    const modeLabel = testMode === 'fill' ? 'Дополнить аят' : 'Угадай следующий аят';
     const label = currentMode === 'juz' ? 'Джуз ' : 'Сура ';
     testTitle.textContent = modeLabel + ': ' + label + currentId;
     testLabel.innerHTML = '📖 <strong>' + modeLabel + ': ' + label + currentId + '</strong>';
@@ -5146,6 +5191,54 @@ function renderNextAyahQuestions() {
         el.addEventListener('change', updateProgress);
     });
 }
+
+function showNextAyahHint(idx) {
+    const hint = document.getElementById(`hint${idx}`);
+    if (hint.style.display === 'none') {
+        hint.textContent = `📍 ${currentQuestions[idx].source}`;
+        hint.style.display = 'block';
+    } else {
+        hint.style.display = 'none';
+    }
+}
+        // ================================================================
+//  ОТОБРАЖЕНИЕ ВОПРОСОВ "УГАДАЙ СЛЕДУЮЩИЙ АЯТ"
+// ================================================================
+
+function renderNextAyahQuestions() {
+    let html = '';
+    currentQuestions.forEach((q, idx) => {
+        html += `
+            <div class="question-block" id="q${idx}">
+                <div class="question-number">Вопрос ${idx+1} из ${currentQuestions.length}</div>
+                <div class="ayah-text" dir="rtl">${q.text.replace(/\n/g, '<br>')}</div>
+                <div class="options" id="opts${idx}">
+                    ${q.options.map((opt, oi) => `
+                        <label id="lbl${idx}_${oi}">
+                            <input type="radio" name="q${idx}" value="${oi}">
+                            <span dir="rtl">${opt}</span>
+                        </label>
+                    `).join('')}
+                </div>
+                <button class="btn-hint" onclick="showNextAyahHint(${idx})">📖 Подсказка</button>
+                <div class="hint-text" id="hint${idx}" style="display:none;">
+                    📍 ${q.source}
+                </div>
+                <div class="feedback" id="fb${idx}"></div>
+            </div>
+        `;
+    });
+    questionsContainer.innerHTML = html;
+    updateProgress();
+
+    document.querySelectorAll('input[type="radio"]').forEach(el => {
+        el.addEventListener('change', updateProgress);
+    });
+}
+
+// ================================================================
+//  ПОДСКАЗКА ДЛЯ "УГАДАЙ СЛЕДУЮЩИЙ АЯТ"
+// ================================================================
 
 function showNextAyahHint(idx) {
     const hint = document.getElementById(`hint${idx}`);
