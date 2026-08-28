@@ -4862,7 +4862,7 @@ document.getElementById('btnChooseBack').addEventListener('click', function() {
         }
 
       // ================================================================
-//  ЗАПУСК ТЕСТА (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+//  ЗАПУСК ТЕСТА (ГАРАНТИРОВАННО РАБОТАЕТ С РАЗНЫМИ СУРАМИ)
 // ================================================================
 
 function startTest() {
@@ -4881,24 +4881,28 @@ function startTest() {
 
     let questions = [...data.questions];
     
-    // ============ ДЛЯ ДЖУЗОВ - ПЕРЕМЕШИВАЕМ ПО СУРАМ ============
+    // ============ ТОЛЬКО ДЛЯ ДЖУЗОВ - ПЕРЕМЕШИВАЕМ ПО СУРАМ ============
     if (currentMode === 'juz') {
         // Группируем вопросы по сурам
         const grouped = {};
         questions.forEach(q => {
-            if (!grouped[q.surah]) grouped[q.surah] = [];
-            grouped[q.surah].push(q);
+            // Убеждаемся, что q.surah существует
+            const surahKey = q.surah || 0;
+            if (!grouped[surahKey]) grouped[surahKey] = [];
+            grouped[surahKey].push(q);
         });
 
-        // Получаем список сур и перемешиваем их
+        // Получаем список сур
         const surahs = Object.keys(grouped);
+        console.log('Найдено сур в джузе:', surahs.length, 'Суры:', surahs);
+        
+        // Перемешиваем суры
         shuffleArray(surahs);
         
-        // Берем из каждой суры по 2 вопроса (или сколько есть)
+        // Берем из каждой суры по 2 вопроса
         const selected = [];
         for (const surah of surahs) {
             const surahQuestions = shuffleArray(grouped[surah]);
-            // Берем максимум 2 вопроса из каждой суры
             const count = Math.min(2, surahQuestions.length);
             for (let i = 0; i < count; i++) {
                 selected.push(surahQuestions[i]);
@@ -4916,6 +4920,8 @@ function startTest() {
         }
 
         questions = shuffleArray(selected);
+        console.log('Итоговое количество вопросов:', questions.length);
+        console.log('Вопросы из сур:', questions.map(q => q.surah).join(', '));
     }
     // ====================================================================
 
