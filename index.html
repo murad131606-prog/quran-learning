@@ -4862,7 +4862,7 @@ document.getElementById('btnChooseBack').addEventListener('click', function() {
         }
 
        // ================================================================
-//  ЗАПУСК ТЕСТА (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+//  ЗАПУСК ТЕСТА (ИСПРАВЛЕННАЯ ВЕРСИЯ - ЗАМЕНИТЬ СУЩЕСТВУЮЩУЮ)
 // ================================================================
 
 function startTest() {
@@ -4896,7 +4896,6 @@ function startTest() {
         shuffleArray(surahs);
         
         // Если сур мало (1-2), берем по 3-4 вопроса из каждой
-        // Если сур много, берем по 1-2 вопроса
         let questionsPerSurah = 2;
         if (surahs.length <= 2) {
             questionsPerSurah = 4;
