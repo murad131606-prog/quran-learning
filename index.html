@@ -142,10 +142,11 @@ body.dark {
         radial-gradient(ellipse at 30% 40%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
         radial-gradient(ellipse at 70% 60%, rgba(100, 50, 255, 0.06) 0%, transparent 50%),
         radial-gradient(ellipse at center, #0f0a1a 0%, #06040a 100%);
+    min-height: 100vh;
 }
 
 body.dark .container {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(20, 15, 35, 0.85);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -214,6 +215,7 @@ body.dark .language-toggle:hover {
 body.dark .choose-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.04);
+    color: #e8e0d8;
 }
 
 body.dark .choose-card:hover {
@@ -222,14 +224,24 @@ body.dark .choose-card:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
+body.dark .choose-card h3 {
+    color: #f0e8e0;
+}
+
+body.dark .choose-card p {
+    color: rgba(255,255,255,0.4);
+}
+
 body.dark .number-btn {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.04);
+    color: rgba(255,255,255,0.6);
 }
 
 body.dark .number-btn:hover {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(212, 175, 55, 0.1);
+    color: #ffffff;
 }
 
 body.dark .number-btn.surah-btn {
@@ -238,6 +250,82 @@ body.dark .number-btn.surah-btn {
 
 body.dark .number-btn.surah-btn:hover {
     background: rgba(255, 255, 255, 0.04);
+}
+
+body.dark .select-page h2 {
+    color: #ffffff;
+}
+
+body.dark .select-page p {
+    color: rgba(255,255,255,0.4);
+}
+
+body.dark .test-page .ayah-text {
+    color: #f5efe8;
+    background: rgba(255,255,255,0.03);
+}
+
+body.dark .test-page .options label {
+    color: rgba(255,255,255,0.6);
+    border-color: rgba(255,255,255,0.06);
+}
+
+body.dark .test-page .options label:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+body.dark .test-page .feedback.correct {
+    color: #28a745;
+}
+
+body.dark .test-page .feedback.wrong {
+    color: #dc3545;
+}
+
+body.dark .btn-secondary {
+    color: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.06);
+}
+
+body.dark .btn-secondary:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+body.dark .hint-text {
+    color: rgba(255,255,255,0.4);
+}
+
+body.dark .question-block {
+    border-bottom-color: rgba(255,255,255,0.04);
+}
+
+body.dark .result-detail {
+    border-bottom-color: rgba(255,255,255,0.04);
+}
+
+body.dark .result-block .score {
+    color: #f5efe8;
+}
+
+body.dark .test-page .test-header {
+    color: rgba(255,255,255,0.3);
+}
+
+body.dark .question-number {
+    color: rgba(255,255,255,0.3);
+}
+
+body.dark .result-block {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+body.dark .number-grid::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02);
+}
+
+body.dark .number-grid::-webkit-scrollbar-thumb {
+    background: rgba(212,175,55,0.15);
 }
 
 /* ===== КОНТЕЙНЕР ===== */
