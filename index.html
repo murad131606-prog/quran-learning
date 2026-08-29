@@ -5405,13 +5405,13 @@ function getText(key, replace = {}) {
 
 function updateLanguage() {
     // Обновляем все тексты на странице
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         el.innerHTML = getText(key);
     });
     
     // Обновляем кнопку языка
-    document.getElementById('langLabel').textContent = langLabels[currentLang];
+     document.getElementById('langLabel').textContent = langLabels[currentLang];
     document.getElementById('langIcon').textContent = langIcons[currentLang];
     
     // Обновляем динамические элементы
@@ -5557,6 +5557,29 @@ document.getElementById('btnChooseBack').addEventListener('click', function() {
             });
         }
         numberGrid.appendChild(btn);
+    }
+}
+        function updateDynamicTexts() {
+    // Если мы на странице выбора сур/джузов - обновляем кнопки
+    if (pageSelect.classList.contains('active')) {
+        const count = currentMode === 'juz' ? 30 : 114;
+        const ids = currentMode === 'juz' 
+            ? Object.keys(TEST_DATA.juz).map(Number) 
+            : Object.keys(TEST_DATA.surah).map(Number);
+        renderNumbers(count, ids);
+    }
+    
+    // Обновляем заголовки на странице выбора
+    if (pageChoose.classList.contains('active')) {
+        document.querySelector('.choose-page h2').textContent = getText('chooseMode');
+        document.querySelector('.choose-page p').textContent = getText('chooseModeDesc');
+        document.querySelector('#btnChooseFill h3').textContent = getText('fillMode');
+        document.querySelector('#btnChooseFill p').textContent = getText('fillModeDesc');
+        document.querySelector('#btnChooseNext h3').textContent = getText('nextMode');
+        document.querySelector('#btnChooseNext p').textContent = getText('nextModeDesc');
+        document.getElementById('btnChooseJuz').textContent = getText('chooseJuz');
+        document.getElementById('btnChooseSurah').textContent = getText('chooseSurah');
+        document.getElementById('btnChooseBack').textContent = getText('back');
     }
 }
       // ================================================================
