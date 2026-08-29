@@ -512,6 +512,32 @@
             .test-page .ayah-text { font-size: 18px; padding: 10px 12px; }
             .options label { font-size: 15px; padding: 6px 12px; }
         }
+        .test-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+.test-buttons .btn-secondary { 
+    margin-top: 0; 
+    padding: 10px 20px;
+    font-size: 14px;
+}
+#btnPrevSection, #btnNextSection {
+    min-width: 120px;
+}
+@media (max-width: 600px) {
+    .test-buttons .btn-secondary {
+        padding: 8px 14px;
+        font-size: 13px;
+        min-width: 80px;
+    }
+    #btnPrevSection, #btnNextSection {
+        min-width: 80px;
+    }
+}
     </style>
 </head>
 <body>
@@ -585,23 +611,23 @@
         </div>
 
         <!-- ===== СТРАНИЦА 4: ТЕСТ ===== -->
-        <div class="page" id="pageTest">
-            <div class="test-page">
-                <div class="test-header">
-                    <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
-                    <span id="progressText">0 из 0</span>
-                </div>
-                <div class="questions-container" id="questionsContainer"></div>
-                <div class="result-block" id="resultBlock"></div>
-                <div class="test-buttons">
-                    <button class="btn-secondary" id="btnTestBack">← Назад</button>
-                    <button class="btn-secondary" id="btnTestHome">🏠 На главную</button>
-                    <button class="btn-secondary" id="checkBtn">✅ Проверить</button>
-                </div>
-            </div>
+<div class="page" id="pageTest">
+    <div class="test-page">
+        <div class="test-header">
+            <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
+            <span id="progressText">0 из 0</span>
         </div>
-
+        <div class="questions-container" id="questionsContainer"></div>
+        <div class="result-block" id="resultBlock"></div>
+        <div class="test-buttons">
+            <button class="btn-secondary" id="btnTestBack">← Назад</button>
+            <button class="btn-secondary" id="btnPrevSection">◀ Предыдущий</button>
+            <button class="btn-secondary" id="btnNextSection">Следующий ▶</button>
+            <button class="btn-secondary" id="btnTestHome">🏠 На главную</button>
+            <button class="btn-secondary" id="checkBtn">✅ Проверить</button>
+        </div>
     </div>
+</div>
 
     <script>
         // ================================================================
@@ -4737,6 +4763,8 @@ const JUZ_AYATS = {
         const progressText = document.getElementById('progressText');
         const questionsContainer = document.getElementById('questionsContainer');
         const resultBlock = document.getElementById('resultBlock');
+        const btnPrevSection = document.getElementById('btnPrevSection');
+const btnNextSection = document.getElementById('btnNextSection');
 
         let currentMode = 'juz';
         let currentId = 1;
@@ -5254,6 +5282,48 @@ function showNextAyahHint(idx) {
         hint.style.display = 'none';
     }
 }
+        // ================================================================
+//  НАВИГАЦИЯ ПО СЕКЦИЯМ (ДЖУЗЫ/СУРЫ)
+// ================================================================
+
+function getAvailableIds() {
+    if (currentMode === 'juz') {
+        return Object.keys(TEST_DATA.juz).map(Number).sort((a, b) => a - b);
+    } else {
+        return Object.keys(TEST_DATA.surah).map(Number).sort((a, b) => a - b);
+    }
+}
+
+function goToPrevSection() {
+    const ids = getAvailableIds();
+    const currentIndex = ids.indexOf(currentId);
+    if (currentIndex > 0) {
+        currentId = ids[currentIndex - 1];
+        startTest();
+    } else {
+        const label = currentMode === 'juz' ? 'джуза' : 'суры';
+        alert(`Это первый доступный ${label}.`);
+    }
+}
+
+function goToNextSection() {
+    const ids = getAvailableIds();
+    const currentIndex = ids.indexOf(currentId);
+    if (currentIndex < ids.length - 1) {
+        currentId = ids[currentIndex + 1];
+        startTest();
+    } else {
+        const label = currentMode === 'juz' ? 'джуза' : 'суры';
+        alert(`Это последний доступный ${label}.`);
+    }
+}
+
+// ================================================================
+//  ОБРАБОТЧИКИ КНОПОК НАВИГАЦИИ
+// ================================================================
+
+document.getElementById('btnPrevSection').addEventListener('click', goToPrevSection);
+document.getElementById('btnNextSection').addEventListener('click', goToNextSection);
     </script>
 </body>
 </html>
