@@ -1348,6 +1348,266 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
     .prayer-grid { grid-template-columns: repeat(2, 1fr); }
     .prayer-time { font-size: 13px; }
 }
+    /* ===== АДАПТИВ ДЛЯ ТЕЛЕФОНОВ (СТРАНИЦЫ СВЕРХУ) ===== */
+@media (max-width: 768px) {
+    
+    /* Убираем вертикальное центрирование */
+    body {
+        align-items: flex-start !important;
+        padding: 12px !important;
+        min-height: 100vh;
+    }
+    
+    .container {
+        min-height: auto !important;
+        max-height: none !important;
+        justify-content: flex-start !important;
+        padding: 20px 16px !important;
+        margin: 0 !important;
+        border-radius: 24px !important;
+    }
+    
+    /* Страницы выравниваем сверху */
+    .page {
+        justify-content: flex-start !important;
+        padding: 10px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .page.active {
+        display: flex !important;
+    }
+    
+    /* Приветствие на телефоне */
+    .welcome-content {
+        padding: 5px 0 !important;
+        gap: 8px !important;
+        justify-content: flex-start !important;
+    }
+    
+    .salam-block {
+        margin-top: 5px;
+    }
+    
+    .arabic-salam {
+        font-size: 28px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .arabic-verse {
+        font-size: 20px !important;
+        padding: 6px 0 !important;
+    }
+    
+    .arabic-verse small {
+        font-size: 13px !important;
+    }
+    
+    .welcome-description {
+        font-size: 14px !important;
+        margin: 6px 0 12px 0 !important;
+    }
+    
+    .btn-primary {
+        padding: 14px 36px !important;
+        font-size: 15px !important;
+        margin-top: 4px !important;
+    }
+    
+    /* Блок намаза на телефоне */
+    .prayer-times {
+        margin: 0 0 8px 0 !important;
+        padding: 10px 12px 8px 12px !important;
+    }
+    
+    /* Кнопки выбора режима */
+    .choose-page {
+        justify-content: flex-start !important;
+        padding: 5px 0 !important;
+        gap: 10px !important;
+    }
+    
+    .choose-page h2 {
+        font-size: 20px !important;
+        margin-top: 0 !important;
+    }
+    
+    .choose-page p {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .choose-card {
+        padding: 20px 24px !important;
+        min-width: 100% !important;
+    }
+    
+    .choose-card h3 {
+        font-size: 17px !important;
+    }
+    
+    /* Выбор номера */
+    .select-page {
+        justify-content: flex-start !important;
+        padding: 5px 0 !important;
+    }
+    
+    .select-page h2 {
+        font-size: 20px !important;
+    }
+    
+    .select-page p {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .number-grid {
+        max-height: 400px !important;
+        padding: 4px 2px !important;
+        gap: 8px !important;
+    }
+    
+    .number-btn {
+        padding: 10px 14px !important;
+        font-size: 14px !important;
+        min-width: 44px !important;
+    }
+    
+    .number-btn.surah-btn {
+        font-size: 12px !important;
+        padding: 8px 12px !important;
+        min-width: 150px !important;
+    }
+    
+    /* Тесты */
+    .test-page {
+        justify-content: flex-start !important;
+        padding: 5px 0 !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+    }
+    
+    .test-page .test-header {
+        font-size: 13px !important;
+        padding: 4px 0 !important;
+    }
+    
+    .questions-container {
+        padding: 4px 0 !important;
+        overflow-y: visible !important;
+    }
+    
+    .question-block {
+        padding: 10px 0 !important;
+    }
+    
+    .question-number {
+        font-size: 12px !important;
+    }
+    
+    .test-page .ayah-text {
+        font-size: 20px !important;
+        padding: 12px 14px !important;
+    }
+    
+    .options label {
+        font-size: 18px !important;
+        padding: 8px 12px !important;
+    }
+    
+    .test-buttons {
+        gap: 6px !important;
+    }
+    
+    .test-buttons .btn-secondary {
+        padding: 8px 14px !important;
+        font-size: 12px !important;
+        min-width: 60px !important;
+    }
+    
+    .result-block {
+        padding: 12px 16px !important;
+    }
+    
+    .result-block .score {
+        font-size: 28px !important;
+    }
+}
+
+/* Для очень маленьких телефонов */
+@media (max-width: 400px) {
+    body {
+        padding: 8px !important;
+    }
+    
+    .container {
+        padding: 14px 12px !important;
+        border-radius: 18px !important;
+    }
+    
+    .arabic-salam {
+        font-size: 22px !important;
+    }
+    
+    .arabic-verse {
+        font-size: 17px !important;
+    }
+    
+    .btn-primary {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+    
+    .choose-card {
+        padding: 14px 18px !important;
+    }
+    
+    .choose-card h3 {
+        font-size: 15px !important;
+    }
+    
+    .number-btn {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+        min-width: 36px !important;
+    }
+    
+    .number-btn.surah-btn {
+        font-size: 11px !important;
+        padding: 6px 10px !important;
+        min-width: 120px !important;
+    }
+    
+    .test-page .ayah-text {
+        font-size: 17px !important;
+        padding: 10px 12px !important;
+    }
+    
+    .options label {
+        font-size: 16px !important;
+        padding: 6px 10px !important;
+    }
+}
+
+/* Планшеты (между телефоном и десктопом) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        align-items: center !important;
+        padding: 20px !important;
+    }
+    
+    .container {
+        min-height: auto !important;
+        max-height: none !important;
+        justify-content: center !important;
+        padding: 30px 24px !important;
+    }
+    
+    .page {
+        justify-content: center !important;
+    }
+}
     </style>
 </head>
 <body>
