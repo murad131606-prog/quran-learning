@@ -7406,7 +7406,6 @@ updateLanguage();
 //  ВРЕМЯ НАМАЗА (г. Энгельс) - Сентябрь 2026
 // ================================================================
 
-// 1. СНАЧАЛА ОБЪЯВЛЯЕМ РАСПИСАНИЕ
 const PRAYER_SCHEDULE = {
     1: { Fajr: '04:02', Sunrise: '06:08', Dhuhr: '12:56', Asr: '16:39', Maghrib: '19:42', Isha: '21:39' },
     2: { Fajr: '04:05', Sunrise: '06:09', Dhuhr: '12:55', Asr: '16:37', Maghrib: '19:40', Isha: '21:36' },
@@ -7440,7 +7439,6 @@ const PRAYER_SCHEDULE = {
     30: { Fajr: '05:02', Sunrise: '06:54', Dhuhr: '12:46', Asr: '15:53', Maghrib: '18:36', Isha: '20:21' }
 };
 
-// 2. ПОТОМ НАЗВАНИЯ И ПОРЯДОК
 const PRAYER_NAMES = {
     Fajr: 'Фаджр',
     Sunrise: 'Шурук',
@@ -7452,7 +7450,8 @@ const PRAYER_NAMES = {
 
 const PRAYER_ORDER = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 
-// 3. ПОТОМ ФУНКЦИИ
+let countdownInterval = null;
+
 function getTodayPrayerTimes() {
     const today = new Date();
     const day = today.getDate();
@@ -7463,11 +7462,7 @@ function getTodayPrayerTimes() {
     return PRAYER_SCHEDULE[1];
 }
 
-let countdownInterval = null;
-
 function updatePrayerTimes() {
-    console.log('🔄 Обновление времени намаза...');
-    
     const times = getTodayPrayerTimes();
     const today = new Date();
     const day = today.getDate();
@@ -7515,11 +7510,24 @@ function findNextPrayer(times) {
         
         let diff = prayerMinutes - currentMinutes;
         if (diff < 0) diff += 24 * 60;
+        if (diff === 0) diff = 24 * 60;
         
         if (diff < minDiff) {
             minDiff = diff;
             nextPrayer = prayer;
             nextMinutes = prayerMinutes;
+            if (diff < currentMinutes) {
+                nextMinutes += 24 * 60;
+            }
+        }
+    }
+    
+    if (!nextPrayer && PRAYER_ORDER.length > 0) {
+        nextPrayer = PRAYER_ORDER[0];
+        const time = times[nextPrayer];
+        if (time) {
+            const [hours, minutes] = time.split(':').map(Number);
+            nextMinutes = hours * 60 + minutes + 24 * 60;
         }
     }
     
@@ -7552,6 +7560,7 @@ function startCountdown(targetMinutes) {
         
         let diffMinutes = targetMinutes - currentMinutes;
         if (diffMinutes < 0) diffMinutes += 24 * 60;
+        if (diffMinutes === 0) diffMinutes = 24 * 60;
         
         let totalSeconds = diffMinutes * 60 - currentSeconds;
         if (totalSeconds < 0) totalSeconds = 0;
@@ -7570,7 +7579,7 @@ function startCountdown(targetMinutes) {
             el.textContent = timeStr;
         }
         
-        if (totalSeconds === 0) {
+        if (totalSeconds <= 1) {
             clearInterval(countdownInterval);
             countdownInterval = null;
             setTimeout(updatePrayerTimes, 1000);
@@ -7581,9 +7590,7 @@ function startCountdown(targetMinutes) {
     countdownInterval = setInterval(updateTimer, 1000);
 }
 
-// 4. ЗАПУСК
 function initTimer() {
-    console.log('🚀 Запуск таймера намаза...');
     setTimeout(function() {
         updatePrayerTimes();
         setInterval(function() {
