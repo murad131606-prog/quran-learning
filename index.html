@@ -1977,17 +1977,17 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
         <div class="page active" id="pageWelcome">
             <div class="welcome-content">
                 
-              <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА ===== -->
+            <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА ===== -->
 <div class="prayer-times" id="prayerTimes">
     <div class="prayer-header">
         <span class="prayer-icon">🕌</span>
         <span class="prayer-title">Энгельс</span>
-        <span class="prayer-date" id="prayerDate">1 сен 2026</span>
+        <span class="prayer-date" id="prayerDate">--</span>
     </div>
     
     <div class="prayer-countdown">
-        <span class="countdown-label" id="countdownLabel">До Аср осталось:</span>
-        <span class="countdown-time" id="countdownTime">00:00:00</span>
+        <span class="countdown-label" id="countdownLabel">Загрузка...</span>
+        <span class="countdown-time" id="countdownTime">--:--:--</span>
     </div>
     
     <div class="prayer-grid">
@@ -7449,33 +7449,38 @@ const PRAYER_NAMES = {
 };
 
 const PRAYER_ORDER = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
-
 let countdownInterval = null;
 
 function getTodayPrayerTimes() {
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth() + 1;
-    if (month === 9 && PRAYER_SCHEDULE[day]) {
+    
+    // Если сегодня сентябрь 2026
+    if (month === 9 && day >= 1 && day <= 30) {
         return PRAYER_SCHEDULE[day];
     }
+    
+    // Если сегодня не сентябрь - показываем текущую дату, но расписание на 1 сентября
+    console.warn('Сегодня не сентябрь 2026, показываю расписание на 1 сентября');
     return PRAYER_SCHEDULE[1];
 }
 
 function updatePrayerTimes() {
-    console.log('🔄 Обновление времени намаза...');
-    
     const times = getTodayPrayerTimes();
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth() + 1;
+    const year = today.getFullYear();
     
+    // Обновляем дату
     const dateEl = document.getElementById('prayerDate');
     if (dateEl) {
         const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-        dateEl.textContent = day + ' ' + months[month - 1] + ' 2026';
+        dateEl.textContent = day + ' ' + months[month - 1] + ' ' + year;
     }
     
+    // Обновляем время намазов
     const prayerMap = {
         Fajr: 'prayerFajr',
         Sunrise: 'prayerSunrise',
@@ -7489,7 +7494,6 @@ function updatePrayerTimes() {
         const el = document.getElementById(elId);
         if (el && times[key]) {
             el.textContent = times[key];
-            console.log(`✅ ${key}: ${times[key]}`);
         }
     }
     
@@ -7515,13 +7519,11 @@ function findNextPrayer(times) {
         if (diff < 0) diff += 24 * 60;
         if (diff === 0) diff = 24 * 60;
         
-        console.log(`⏰ ${prayer}: ${time} (${prayerMinutes} мин.) разница: ${diff} мин.`);
-        
         if (diff < minDiff) {
             minDiff = diff;
             nextPrayer = prayer;
             nextMinutes = prayerMinutes;
-            if (diff > 0 && prayerMinutes < currentMinutes) {
+            if (prayerMinutes < currentMinutes) {
                 nextMinutes += 24 * 60;
             }
         }
@@ -7536,8 +7538,7 @@ function findNextPrayer(times) {
         }
     }
     
-    console.log(`🎯 Следующий намаз: ${nextPrayer} в ${nextMinutes} мин.`);
-    
+    // Подсвечиваем активный намаз
     document.querySelectorAll('.prayer-item').forEach(el => {
         el.classList.remove('active');
         if (el.dataset && el.dataset.prayer === nextPrayer) {
@@ -7598,16 +7599,17 @@ function startCountdown(targetMinutes) {
 }
 
 function initTimer() {
-    console.log('🚀 Инициализация таймера намаза...');
-    setTimeout(function() {
-        updatePrayerTimes();
-        setInterval(function() {
-            const now = new Date();
-            if (now.getHours() === 0 && now.getMinutes() === 0) {
-                updatePrayerTimes();
-            }
-        }, 60000);
-    }, 200);
+    // Обновляем сразу
+    updatePrayerTimes();
+    
+    // И каждую минуту проверяем, не нужно ли обновить (для смены дня)
+    setInterval(function() {
+        const now = new Date();
+        // Проверяем каждую минуту, не наступил ли новый день
+        if (now.getHours() === 0 && now.getMinutes() === 0) {
+            updatePrayerTimes();
+        }
+    }, 60000);
 }
 
 // ЗАПУСК ПРИ ЗАГРУЗКЕ
