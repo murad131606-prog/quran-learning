@@ -7439,19 +7439,16 @@ const PRAYER_SCHEDULE = {
     30: { Fajr: '05:02', Sunrise: '06:54', Dhuhr: '12:46', Asr: '15:53', Maghrib: '18:36', Isha: '20:21' }
 };
 
-// Получаем сегодняшнее расписание
 function getTodayPrayerTimes() {
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth() + 1;
-    
     if (month === 9 && PRAYER_SCHEDULE[day]) {
         return PRAYER_SCHEDULE[day];
     }
     return PRAYER_SCHEDULE[1];
 }
 
-// Обновляем время намазов и таймер
 function updatePrayerTimes() {
     const times = getTodayPrayerTimes();
     const today = new Date();
@@ -7462,7 +7459,7 @@ function updatePrayerTimes() {
     const dateEl = document.getElementById('prayerDate');
     if (dateEl) {
         const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-        dateEl.textContent = `${day} ${months[month - 1]} 2026`;
+        dateEl.textContent = day + ' ' + months[month - 1] + ' 2026';
     }
     
     // Обновляем время намазов
@@ -7486,12 +7483,14 @@ function updatePrayerTimes() {
     
     // Находим следующий намаз
     findNextPrayer(prayerTimes);
+    
+    // Обновляем таймер каждую секунду (сам таймер обновляется внутри findNextPrayer)
 }
 
-// Находим следующий намаз
 function findNextPrayer(prayerTimes) {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const currentSeconds = now.getSeconds();
     
     const order = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
     const names = {
@@ -7517,6 +7516,7 @@ function findNextPrayer(prayerTimes) {
         const prayerMinutes = hours * 60 + minutes;
         
         let diff = prayerMinutes - currentMinutes;
+        // Если намаз уже прошел сегодня, считаем на завтра
         if (diff < 0) diff += 24 * 60;
         
         if (diff < minDiff) {
@@ -7544,7 +7544,6 @@ function findNextPrayer(prayerTimes) {
     }
 }
 
-// Обновляем таймер обратного отсчета
 function updateCountdown(targetMinutes) {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -7553,6 +7552,7 @@ function updateCountdown(targetMinutes) {
     let diffMinutes = targetMinutes - currentMinutes;
     if (diffMinutes < 0) diffMinutes += 24 * 60;
     
+    // Вычисляем общее количество секунд
     let totalSeconds = diffMinutes * 60 - currentSeconds;
     if (totalSeconds < 0) totalSeconds = 0;
     
@@ -7560,29 +7560,65 @@ function updateCountdown(targetMinutes) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);
     
-    // Форматируем время
-    let timeStr = '';
-    timeStr += String(hours).padStart(2, '0') + ':';
-    timeStr += String(minutes).padStart(2, '0') + ':';
-    timeStr += String(seconds).padStart(2, '0');
+    // Форматируем с ведущими нулями
+    const hh = String(hours).padStart(2, '0');
+    const mm = String(minutes).padStart(2, '0');
+    const ss = String(seconds).padStart(2, '0');
     
     const el = document.getElementById('countdownTime');
     if (el) {
-        el.textContent = timeStr;
+        el.textContent = hh + ':' + mm + ':' + ss;
     }
 }
 
-// ===== ЗАПУСК =====
-// При загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
+// Запускаем обновление каждую секунду
+function startTimer() {
+    // Первое обновление сразу
     updatePrayerTimes();
-    // Обновляем каждую секунду
-    setInterval(updatePrayerTimes, 1000);
+    
+    // Затем каждую секунду обновляем только таймер (без перерисовки всего)
+    setInterval(function() {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const currentSeconds = now.getSeconds();
+        
+        // Получаем время следующего намаза
+        const times = getTodayPrayerTimes();
+        const order = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+        let nextMinutes = 0;
+        let minDiff = Infinity;
+        
+        for (const prayer of order) {
+            const time = times[prayer];
+            if (!time) continue;
+            
+            const parts = time.split(':');
+            const hours = parseInt(parts[0]);
+            const minutes = parseInt(parts[1]);
+            const prayerMinutes = hours * 60 + minutes;
+            
+            let diff = prayerMinutes - currentMinutes;
+            if (diff < 0) diff += 24 * 60;
+            
+            if (diff < minDiff) {
+                minDiff = diff;
+                nextMinutes = prayerMinutes;
+            }
+        }
+        
+        // Обновляем только таймер
+        updateCountdown(nextMinutes);
+    }, 1000);
+}
+
+// Запускаем таймер
+document.addEventListener('DOMContentLoaded', function() {
+    startTimer();
 });
 
-// Также запускаем сразу, если DOM уже загружен
+// Если DOM уже загружен
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(updatePrayerTimes, 100);
+    startTimer();
 }
     </script>
 </body>
