@@ -7550,6 +7550,159 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
 } else {
     document.addEventListener('DOMContentLoaded', initPrayerTimes);
 }
+        // ================================================================
+//  НАВИГАЦИЯ (ПРОСТОЕ И НАДЁЖНОЕ РЕШЕНИЕ)
+// ================================================================
+
+// Функция переключения страниц
+function showPage(pageId) {
+    console.log('📄 Переход на страницу:', pageId);
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(pageId);
+    if (target) {
+        target.classList.add('active');
+        console.log('✅ Страница показана:', pageId);
+    } else {
+        console.error('❌ Страница не найдена:', pageId);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== ВСЕ КНОПКИ =====
+
+// 1. Кнопка "Начать изучение"
+document.addEventListener('DOMContentLoaded', function() {
+    const btnWelcome = document.getElementById('btnWelcomeNext');
+    if (btnWelcome) {
+        console.log('✅ Кнопка "Начать изучение" найдена');
+        btnWelcome.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🔄 Нажата кнопка "Начать изучение"');
+            showPage('pageChoose');
+        });
+    } else {
+        console.error('❌ Кнопка "Начать изучение" не найдена!');
+    }
+});
+
+// 2. Кнопки выбора режима
+document.addEventListener('DOMContentLoaded', function() {
+    const fillBtn = document.getElementById('btnChooseFill');
+    const nextBtn = document.getElementById('btnChooseNext');
+    
+    if (fillBtn) {
+        fillBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('📝 Режим: Дополнить аят');
+            testMode = 'fill';
+            this.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+            document.getElementById('selectModeButtons').style.display = 'block';
+            document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
+            document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🎯 Режим: Угадай следующий аят');
+            testMode = 'next';
+            this.style.display = 'none';
+            if (fillBtn) fillBtn.style.display = 'none';
+            document.getElementById('selectModeButtons').style.display = 'block';
+            document.querySelector('.choose-page h2').textContent = 'Выберите раздел';
+            document.querySelector('.choose-page p').textContent = 'Выберите джуз или суру для проверки знаний';
+        });
+    }
+});
+
+// 3. Кнопки выбора раздела
+document.addEventListener('DOMContentLoaded', function() {
+    const juzBtn = document.getElementById('btnChooseJuz');
+    const surahBtn = document.getElementById('btnChooseSurah');
+    
+    if (juzBtn) {
+        juzBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('📖 Выбран джуз');
+            currentMode = 'juz';
+            const ids = Object.keys(TEST_DATA.juz).map(Number);
+            if (ids.length === 0) {
+                alert('Джузы пока не добавлены.');
+                return;
+            }
+            document.getElementById('selectTitle').textContent = 'Выберите джуз';
+            document.getElementById('selectSub').textContent = 'Выберите номер джуза (1–30)';
+            renderNumbers(30, ids);
+            showPage('pageSelect');
+        });
+    }
+    
+    if (surahBtn) {
+        surahBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('📖 Выбрана сура');
+            currentMode = 'surah';
+            const ids = Object.keys(TEST_DATA.surah).map(Number);
+            if (ids.length === 0) {
+                alert('Суры пока не добавлены.');
+                return;
+            }
+            document.getElementById('selectTitle').textContent = 'Выберите суру';
+            document.getElementById('selectSub').textContent = 'Выберите номер суры (1–114)';
+            renderNumbers(114, ids);
+            showPage('pageSelect');
+        });
+    }
+});
+
+// 4. Кнопки "Назад"
+document.addEventListener('DOMContentLoaded', function() {
+    const backChoose = document.getElementById('btnChooseBack');
+    const backSelect = document.getElementById('btnSelectBack');
+    const backTest = document.getElementById('btnTestBack');
+    const homeTest = document.getElementById('btnTestHome');
+    
+    if (backChoose) {
+        backChoose.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('⬅️ Назад на главную');
+            document.getElementById('btnChooseFill').style.display = 'block';
+            document.getElementById('btnChooseNext').style.display = 'block';
+            document.getElementById('selectModeButtons').style.display = 'none';
+            document.querySelector('.choose-page h2').textContent = 'Выберите режим';
+            document.querySelector('.choose-page p').textContent = 'Выберите тип теста для проверки знаний';
+            showPage('pageWelcome');
+        });
+    }
+    
+    if (backSelect) {
+        backSelect.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('⬅️ Назад к выбору режима');
+            showPage('pageChoose');
+        });
+    }
+    
+    if (backTest) {
+        backTest.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('⬅️ Назад к выбору номера');
+            showPage('pageSelect');
+        });
+    }
+    
+    if (homeTest) {
+        homeTest.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🏠 На главную');
+            showPage('pageWelcome');
+        });
+    }
+});
+
+console.log('✅ Навигация полностью инициализирована');
     </script>
 </body>
 </html>
