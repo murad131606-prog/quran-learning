@@ -1246,47 +1246,47 @@ body.dark .result-block .score { color: #f5efe8; }
         font-size: 16px;
         padding: 8px 12px;
     }
-/* ===== ВРЕМЯ НАМАЗА (ГОРИЗОНТАЛЬНЫЙ СПИСОК) ===== */
+/* ===== ВРЕМЯ НАМАЗА (ЛЕВЫЙ ВЕРХНИЙ УГОЛ) ===== */
 .prayer-times {
+    position: absolute;
+    top: 80px;
+    left: 38px;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 16px;
-    padding: 14px 20px 12px 20px;
-    border: 1px solid rgba(212, 175, 55, 0.08);
+    border-radius: 14px;
+    padding: 10px 16px 8px 16px;
+    border: 1px solid rgba(212, 175, 55, 0.06);
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
-    max-width: 700px;
-    width: 100%;
-    margin: 0 auto 12px auto;
+    max-width: 340px;
+    z-index: 5;
 }
 
 body.light .prayer-times {
-    background: rgba(255, 252, 248, 0.6);
-    border-color: rgba(212, 175, 55, 0.1);
+    background: rgba(255, 252, 248, 0.5);
+    border-color: rgba(212, 175, 55, 0.08);
     box-shadow: 0 4px 20px rgba(212, 175, 55, 0.04);
 }
 
 body.dark .prayer-times {
-    background: rgba(20, 15, 35, 0.7);
-    border-color: rgba(212, 175, 55, 0.06);
+    background: rgba(20, 15, 35, 0.6);
+    border-color: rgba(212, 175, 55, 0.04);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .prayer-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
-    margin-bottom: 8px;
+    gap: 6px;
+    margin-bottom: 4px;
 }
 
 .prayer-icon {
-    font-size: 16px;
-    opacity: 0.6;
+    font-size: 14px;
+    opacity: 0.5;
 }
 
 .prayer-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.3px;
 }
@@ -1296,12 +1296,12 @@ body.light .prayer-title {
 }
 
 body.dark .prayer-title {
-    color: #f5efe8;
+    color: rgba(255,255,255,0.6);
 }
 
 .prayer-date {
-    font-size: 11px;
-    opacity: 0.4;
+    font-size: 10px;
+    opacity: 0.3;
     font-weight: 400;
     margin-left: auto;
 }
@@ -1311,73 +1311,45 @@ body.light .prayer-date {
 }
 
 body.dark .prayer-date {
-    color: rgba(255,255,255,0.3);
-}
-
-.prayer-countdown {
-    text-align: center;
-    padding: 4px 0 8px 0;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
-    margin-bottom: 8px;
-}
-
-.countdown-label {
-    font-size: 11px;
-    font-weight: 400;
-    opacity: 0.5;
-}
-
-body.light .countdown-label {
-    color: #6a5a4a;
-}
-
-body.dark .countdown-label {
-    color: rgba(255,255,255,0.3);
-}
-
-.countdown-time {
-    font-size: 20px;
-    font-weight: 700;
-    color: #d4af37;
-    font-variant-numeric: tabular-nums;
-    margin-left: 6px;
+    color: rgba(255,255,255,0.2);
 }
 
 .prayer-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 6px;
+    margin-bottom: 3px;
 }
 
 .prayer-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 6px 4px;
-    border-radius: 8px;
+    gap: 2px;
+    padding: 2px 8px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     cursor: default;
 }
 
 .prayer-item.active {
-    background: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.12);
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.08);
 }
 
 body.light .prayer-item.active {
-    background: rgba(212, 175, 55, 0.06);
+    background: rgba(212, 175, 55, 0.04);
 }
 
 body.dark .prayer-item.active {
-    background: rgba(212, 175, 55, 0.06);
+    background: rgba(212, 175, 55, 0.04);
 }
 
 .prayer-name {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 500;
-    opacity: 0.4;
-    letter-spacing: 0.3px;
+    opacity: 0.3;
     text-transform: uppercase;
+    letter-spacing: 0.2px;
 }
 
 body.light .prayer-name {
@@ -1385,19 +1357,18 @@ body.light .prayer-name {
 }
 
 body.dark .prayer-name {
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.2);
 }
 
 .prayer-item.active .prayer-name {
-    opacity: 0.8;
+    opacity: 0.6;
     color: #d4af37;
 }
 
 .prayer-time {
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
-    margin-top: 1px;
 }
 
 body.light .prayer-time {
@@ -1405,46 +1376,108 @@ body.light .prayer-time {
 }
 
 body.dark .prayer-time {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.6);
 }
 
 .prayer-item.active .prayer-time {
     color: #d4af37;
 }
 
-@media (max-width: 768px) {
+.prayer-next {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(212, 175, 55, 0.03);
+    border-top: 1px solid rgba(212, 175, 55, 0.04);
+    padding-top: 4px;
+    margin-top: 2px;
+}
+
+body.light .prayer-next {
+    color: #6a5a4a;
+}
+
+body.dark .prayer-next {
+    color: rgba(255,255,255,0.2);
+}
+
+#nextPrayerName {
+    font-weight: 600;
+    color: #d4af37;
+    font-size: 10px;
+}
+
+#nextPrayerTime {
+    font-weight: 600;
+    color: #d4af37;
+    font-size: 11px;
+}
+
+@media (max-width: 1024px) {
     .prayer-times {
-        padding: 12px 14px 10px 14px;
+        position: relative;
+        top: auto;
+        left: auto;
         max-width: 100%;
+        margin: 0 0 12px 0;
+        padding: 10px 14px 8px 14px;
+        width: 100%;
     }
     .prayer-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2px;
-    }
-    .prayer-time {
-        font-size: 14px;
-    }
-    .prayer-name {
-        font-size: 9px;
-    }
-    .countdown-time {
-        font-size: 17px;
+        justify-content: center;
     }
 }
 
-@media (max-width: 400px) {
-    .prayer-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-    }
+@media (max-width: 768px) {
     .prayer-times {
-        padding: 10px 10px 8px 10px;
+        padding: 8px 12px 6px 12px;
+        border-radius: 12px;
     }
     .prayer-time {
-        font-size: 13px;
+        font-size: 11px;
     }
     .prayer-name {
         font-size: 8px;
+    }
+    .prayer-title {
+        font-size: 11px;
+    }
+    .prayer-date {
+        font-size: 9px;
+    }
+    .prayer-next {
+        font-size: 9px;
+    }
+    #nextPrayerTime {
+        font-size: 10px;
+    }
+    .prayer-item {
+        padding: 1px 5px;
+    }
+    .prayer-grid {
+        gap: 1px 4px;
+    }
+}
+
+@media (max-width: 500px) {
+    .prayer-times {
+        padding: 6px 10px 4px 10px;
+    }
+    .prayer-time {
+        font-size: 10px;
+    }
+    .prayer-name {
+        font-size: 7px;
+    }
+    .prayer-item {
+        padding: 1px 4px;
+    }
+    .prayer-grid {
+        gap: 1px 2px;
     }
 }
     </style>
@@ -1464,51 +1497,71 @@ body.dark .prayer-time {
     <span id="langLabel">Русский</span>
 </button>
 
-   <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+  <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
 <div class="page active" id="pageWelcome">
     <div class="welcome-content">
         
-        <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА (ГОРИЗОНТАЛЬНЫЙ) ===== -->
+        <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА (ЛЕВЫЙ ВЕРХНИЙ УГОЛ) ===== -->
         <div class="prayer-times" id="prayerTimes">
             <div class="prayer-header">
                 <span class="prayer-icon">🕌</span>
                 <span class="prayer-title">Энгельс</span>
-                <span class="prayer-date" id="prayerDate">1 сен 2026</span>
+                <span class="prayer-date" id="prayerDate">1 сентября 2026</span>
             </div>
-            
-            <div class="prayer-countdown">
-                <span class="countdown-label">До Аср осталось:</span>
-                <span class="countdown-time" id="countdownTime">00:41:46</span>
-            </div>
-            
             <div class="prayer-grid">
-                <div class="prayer-item">
+                <div class="prayer-item" data-prayer="Fajr">
                     <span class="prayer-name">Фаджр</span>
-                    <span class="prayer-time" id="prayerFajr">04:19</span>
+                    <span class="prayer-time" id="prayerFajr">04:02</span>
                 </div>
-                <div class="prayer-item">
-                    <span class="prayer-name">Шурук</span>
+                <div class="prayer-item" data-prayer="Sunrise">
+                    <span class="prayer-name">Восход</span>
                     <span class="prayer-time" id="prayerSunrise">06:08</span>
                 </div>
-                <div class="prayer-item">
+                <div class="prayer-item" data-prayer="Dhuhr">
                     <span class="prayer-name">Зухр</span>
                     <span class="prayer-time" id="prayerDhuhr">12:56</span>
                 </div>
-                <div class="prayer-item active">
+                <div class="prayer-item" data-prayer="Asr">
                     <span class="prayer-name">Аср</span>
                     <span class="prayer-time" id="prayerAsr">16:39</span>
                 </div>
-                <div class="prayer-item">
+                <div class="prayer-item" data-prayer="Maghrib">
                     <span class="prayer-name">Магриб</span>
-                    <span class="prayer-time" id="prayerMaghrib">19:43</span>
+                    <span class="prayer-time" id="prayerMaghrib">19:42</span>
                 </div>
-                <div class="prayer-item">
+                <div class="prayer-item" data-prayer="Isha">
                     <span class="prayer-name">Иша</span>
-                    <span class="prayer-time" id="prayerIsha">21:23</span>
+                    <span class="prayer-time" id="prayerIsha">21:39</span>
                 </div>
+            </div>
+            <div class="prayer-next">
+                <span>🔔 Ближайший: </span>
+                <span id="nextPrayerName">Аср</span>
+                <span id="nextPrayerTime">16:39</span>
             </div>
         </div>
 
+        <div class="salam-block">
+            <div class="arabic-salam">
+                ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+            </div>
+        </div>
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+        </div>
+        <div class="verse-block">
+            <div class="arabic-verse">
+                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+            </div>
+        </div>
+        
+        <p class="welcome-description" data-i18n="welcomeDesc">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+        <button class="btn-primary" id="btnWelcomeNext" data-i18n="startBtn">Начать изучение →</button>
+    </div>
+</div>
         <!-- ===== ПРИВЕТСТВИЕ ===== -->
         <div class="salam-block">
             <div class="arabic-salam">
@@ -6895,36 +6948,36 @@ updateLanguage();
 // ================================================================
 
 const PRAYER_SCHEDULE = {
-    1: { Fajr: '04:02', Sunrise: '06:08', Dhuhr: '12:56', Asr: '16:39', Maghrib: '19:42', Isha: '21:39' },
-    2: { Fajr: '04:05', Sunrise: '06:09', Dhuhr: '12:55', Asr: '16:37', Maghrib: '19:40', Isha: '21:36' },
-    3: { Fajr: '04:07', Sunrise: '06:11', Dhuhr: '12:55', Asr: '16:36', Maghrib: '19:38', Isha: '21:33' },
-    4: { Fajr: '04:10', Sunrise: '06:13', Dhuhr: '12:55', Asr: '16:35', Maghrib: '19:36', Isha: '21:30' },
-    5: { Fajr: '04:12', Sunrise: '06:14', Dhuhr: '12:54', Asr: '16:33', Maghrib: '19:33', Isha: '21:27' },
-    6: { Fajr: '04:14', Sunrise: '06:16', Dhuhr: '12:54', Asr: '16:32', Maghrib: '19:31', Isha: '21:24' },
-    7: { Fajr: '04:16', Sunrise: '06:17', Dhuhr: '12:54', Asr: '16:30', Maghrib: '19:29', Isha: '21:21' },
-    8: { Fajr: '04:19', Sunrise: '06:19', Dhuhr: '12:53', Asr: '16:29', Maghrib: '19:27', Isha: '21:19' },
-    9: { Fajr: '04:21', Sunrise: '06:21', Dhuhr: '12:53', Asr: '16:27', Maghrib: '19:24', Isha: '21:16' },
-    10: { Fajr: '04:23', Sunrise: '06:22', Dhuhr: '12:53', Asr: '16:26', Maghrib: '19:22', Isha: '21:13' },
-    11: { Fajr: '04:25', Sunrise: '06:24', Dhuhr: '12:52', Asr: '16:24', Maghrib: '19:20', Isha: '21:10' },
-    12: { Fajr: '04:27', Sunrise: '06:25', Dhuhr: '12:52', Asr: '16:23', Maghrib: '19:17', Isha: '21:08' },
-    13: { Fajr: '04:29', Sunrise: '06:27', Dhuhr: '12:52', Asr: '16:21', Maghrib: '19:15', Isha: '21:05' },
-    14: { Fajr: '04:31', Sunrise: '06:29', Dhuhr: '12:51', Asr: '16:20', Maghrib: '19:13', Isha: '21:02' },
-    15: { Fajr: '04:33', Sunrise: '06:30', Dhuhr: '12:51', Asr: '16:18', Maghrib: '19:11', Isha: '20:59' },
-    16: { Fajr: '04:35', Sunrise: '06:32', Dhuhr: '12:51', Asr: '16:16', Maghrib: '19:08', Isha: '20:57' },
-    17: { Fajr: '04:37', Sunrise: '06:33', Dhuhr: '12:50', Asr: '16:15', Maghrib: '19:06', Isha: '20:54' },
-    18: { Fajr: '04:39', Sunrise: '06:35', Dhuhr: '12:50', Asr: '16:13', Maghrib: '19:04', Isha: '20:51' },
-    19: { Fajr: '04:41', Sunrise: '06:37', Dhuhr: '12:49', Asr: '16:12', Maghrib: '19:01', Isha: '20:49' },
-    20: { Fajr: '04:43', Sunrise: '06:38', Dhuhr: '12:49', Asr: '16:10', Maghrib: '18:59', Isha: '20:46' },
-    21: { Fajr: '04:45', Sunrise: '06:40', Dhuhr: '12:49', Asr: '16:08', Maghrib: '18:57', Isha: '20:44' },
-    22: { Fajr: '04:47', Sunrise: '06:41', Dhuhr: '12:48', Asr: '16:07', Maghrib: '18:54', Isha: '20:41' },
-    23: { Fajr: '04:49', Sunrise: '06:43', Dhuhr: '12:48', Asr: '16:05', Maghrib: '18:52', Isha: '20:38' },
-    24: { Fajr: '04:51', Sunrise: '06:45', Dhuhr: '12:48', Asr: '16:03', Maghrib: '18:50', Isha: '20:36' },
-    25: { Fajr: '04:53', Sunrise: '06:46', Dhuhr: '12:47', Asr: '16:02', Maghrib: '18:48', Isha: '20:33' },
-    26: { Fajr: '04:55', Sunrise: '06:48', Dhuhr: '12:47', Asr: '16:00', Maghrib: '18:45', Isha: '20:31' },
-    27: { Fajr: '04:57', Sunrise: '06:49', Dhuhr: '12:47', Asr: '15:58', Maghrib: '18:43', Isha: '20:28' },
-    28: { Fajr: '04:58', Sunrise: '06:51', Dhuhr: '12:46', Asr: '15:57', Maghrib: '18:41', Isha: '20:26' },
-    29: { Fajr: '05:00', Sunrise: '06:53', Dhuhr: '12:46', Asr: '15:55', Maghrib: '18:38', Isha: '20:23' },
-    30: { Fajr: '05:02', Sunrise: '06:54', Dhuhr: '12:46', Asr: '15:53', Maghrib: '18:36', Isha: '20:21' }
+    1: { day: 'ВТ', Fajr: '04:02', Sunrise: '06:08', Dhuhr: '12:56', Asr: '16:39', Maghrib: '19:42', Isha: '21:39' },
+    2: { day: 'СР', Fajr: '04:05', Sunrise: '06:09', Dhuhr: '12:55', Asr: '16:37', Maghrib: '19:40', Isha: '21:36' },
+    3: { day: 'ЧТ', Fajr: '04:07', Sunrise: '06:11', Dhuhr: '12:55', Asr: '16:36', Maghrib: '19:38', Isha: '21:33' },
+    4: { day: 'ПТ', Fajr: '04:10', Sunrise: '06:13', Dhuhr: '12:55', Asr: '16:35', Maghrib: '19:36', Isha: '21:30' },
+    5: { day: 'СБ', Fajr: '04:12', Sunrise: '06:14', Dhuhr: '12:54', Asr: '16:33', Maghrib: '19:33', Isha: '21:27' },
+    6: { day: 'ВС', Fajr: '04:14', Sunrise: '06:16', Dhuhr: '12:54', Asr: '16:32', Maghrib: '19:31', Isha: '21:24' },
+    7: { day: 'ПН', Fajr: '04:16', Sunrise: '06:17', Dhuhr: '12:54', Asr: '16:30', Maghrib: '19:29', Isha: '21:21' },
+    8: { day: 'ВТ', Fajr: '04:19', Sunrise: '06:19', Dhuhr: '12:53', Asr: '16:29', Maghrib: '19:27', Isha: '21:19' },
+    9: { day: 'СР', Fajr: '04:21', Sunrise: '06:21', Dhuhr: '12:53', Asr: '16:27', Maghrib: '19:24', Isha: '21:16' },
+    10: { day: 'ЧТ', Fajr: '04:23', Sunrise: '06:22', Dhuhr: '12:53', Asr: '16:26', Maghrib: '19:22', Isha: '21:13' },
+    11: { day: 'ПТ', Fajr: '04:25', Sunrise: '06:24', Dhuhr: '12:52', Asr: '16:24', Maghrib: '19:20', Isha: '21:10' },
+    12: { day: 'СБ', Fajr: '04:27', Sunrise: '06:25', Dhuhr: '12:52', Asr: '16:23', Maghrib: '19:17', Isha: '21:08' },
+    13: { day: 'ВС', Fajr: '04:29', Sunrise: '06:27', Dhuhr: '12:52', Asr: '16:21', Maghrib: '19:15', Isha: '21:05' },
+    14: { day: 'ПН', Fajr: '04:31', Sunrise: '06:29', Dhuhr: '12:51', Asr: '16:20', Maghrib: '19:13', Isha: '21:02' },
+    15: { day: 'ВТ', Fajr: '04:33', Sunrise: '06:30', Dhuhr: '12:51', Asr: '16:18', Maghrib: '19:11', Isha: '20:59' },
+    16: { day: 'СР', Fajr: '04:35', Sunrise: '06:32', Dhuhr: '12:51', Asr: '16:16', Maghrib: '19:08', Isha: '20:57' },
+    17: { day: 'ЧТ', Fajr: '04:37', Sunrise: '06:33', Dhuhr: '12:50', Asr: '16:15', Maghrib: '19:06', Isha: '20:54' },
+    18: { day: 'ПТ', Fajr: '04:39', Sunrise: '06:35', Dhuhr: '12:50', Asr: '16:13', Maghrib: '19:04', Isha: '20:51' },
+    19: { day: 'СБ', Fajr: '04:41', Sunrise: '06:37', Dhuhr: '12:49', Asr: '16:12', Maghrib: '19:01', Isha: '20:49' },
+    20: { day: 'ВС', Fajr: '04:43', Sunrise: '06:38', Dhuhr: '12:49', Asr: '16:10', Maghrib: '18:59', Isha: '20:46' },
+    21: { day: 'ПН', Fajr: '04:45', Sunrise: '06:40', Dhuhr: '12:49', Asr: '16:08', Maghrib: '18:57', Isha: '20:44' },
+    22: { day: 'ВТ', Fajr: '04:47', Sunrise: '06:41', Dhuhr: '12:48', Asr: '16:07', Maghrib: '18:54', Isha: '20:41' },
+    23: { day: 'СР', Fajr: '04:49', Sunrise: '06:43', Dhuhr: '12:48', Asr: '16:05', Maghrib: '18:52', Isha: '20:38' },
+    24: { day: 'ЧТ', Fajr: '04:51', Sunrise: '06:45', Dhuhr: '12:48', Asr: '16:03', Maghrib: '18:50', Isha: '20:36' },
+    25: { day: 'ПТ', Fajr: '04:53', Sunrise: '06:46', Dhuhr: '12:47', Asr: '16:02', Maghrib: '18:48', Isha: '20:33' },
+    26: { day: 'СБ', Fajr: '04:55', Sunrise: '06:48', Dhuhr: '12:47', Asr: '16:00', Maghrib: '18:45', Isha: '20:31' },
+    27: { day: 'ВС', Fajr: '04:57', Sunrise: '06:49', Dhuhr: '12:47', Asr: '15:58', Maghrib: '18:43', Isha: '20:28' },
+    28: { day: 'ПН', Fajr: '04:58', Sunrise: '06:51', Dhuhr: '12:46', Asr: '15:57', Maghrib: '18:41', Isha: '20:26' },
+    29: { day: 'ВТ', Fajr: '05:00', Sunrise: '06:53', Dhuhr: '12:46', Asr: '15:55', Maghrib: '18:38', Isha: '20:23' },
+    30: { day: 'СР', Fajr: '05:02', Sunrise: '06:54', Dhuhr: '12:46', Asr: '15:53', Maghrib: '18:36', Isha: '20:21' }
 };
 
 function getTodayPrayerTimes() {
@@ -6932,9 +6985,11 @@ function getTodayPrayerTimes() {
     const day = today.getDate();
     const month = today.getMonth() + 1;
     
+    // Сентябрь = месяц 9
     if (month === 9 && PRAYER_SCHEDULE[day]) {
         return PRAYER_SCHEDULE[day];
     }
+    // Если не сентябрь, показываем 1 сентября
     return PRAYER_SCHEDULE[1];
 }
 
@@ -6948,7 +7003,8 @@ function updatePrayerTimes() {
     // Обновляем дату
     const dateEl = document.getElementById('prayerDate');
     if (dateEl) {
-        const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+        const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
+                       'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
         dateEl.textContent = `${day} ${months[month - 1]} 2026`;
     }
     
@@ -6971,18 +7027,18 @@ function updatePrayerTimes() {
         }
     }
     
+    // Находим ближайший намаз
     findNextPrayer(prayerTimes);
 }
 
 function findNextPrayer(prayerTimes) {
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
-    const currentSeconds = now.getSeconds();
     
     const prayerOrder = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
     const prayerNames = {
         Fajr: 'Фаджр',
-        Sunrise: 'Шурук',
+        Sunrise: 'Восход',
         Dhuhr: 'Зухр',
         Asr: 'Аср',
         Maghrib: 'Магриб',
@@ -6991,7 +7047,6 @@ function findNextPrayer(prayerTimes) {
     
     let nextPrayer = null;
     let nextTime = Infinity;
-    let nextPrayerMinutes = 0;
     
     for (const prayer of prayerOrder) {
         const time = prayerTimes[prayer];
@@ -7006,55 +7061,28 @@ function findNextPrayer(prayerTimes) {
         if (diff < nextTime) {
             nextTime = diff;
             nextPrayer = prayer;
-            nextPrayerMinutes = prayerMinutes;
         }
     }
     
-    // Подсвечиваем активный намаз
     document.querySelectorAll('.prayer-item').forEach(el => {
         el.classList.remove('active');
-        if (el.dataset && el.dataset.prayer === nextPrayer) {
+        if (el.dataset.prayer === nextPrayer) {
             el.classList.add('active');
         }
     });
     
-    // Обновляем таймер
     if (nextPrayer) {
-        const label = document.querySelector('.countdown-label');
-        if (label) {
-            label.textContent = `До ${prayerNames[nextPrayer]} осталось:`;
-        }
-        updateCountdown(nextPrayerMinutes);
+        const nameEl = document.getElementById('nextPrayerName');
+        const timeEl = document.getElementById('nextPrayerTime');
+        if (nameEl) nameEl.textContent = prayerNames[nextPrayer] || nextPrayer;
+        if (timeEl) timeEl.textContent = prayerTimes[nextPrayer] || '--:--';
     }
 }
 
-function updateCountdown(targetMinutes) {
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
-    const currentSeconds = now.getSeconds();
-    
-    let diffMinutes = targetMinutes - currentMinutes;
-    if (diffMinutes < 0) diffMinutes += 24 * 60;
-    
-    const totalSeconds = diffMinutes * 60 - currentSeconds;
-    
-    if (totalSeconds <= 0) {
-        document.getElementById('countdownTime').textContent = '00:00:00';
-        return;
-    }
-    
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = Math.floor(totalSeconds % 60);
-    
-    const timeString = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    document.getElementById('countdownTime').textContent = timeString;
-}
-
-// Загружаем при загрузке и обновляем каждую секунду
+// Загружаем при загрузке и обновляем каждую минуту
 document.addEventListener('DOMContentLoaded', function() {
     updatePrayerTimes();
-    setInterval(updatePrayerTimes, 1000);
+    setInterval(updatePrayerTimes, 60000);
 });
     </script>
 </body>
