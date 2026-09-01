@@ -137,7 +137,7 @@ body.light .number-btn.surah-btn:hover {
     background: rgba(212, 175, 55, 0.06);
 }
 
-/* ===== ТЁМНАЯ ТЕМА ===== */
+/* ===== ТЁМНАЯ ТЕМА (ПОЛНОСТЬЮ ИСПРАВЛЕННАЯ) ===== */
 body.dark {
     background: 
         radial-gradient(ellipse at 30% 40%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
@@ -149,11 +149,26 @@ body.dark {
 body.dark .container {
     background: rgba(20, 15, 35, 0.85);
     backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
 }
 
+/* ===== ШАПКА ===== */
+body.dark .bismillah { 
+    color: rgba(212, 175, 55, 0.2); 
+}
+
+body.dark .theme-toggle,
+body.dark .language-toggle { 
+    color: rgba(255,255,255,0.25); 
+}
+
+body.dark .theme-toggle:hover,
+body.dark .language-toggle:hover { 
+    background: rgba(255,255,255,0.04); 
+}
+
+/* ===== ПРИВЕТСТВИЕ ===== */
 body.dark .arabic-salam { 
     color: #f5efe8; 
     text-shadow: 0 2px 40px rgba(212, 175, 55, 0.08);
@@ -164,13 +179,22 @@ body.dark .arabic-verse {
 }
 
 body.dark .arabic-verse small { 
-    color: rgba(255,255,255,0.25); 
+    color: rgba(255,255,255,0.3); 
 }
 
 body.dark .welcome-description { 
-    color: rgba(255,255,255,0.35); 
+    color: rgba(255,255,255,0.5); 
 }
 
+body.dark .divider-line { 
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent); 
+}
+
+body.dark .divider-icon { 
+    color: rgba(212, 175, 55, 0.1); 
+}
+
+/* ===== КНОПКИ ===== */
 body.dark .btn-primary {
     background: linear-gradient(145deg, #d4af37, #b8942e);
     color: #0a0615;
@@ -182,34 +206,16 @@ body.dark .btn-primary:hover {
     transform: translateY(-4px) scale(1.02);
 }
 
-body.dark .divider-line { 
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent); 
+body.dark .btn-secondary {
+    color: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.06);
 }
 
-body.dark .divider-icon { 
-    color: rgba(212, 175, 55, 0.1); 
+body.dark .btn-secondary:hover {
+    background: rgba(255,255,255,0.04);
 }
 
-body.dark .bismillah { 
-    color: rgba(212, 175, 55, 0.15); 
-}
-
-body.dark .theme-toggle { 
-    color: rgba(255,255,255,0.25); 
-}
-
-body.dark .theme-toggle:hover { 
-    background: rgba(255,255,255,0.04); 
-}
-
-body.dark .language-toggle { 
-    color: rgba(255,255,255,0.25); 
-}
-
-body.dark .language-toggle:hover { 
-    background: rgba(255,255,255,0.04); 
-}
-
+/* ===== СТРАНИЦА ВЫБОРА РЕЖИМА ===== */
 body.dark .choose-page h2 {
     color: #f5efe8;
 }
@@ -237,6 +243,7 @@ body.dark .choose-card:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* ===== СТРАНИЦА ВЫБОРА НОМЕРА ===== */
 body.dark .select-page h2 {
     color: #f5efe8;
 }
@@ -265,9 +272,28 @@ body.dark .number-btn.surah-btn:hover {
     background: rgba(255, 255, 255, 0.04);
 }
 
+/* ===== СТРАНИЦА ТЕСТА ===== */
+body.dark .test-page .test-header {
+    color: rgba(255,255,255,0.3);
+}
+
+body.dark .test-page .test-header strong {
+    color: #f5efe8;
+}
+
+body.dark .question-number {
+    color: rgba(255,255,255,0.3);
+}
+
 body.dark .test-page .ayah-text {
     color: #f5efe8;
     background: rgba(255,255,255,0.03);
+}
+
+body.dark .test-page .ayah-text .highlight-missing {
+    background: rgba(220,53,69,0.15);
+    color: #ff6b7a;
+    border-bottom-color: #ff6b7a;
 }
 
 body.dark .test-page .options label {
@@ -279,45 +305,28 @@ body.dark .test-page .options label:hover {
     background: rgba(255,255,255,0.04);
 }
 
+body.dark .test-page .options label.correct-answer {
+    background: rgba(40,167,69,0.15) !important;
+    color: #5cdb7a !important;
+    border-color: rgba(40,167,69,0.25) !important;
+}
+
+body.dark .test-page .options label.wrong-answer {
+    background: rgba(220,53,69,0.15) !important;
+    color: #ff6b7a !important;
+    border-color: rgba(220,53,69,0.25) !important;
+}
+
 body.dark .test-page .feedback.correct {
-    color: #28a745;
+    color: #5cdb7a;
 }
 
 body.dark .test-page .feedback.wrong {
-    color: #dc3545;
-}
-
-body.dark .btn-secondary {
-    color: rgba(255,255,255,0.3);
-    border-color: rgba(255,255,255,0.06);
-}
-
-body.dark .btn-secondary:hover {
-    background: rgba(255,255,255,0.04);
-}
-
-body.dark .hint-text {
-    color: rgba(255,255,255,0.4);
+    color: #ff6b7a;
 }
 
 body.dark .question-block {
     border-bottom-color: rgba(255,255,255,0.04);
-}
-
-body.dark .result-detail {
-    border-bottom-color: rgba(255,255,255,0.04);
-}
-
-body.dark .result-block .score {
-    color: #f5efe8;
-}
-
-body.dark .test-page .test-header {
-    color: rgba(255,255,255,0.3);
-}
-
-body.dark .question-number {
-    color: rgba(255,255,255,0.3);
 }
 
 body.dark .result-block {
@@ -325,27 +334,42 @@ body.dark .result-block {
     border: 1px solid rgba(255,255,255,0.04);
 }
 
-body.dark .number-grid::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.02);
-}
-
-body.dark .number-grid::-webkit-scrollbar-thumb {
-    background: rgba(212,175,55,0.15);
-}
-
-body.dark #testTitle {
+body.dark .result-block .score {
     color: #f5efe8;
 }
 
-/* ===== ТЕМНАЯ ТЕМА - ВРЕМЯ НАМАЗА ===== */
+body.dark .result-detail {
+    border-bottom-color: rgba(255,255,255,0.04);
+}
+
+body.dark .result-detail strong {
+    color: #f5efe8;
+}
+
+body.dark .hint-text {
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.02);
+}
+
+body.dark .btn-hint {
+    color: rgba(212, 175, 55, 0.5);
+    border-color: rgba(212, 175, 55, 0.15);
+}
+
+body.dark .btn-hint:hover {
+    background: rgba(212, 175, 55, 0.06);
+    color: rgba(212, 175, 55, 0.7);
+}
+
+/* ===== НАМАЗ ===== */
 body.dark .prayer-times {
-    background: rgba(20, 15, 35, 0.85);
-    border-color: rgba(212, 175, 55, 0.08);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(20, 15, 35, 0.7);
+    border-color: rgba(212, 175, 55, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 body.dark .prayer-header {
-    border-bottom-color: rgba(212, 175, 55, 0.08);
+    border-bottom-color: rgba(212, 175, 55, 0.06);
 }
 
 body.dark .prayer-title {
@@ -356,47 +380,87 @@ body.dark .prayer-date {
     color: rgba(255,255,255,0.3);
 }
 
-body.dark .prayer-countdown {
-    border-bottom-color: rgba(212, 175, 55, 0.08);
-}
-
 body.dark .countdown-label {
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.3);
 }
 
 body.dark .countdown-time {
     color: #d4af37;
 }
 
-body.dark .prayer-row-active {
+body.dark .prayer-item.active {
     background: rgba(212, 175, 55, 0.06);
+    border-color: rgba(212, 175, 55, 0.1);
 }
 
-body.dark .prayer-cell-label {
+body.dark .prayer-name {
     color: rgba(255,255,255,0.3);
 }
 
-body.dark .prayer-cell-time {
+body.dark .prayer-item.active .prayer-name {
+    color: #d4af37;
+}
+
+body.dark .prayer-time {
     color: rgba(255,255,255,0.7);
 }
 
-body.dark .prayer-row-active .prayer-cell-label {
-    color: #d4af37;
-    opacity: 0.7;
-}
-
-body.dark .prayer-row-active .prayer-cell-time {
+body.dark .prayer-item.active .prayer-time {
     color: #d4af37;
 }
 
-body.dark .prayer-labels {
-    border-top-color: rgba(212, 175, 55, 0.06);
+/* ===== СКРОЛЛБАР ===== */
+body.dark .number-grid::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02);
 }
 
-body.dark .prayer-labels span {
-    color: rgba(255,255,255,0.15);
+body.dark .number-grid::-webkit-scrollbar-thumb {
+    background: rgba(212,175,55,0.15);
 }
 
+body.dark .questions-container::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02);
+}
+
+body.dark .questions-container::-webkit-scrollbar-thumb {
+    background: rgba(212,175,55,0.15);
+}
+
+/* ===== ОБЩИЕ ЭЛЕМЕНТЫ ===== */
+body.dark #testTitle {
+    color: #f5efe8;
+}
+
+body.dark .progress-text {
+    color: rgba(255,255,255,0.3);
+}
+
+body.dark .test-buttons .btn-secondary {
+    color: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.06);
+}
+
+body.dark .test-buttons .btn-secondary:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+body.dark .btn-secondary#btnTestHome {
+    color: rgba(212, 175, 55, 0.4);
+    border-color: rgba(212, 175, 55, 0.08);
+}
+
+body.dark .btn-secondary#btnTestHome:hover {
+    background: rgba(212, 175, 55, 0.04);
+}
+
+body.dark .btn-secondary#checkBtn {
+    color: #d4af37;
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+body.dark .btn-secondary#checkBtn:hover {
+    background: rgba(212, 175, 55, 0.06);
+}
 /* ===== КОНТЕЙНЕР ===== */
 .container {
     max-width: 900px;
