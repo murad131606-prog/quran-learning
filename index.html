@@ -1439,7 +1439,7 @@ body.dark .prayer-next {
     <span id="langLabel">Русский</span>
 </button>
 
-      <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+     <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
 <div class="page active" id="pageWelcome">
     <div class="welcome-content">
         
@@ -1448,12 +1448,12 @@ body.dark .prayer-next {
             <div class="prayer-header">
                 <span class="prayer-icon">🕌</span>
                 <span class="prayer-title">Энгельс</span>
-                <span class="prayer-date" id="prayerDate">01 Sep 2026</span>
+                <span class="prayer-date" id="prayerDate">1 сентября 2026</span>
             </div>
             <div class="prayer-grid">
                 <div class="prayer-item" data-prayer="Fajr">
                     <span class="prayer-name">Фаджр</span>
-                    <span class="prayer-time" id="prayerFajr">04:01</span>
+                    <span class="prayer-time" id="prayerFajr">04:02</span>
                 </div>
                 <div class="prayer-item" data-prayer="Sunrise">
                     <span class="prayer-name">Восход</span>
@@ -1461,25 +1461,25 @@ body.dark .prayer-next {
                 </div>
                 <div class="prayer-item" data-prayer="Dhuhr">
                     <span class="prayer-name">Зухр</span>
-                    <span class="prayer-time" id="prayerDhuhr">12:59</span>
+                    <span class="prayer-time" id="prayerDhuhr">12:56</span>
                 </div>
-                <div class="prayer-item active" data-prayer="Asr">
+                <div class="prayer-item" data-prayer="Asr">
                     <span class="prayer-name">Аср</span>
-                    <span class="prayer-time" id="prayerAsr">16:40</span>
+                    <span class="prayer-time" id="prayerAsr">16:39</span>
                 </div>
                 <div class="prayer-item" data-prayer="Maghrib">
                     <span class="prayer-name">Магриб</span>
-                    <span class="prayer-time" id="prayerMaghrib">19:45</span>
+                    <span class="prayer-time" id="prayerMaghrib">19:42</span>
                 </div>
                 <div class="prayer-item" data-prayer="Isha">
                     <span class="prayer-name">Иша</span>
-                    <span class="prayer-time" id="prayerIsha">21:49</span>
+                    <span class="prayer-time" id="prayerIsha">21:39</span>
                 </div>
             </div>
             <div class="prayer-next">
                 <span>🔔 Ближайший: </span>
                 <span id="nextPrayerName">Аср</span>
-                <span id="nextPrayerTime">16:40</span>
+                <span id="nextPrayerTime">16:39</span>
             </div>
         </div>
 
@@ -6861,57 +6861,91 @@ document.getElementById('btnNextSection').addEventListener('click', goToNextSect
 // Обновляем язык при загрузке страницы
 updateLanguage();
 // ================================================================
-//  ВРЕМЯ НАМАЗА (г. Энгельс)
+//  ВРЕМЯ НАМАЗА (г. Энгельс) - Сентябрь 2026
 // ================================================================
 
-async function getPrayerTimes() {
-    const city = 'Энгельс';
-    const country = 'Россия';
-    const method = 16; // Московский метод
+const PRAYER_SCHEDULE = {
+    1: { day: 'ВТ', Fajr: '04:02', Sunrise: '06:08', Dhuhr: '12:56', Asr: '16:39', Maghrib: '19:42', Isha: '21:39' },
+    2: { day: 'СР', Fajr: '04:05', Sunrise: '06:09', Dhuhr: '12:55', Asr: '16:37', Maghrib: '19:40', Isha: '21:36' },
+    3: { day: 'ЧТ', Fajr: '04:07', Sunrise: '06:11', Dhuhr: '12:55', Asr: '16:36', Maghrib: '19:38', Isha: '21:33' },
+    4: { day: 'ПТ', Fajr: '04:10', Sunrise: '06:13', Dhuhr: '12:55', Asr: '16:35', Maghrib: '19:36', Isha: '21:30' },
+    5: { day: 'СБ', Fajr: '04:12', Sunrise: '06:14', Dhuhr: '12:54', Asr: '16:33', Maghrib: '19:33', Isha: '21:27' },
+    6: { day: 'ВС', Fajr: '04:14', Sunrise: '06:16', Dhuhr: '12:54', Asr: '16:32', Maghrib: '19:31', Isha: '21:24' },
+    7: { day: 'ПН', Fajr: '04:16', Sunrise: '06:17', Dhuhr: '12:54', Asr: '16:30', Maghrib: '19:29', Isha: '21:21' },
+    8: { day: 'ВТ', Fajr: '04:19', Sunrise: '06:19', Dhuhr: '12:53', Asr: '16:29', Maghrib: '19:27', Isha: '21:19' },
+    9: { day: 'СР', Fajr: '04:21', Sunrise: '06:21', Dhuhr: '12:53', Asr: '16:27', Maghrib: '19:24', Isha: '21:16' },
+    10: { day: 'ЧТ', Fajr: '04:23', Sunrise: '06:22', Dhuhr: '12:53', Asr: '16:26', Maghrib: '19:22', Isha: '21:13' },
+    11: { day: 'ПТ', Fajr: '04:25', Sunrise: '06:24', Dhuhr: '12:52', Asr: '16:24', Maghrib: '19:20', Isha: '21:10' },
+    12: { day: 'СБ', Fajr: '04:27', Sunrise: '06:25', Dhuhr: '12:52', Asr: '16:23', Maghrib: '19:17', Isha: '21:08' },
+    13: { day: 'ВС', Fajr: '04:29', Sunrise: '06:27', Dhuhr: '12:52', Asr: '16:21', Maghrib: '19:15', Isha: '21:05' },
+    14: { day: 'ПН', Fajr: '04:31', Sunrise: '06:29', Dhuhr: '12:51', Asr: '16:20', Maghrib: '19:13', Isha: '21:02' },
+    15: { day: 'ВТ', Fajr: '04:33', Sunrise: '06:30', Dhuhr: '12:51', Asr: '16:18', Maghrib: '19:11', Isha: '20:59' },
+    16: { day: 'СР', Fajr: '04:35', Sunrise: '06:32', Dhuhr: '12:51', Asr: '16:16', Maghrib: '19:08', Isha: '20:57' },
+    17: { day: 'ЧТ', Fajr: '04:37', Sunrise: '06:33', Dhuhr: '12:50', Asr: '16:15', Maghrib: '19:06', Isha: '20:54' },
+    18: { day: 'ПТ', Fajr: '04:39', Sunrise: '06:35', Dhuhr: '12:50', Asr: '16:13', Maghrib: '19:04', Isha: '20:51' },
+    19: { day: 'СБ', Fajr: '04:41', Sunrise: '06:37', Dhuhr: '12:49', Asr: '16:12', Maghrib: '19:01', Isha: '20:49' },
+    20: { day: 'ВС', Fajr: '04:43', Sunrise: '06:38', Dhuhr: '12:49', Asr: '16:10', Maghrib: '18:59', Isha: '20:46' },
+    21: { day: 'ПН', Fajr: '04:45', Sunrise: '06:40', Dhuhr: '12:49', Asr: '16:08', Maghrib: '18:57', Isha: '20:44' },
+    22: { day: 'ВТ', Fajr: '04:47', Sunrise: '06:41', Dhuhr: '12:48', Asr: '16:07', Maghrib: '18:54', Isha: '20:41' },
+    23: { day: 'СР', Fajr: '04:49', Sunrise: '06:43', Dhuhr: '12:48', Asr: '16:05', Maghrib: '18:52', Isha: '20:38' },
+    24: { day: 'ЧТ', Fajr: '04:51', Sunrise: '06:45', Dhuhr: '12:48', Asr: '16:03', Maghrib: '18:50', Isha: '20:36' },
+    25: { day: 'ПТ', Fajr: '04:53', Sunrise: '06:46', Dhuhr: '12:47', Asr: '16:02', Maghrib: '18:48', Isha: '20:33' },
+    26: { day: 'СБ', Fajr: '04:55', Sunrise: '06:48', Dhuhr: '12:47', Asr: '16:00', Maghrib: '18:45', Isha: '20:31' },
+    27: { day: 'ВС', Fajr: '04:57', Sunrise: '06:49', Dhuhr: '12:47', Asr: '15:58', Maghrib: '18:43', Isha: '20:28' },
+    28: { day: 'ПН', Fajr: '04:58', Sunrise: '06:51', Dhuhr: '12:46', Asr: '15:57', Maghrib: '18:41', Isha: '20:26' },
+    29: { day: 'ВТ', Fajr: '05:00', Sunrise: '06:53', Dhuhr: '12:46', Asr: '15:55', Maghrib: '18:38', Isha: '20:23' },
+    30: { day: 'СР', Fajr: '05:02', Sunrise: '06:54', Dhuhr: '12:46', Asr: '15:53', Maghrib: '18:36', Isha: '20:21' }
+};
+
+function getTodayPrayerTimes() {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
     
-    try {
-        const response = await fetch(
-            `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${method}`
-        );
-        
-        if (!response.ok) throw new Error('Ошибка загрузки');
-        
-        const data = await response.json();
-        const timings = data.data.timings;
-        const date = data.data.date.readable;
-        
-        // Обновляем дату
-        document.getElementById('prayerDate').textContent = date;
-        
-        // Обновляем время намазов
-        const prayers = {
-            Fajr: 'prayerFajr',
-            Sunrise: 'prayerSunrise',
-            Dhuhr: 'prayerDhuhr',
-            Asr: 'prayerAsr',
-            Maghrib: 'prayerMaghrib',
-            Isha: 'prayerIsha'
-        };
-        
-        const prayerTimes = {};
-        
-        for (const [key, elementId] of Object.entries(prayers)) {
-            const time = timings[key];
-            document.getElementById(elementId).textContent = time;
-            prayerTimes[key] = time;
-        }
-        
-        // Находим ближайший намаз
-        findNextPrayer(prayerTimes);
-        
-    } catch (error) {
-        console.error('Ошибка получения времени намаза:', error);
-        // Показываем заглушку
-        document.querySelectorAll('.prayer-time').forEach(el => {
-            el.textContent = '--:--';
-        });
-        document.getElementById('prayerDate').textContent = 'Не удалось загрузить';
+    // Сентябрь = месяц 9
+    if (month === 9 && PRAYER_SCHEDULE[day]) {
+        return PRAYER_SCHEDULE[day];
     }
+    // Если не сентябрь, показываем 1 сентября
+    return PRAYER_SCHEDULE[1];
+}
+
+function updatePrayerTimes() {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
+    
+    const times = getTodayPrayerTimes();
+    
+    // Обновляем дату
+    const dateEl = document.getElementById('prayerDate');
+    if (dateEl) {
+        const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
+                       'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+        dateEl.textContent = `${day} ${months[month - 1]} 2026`;
+    }
+    
+    // Обновляем время
+    const prayerElements = {
+        Fajr: 'prayerFajr',
+        Sunrise: 'prayerSunrise',
+        Dhuhr: 'prayerDhuhr',
+        Asr: 'prayerAsr',
+        Maghrib: 'prayerMaghrib',
+        Isha: 'prayerIsha'
+    };
+    
+    const prayerTimes = {};
+    for (const [key, elementId] of Object.entries(prayerElements)) {
+        const el = document.getElementById(elementId);
+        if (el && times[key]) {
+            el.textContent = times[key];
+            prayerTimes[key] = times[key];
+        }
+    }
+    
+    // Находим ближайший намаз
+    findNextPrayer(prayerTimes);
 }
 
 function findNextPrayer(prayerTimes) {
@@ -6938,7 +6972,6 @@ function findNextPrayer(prayerTimes) {
         const [hours, minutes] = time.split(':').map(Number);
         const prayerMinutes = hours * 60 + minutes;
         
-        // Если время намаза уже прошло сегодня, считаем на завтра
         let diff = prayerMinutes - currentTime;
         if (diff < 0) diff += 24 * 60;
         
@@ -6948,7 +6981,6 @@ function findNextPrayer(prayerTimes) {
         }
     }
     
-    // Подсвечиваем активный намаз
     document.querySelectorAll('.prayer-item').forEach(el => {
         el.classList.remove('active');
         if (el.dataset.prayer === nextPrayer) {
@@ -6956,19 +6988,18 @@ function findNextPrayer(prayerTimes) {
         }
     });
     
-    // Обновляем информацию о ближайшем намазе
     if (nextPrayer) {
-        document.getElementById('nextPrayerName').textContent = prayerNames[nextPrayer] || nextPrayer;
-        document.getElementById('nextPrayerTime').textContent = prayerTimes[nextPrayer] || '--:--';
+        const nameEl = document.getElementById('nextPrayerName');
+        const timeEl = document.getElementById('nextPrayerTime');
+        if (nameEl) nameEl.textContent = prayerNames[nextPrayer] || nextPrayer;
+        if (timeEl) timeEl.textContent = prayerTimes[nextPrayer] || '--:--';
     }
 }
 
-// Загружаем время намаза при загрузке страницы
+// Загружаем при загрузке и обновляем каждую минуту
 document.addEventListener('DOMContentLoaded', function() {
-    getPrayerTimes();
-    
-    // Обновляем каждые 60 секунд
-    setInterval(getPrayerTimes, 60000);
+    updatePrayerTimes();
+    setInterval(updatePrayerTimes, 60000);
 });
     </script>
 </body>
