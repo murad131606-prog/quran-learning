@@ -1977,7 +1977,7 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
         <div class="page active" id="pageWelcome">
             <div class="welcome-content">
                 
-               <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА ===== -->
+              <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА ===== -->
 <div class="prayer-times" id="prayerTimes">
     <div class="prayer-header">
         <span class="prayer-icon">🕌</span>
@@ -1993,27 +1993,27 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
     <div class="prayer-grid">
         <div class="prayer-item" data-prayer="Fajr">
             <span class="prayer-name">Фаджр</span>
-            <span class="prayer-time" id="prayerFajr">04:19</span>
+            <span class="prayer-time" id="prayerFajr">--:--</span>
         </div>
         <div class="prayer-item" data-prayer="Sunrise">
             <span class="prayer-name">Шурук</span>
-            <span class="prayer-time" id="prayerSunrise">06:08</span>
+            <span class="prayer-time" id="prayerSunrise">--:--</span>
         </div>
         <div class="prayer-item" data-prayer="Dhuhr">
             <span class="prayer-name">Зухр</span>
-            <span class="prayer-time" id="prayerDhuhr">12:56</span>
+            <span class="prayer-time" id="prayerDhuhr">--:--</span>
         </div>
         <div class="prayer-item" data-prayer="Asr">
             <span class="prayer-name">Аср</span>
-            <span class="prayer-time" id="prayerAsr">16:39</span>
+            <span class="prayer-time" id="prayerAsr">--:--</span>
         </div>
         <div class="prayer-item" data-prayer="Maghrib">
             <span class="prayer-name">Магриб</span>
-            <span class="prayer-time" id="prayerMaghrib">19:43</span>
+            <span class="prayer-time" id="prayerMaghrib">--:--</span>
         </div>
         <div class="prayer-item" data-prayer="Isha">
             <span class="prayer-name">Иша</span>
-            <span class="prayer-time" id="prayerIsha">21:39</span>
+            <span class="prayer-time" id="prayerIsha">--:--</span>
         </div>
     </div>
 </div>
@@ -7463,6 +7463,8 @@ function getTodayPrayerTimes() {
 }
 
 function updatePrayerTimes() {
+    console.log('🔄 Обновление времени намаза...');
+    
     const times = getTodayPrayerTimes();
     const today = new Date();
     const day = today.getDate();
@@ -7487,6 +7489,7 @@ function updatePrayerTimes() {
         const el = document.getElementById(elId);
         if (el && times[key]) {
             el.textContent = times[key];
+            console.log(`✅ ${key}: ${times[key]}`);
         }
     }
     
@@ -7506,17 +7509,19 @@ function findNextPrayer(times) {
         if (!time) continue;
         
         const [hours, minutes] = time.split(':').map(Number);
-        const prayerMinutes = hours * 60 + minutes;
+        let prayerMinutes = hours * 60 + minutes;
         
         let diff = prayerMinutes - currentMinutes;
         if (diff < 0) diff += 24 * 60;
         if (diff === 0) diff = 24 * 60;
         
+        console.log(`⏰ ${prayer}: ${time} (${prayerMinutes} мин.) разница: ${diff} мин.`);
+        
         if (diff < minDiff) {
             minDiff = diff;
             nextPrayer = prayer;
             nextMinutes = prayerMinutes;
-            if (diff < currentMinutes) {
+            if (diff > 0 && prayerMinutes < currentMinutes) {
                 nextMinutes += 24 * 60;
             }
         }
@@ -7530,6 +7535,8 @@ function findNextPrayer(times) {
             nextMinutes = hours * 60 + minutes + 24 * 60;
         }
     }
+    
+    console.log(`🎯 Следующий намаз: ${nextPrayer} в ${nextMinutes} мин.`);
     
     document.querySelectorAll('.prayer-item').forEach(el => {
         el.classList.remove('active');
@@ -7591,6 +7598,7 @@ function startCountdown(targetMinutes) {
 }
 
 function initTimer() {
+    console.log('🚀 Инициализация таймера намаза...');
     setTimeout(function() {
         updatePrayerTimes();
         setInterval(function() {
@@ -7602,6 +7610,7 @@ function initTimer() {
     }, 200);
 }
 
+// ЗАПУСК ПРИ ЗАГРУЗКЕ
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     initTimer();
 } else {
