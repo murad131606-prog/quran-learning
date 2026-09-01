@@ -1188,63 +1188,49 @@ body.dark .result-block .score { color: #f5efe8; }
         font-size: 16px;
         padding: 8px 12px;
     }
-/* ===== ВРЕМЯ НАМАЗА ===== */
+/* ===== ВРЕМЯ НАМАЗА (ЛЕВЫЙ ВЕРХНИЙ УГОЛ) ===== */
 .prayer-times {
+    position: absolute;
+    top: 80px;
+    left: 38px;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 20px;
-    padding: 18px 24px 14px 24px;
-    margin: 14px 0 8px 0;
-    width: 100%;
-    max-width: 620px;
-    border: 1px solid rgba(212, 175, 55, 0.08);
+    border-radius: 14px;
+    padding: 10px 16px 8px 16px;
+    border: 1px solid rgba(212, 175, 55, 0.06);
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.prayer-times::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.03), transparent 70%);
-    pointer-events: none;
+    max-width: 340px;
+    z-index: 5;
 }
 
 body.light .prayer-times {
     background: rgba(255, 252, 248, 0.5);
-    border-color: rgba(212, 175, 55, 0.1);
-    box-shadow: 0 4px 30px rgba(212, 175, 55, 0.04);
+    border-color: rgba(212, 175, 55, 0.08);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.04);
 }
 
 body.dark .prayer-times {
     background: rgba(20, 15, 35, 0.6);
-    border-color: rgba(212, 175, 55, 0.06);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-color: rgba(212, 175, 55, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .prayer-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+    gap: 6px;
+    margin-bottom: 4px;
 }
 
 .prayer-icon {
-    font-size: 20px;
-    opacity: 0.7;
+    font-size: 14px;
+    opacity: 0.5;
 }
 
 .prayer-title {
-    font-size: 17px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 }
 
 body.light .prayer-title {
@@ -1252,14 +1238,14 @@ body.light .prayer-title {
 }
 
 body.dark .prayer-title {
-    color: #f5efe8;
+    color: rgba(255,255,255,0.6);
 }
 
 .prayer-date {
-    font-size: 13px;
-    opacity: 0.4;
-    margin-left: auto;
+    font-size: 10px;
+    opacity: 0.3;
     font-weight: 400;
+    margin-left: auto;
 }
 
 body.light .prayer-date {
@@ -1267,55 +1253,45 @@ body.light .prayer-date {
 }
 
 body.dark .prayer-date {
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.2);
 }
 
 .prayer-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 4px;
-    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 6px;
+    margin-bottom: 3px;
 }
 
 .prayer-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 6px 4px;
-    border-radius: 10px;
+    gap: 2px;
+    padding: 2px 8px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     cursor: default;
-    position: relative;
 }
 
 .prayer-item.active {
-    background: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.12);
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.08);
 }
 
 body.light .prayer-item.active {
-    background: rgba(212, 175, 55, 0.06);
+    background: rgba(212, 175, 55, 0.04);
 }
 
 body.dark .prayer-item.active {
-    background: rgba(212, 175, 55, 0.06);
-}
-
-.prayer-item.active::after {
-    content: '●';
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    font-size: 8px;
-    color: #d4af37;
+    background: rgba(212, 175, 55, 0.04);
 }
 
 .prayer-name {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.2px;
-    opacity: 0.5;
+    opacity: 0.3;
     text-transform: uppercase;
+    letter-spacing: 0.2px;
 }
 
 body.light .prayer-name {
@@ -1323,18 +1299,17 @@ body.light .prayer-name {
 }
 
 body.dark .prayer-name {
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.2);
 }
 
 .prayer-item.active .prayer-name {
-    opacity: 0.8;
+    opacity: 0.6;
     color: #d4af37;
 }
 
 .prayer-time {
-    font-size: 17px;
-    font-weight: 700;
-    margin-top: 1px;
+    font-size: 13px;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
 }
 
@@ -1343,7 +1318,7 @@ body.light .prayer-time {
 }
 
 body.dark .prayer-time {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.6);
 }
 
 .prayer-item.active .prayer-time {
@@ -1351,15 +1326,17 @@ body.dark .prayer-time {
 }
 
 .prayer-next {
-    text-align: center;
-    padding-top: 10px;
-    border-top: 1px solid rgba(212, 175, 55, 0.06);
-    font-size: 13px;
-    font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(212, 175, 55, 0.03);
+    border-top: 1px solid rgba(212, 175, 55, 0.04);
+    padding-top: 4px;
+    margin-top: 2px;
 }
 
 body.light .prayer-next {
@@ -1367,74 +1344,83 @@ body.light .prayer-next {
 }
 
 body.dark .prayer-next {
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.2);
 }
 
 #nextPrayerName {
     font-weight: 600;
     color: #d4af37;
+    font-size: 10px;
 }
 
 #nextPrayerTime {
     font-weight: 600;
     color: #d4af37;
-    background: rgba(212, 175, 55, 0.06);
-    padding: 1px 10px;
-    border-radius: 12px;
-    font-size: 14px;
+    font-size: 11px;
+}
+
+@media (max-width: 1024px) {
+    .prayer-times {
+        position: relative;
+        top: auto;
+        left: auto;
+        max-width: 100%;
+        margin: 0 0 12px 0;
+        padding: 10px 14px 8px 14px;
+        width: 100%;
+    }
+    .prayer-grid {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
     .prayer-times {
-        padding: 14px 16px 12px 16px;
-        margin: 10px 0 6px 0;
-        border-radius: 16px;
-        max-width: 100%;
-    }
-    .prayer-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 4px;
-    }
-    .prayer-item {
-        padding: 4px 2px;
+        padding: 8px 12px 6px 12px;
+        border-radius: 12px;
     }
     .prayer-time {
-        font-size: 14px;
+        font-size: 11px;
     }
     .prayer-name {
-        font-size: 9px;
+        font-size: 8px;
     }
     .prayer-title {
-        font-size: 14px;
-    }
-    .prayer-icon {
-        font-size: 16px;
+        font-size: 11px;
     }
     .prayer-date {
-        font-size: 11px;
+        font-size: 9px;
     }
     .prayer-next {
-        font-size: 11px;
-        flex-wrap: wrap;
+        font-size: 9px;
     }
     #nextPrayerTime {
-        font-size: 12px;
-        padding: 1px 8px;
+        font-size: 10px;
+    }
+    .prayer-item {
+        padding: 1px 5px;
+    }
+    .prayer-grid {
+        gap: 1px 4px;
     }
 }
 
-@media (max-width: 400px) {
-    .prayer-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-    }
+@media (max-width: 500px) {
     .prayer-times {
-        padding: 10px 12px 8px 12px;
+        padding: 6px 10px 4px 10px;
     }
     .prayer-time {
-        font-size: 13px;
+        font-size: 10px;
     }
-}
+    .prayer-name {
+        font-size: 7px;
+    }
+    .prayer-item {
+        padding: 1px 4px;
+    }
+    .prayer-grid {
+        gap: 1px 2px;
+    }
 }
     </style>
 </head>
@@ -1453,9 +1439,50 @@ body.dark .prayer-next {
     <span id="langLabel">Русский</span>
 </button>
 
-       <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+      <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
 <div class="page active" id="pageWelcome">
     <div class="welcome-content">
+        
+        <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА (ЛЕВЫЙ ВЕРХНИЙ УГОЛ) ===== -->
+        <div class="prayer-times" id="prayerTimes">
+            <div class="prayer-header">
+                <span class="prayer-icon">🕌</span>
+                <span class="prayer-title">Энгельс</span>
+                <span class="prayer-date" id="prayerDate">01 Sep 2026</span>
+            </div>
+            <div class="prayer-grid">
+                <div class="prayer-item" data-prayer="Fajr">
+                    <span class="prayer-name">Фаджр</span>
+                    <span class="prayer-time" id="prayerFajr">04:01</span>
+                </div>
+                <div class="prayer-item" data-prayer="Sunrise">
+                    <span class="prayer-name">Восход</span>
+                    <span class="prayer-time" id="prayerSunrise">06:08</span>
+                </div>
+                <div class="prayer-item" data-prayer="Dhuhr">
+                    <span class="prayer-name">Зухр</span>
+                    <span class="prayer-time" id="prayerDhuhr">12:59</span>
+                </div>
+                <div class="prayer-item active" data-prayer="Asr">
+                    <span class="prayer-name">Аср</span>
+                    <span class="prayer-time" id="prayerAsr">16:40</span>
+                </div>
+                <div class="prayer-item" data-prayer="Maghrib">
+                    <span class="prayer-name">Магриб</span>
+                    <span class="prayer-time" id="prayerMaghrib">19:45</span>
+                </div>
+                <div class="prayer-item" data-prayer="Isha">
+                    <span class="prayer-name">Иша</span>
+                    <span class="prayer-time" id="prayerIsha">21:49</span>
+                </div>
+            </div>
+            <div class="prayer-next">
+                <span>🔔 Ближайший: </span>
+                <span id="nextPrayerName">Аср</span>
+                <span id="nextPrayerTime">16:40</span>
+            </div>
+        </div>
+
         <div class="salam-block">
             <div class="arabic-salam">
                 ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
@@ -1470,46 +1497,6 @@ body.dark .prayer-next {
             <div class="arabic-verse">
                 وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
                 <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
-            </div>
-        </div>
-        
-        <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА ===== -->
-        <div class="prayer-times" id="prayerTimes">
-            <div class="prayer-header">
-                <span class="prayer-icon">🕌</span>
-                <span class="prayer-title">Время намаза</span>
-                <span class="prayer-date" id="prayerDate"></span>
-            </div>
-            <div class="prayer-grid">
-                <div class="prayer-item" data-prayer="Fajr">
-                    <span class="prayer-name">Фаджр</span>
-                    <span class="prayer-time" id="prayerFajr">--:--</span>
-                </div>
-                <div class="prayer-item" data-prayer="Sunrise">
-                    <span class="prayer-name">Восход</span>
-                    <span class="prayer-time" id="prayerSunrise">--:--</span>
-                </div>
-                <div class="prayer-item" data-prayer="Dhuhr">
-                    <span class="prayer-name">Зухр</span>
-                    <span class="prayer-time" id="prayerDhuhr">--:--</span>
-                </div>
-                <div class="prayer-item" data-prayer="Asr">
-                    <span class="prayer-name">Аср</span>
-                    <span class="prayer-time" id="prayerAsr">--:--</span>
-                </div>
-                <div class="prayer-item" data-prayer="Maghrib">
-                    <span class="prayer-name">Магриб</span>
-                    <span class="prayer-time" id="prayerMaghrib">--:--</span>
-                </div>
-                <div class="prayer-item" data-prayer="Isha">
-                    <span class="prayer-name">Иша</span>
-                    <span class="prayer-time" id="prayerIsha">--:--</span>
-                </div>
-            </div>
-            <div class="prayer-next" id="prayerNext">
-                <span>🔔 Ближайший: </span>
-                <span id="nextPrayerName">--</span>
-                <span id="nextPrayerTime">--:--</span>
             </div>
         </div>
         
