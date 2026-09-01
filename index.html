@@ -401,7 +401,7 @@ body.dark .prayer-labels span {
 .container {
     max-width: 900px;
     width: 100%;
-    padding: 60px 55px;
+    padding: 20px 30px 30px 30px;
     position: relative;
     z-index: 1;
     text-align: center;
@@ -410,65 +410,112 @@ body.dark .prayer-labels span {
     min-height: 580px;
     display: flex;
     flex-direction: column;
+}
+
+body.light .container {
+    background: rgba(255, 252, 248, 0.72);
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
+}
+
+body.dark .container {
+    background: rgba(20, 15, 35, 0.85);
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== ШАПКА ===== */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+    margin-bottom: 16px;
+    flex-shrink: 0;
+    min-height: 50px;
+}
+
+.bismillah {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: color 0.4s ease;
+    line-height: 1;
+}
+
+body.light .bismillah { 
+    color: #d4af37; 
+    opacity: 0.5; 
+}
+
+body.dark .bismillah { 
+    color: rgba(212, 175, 55, 0.2); 
+}
+
+.header-controls {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.theme-toggle,
+.language-toggle {
+    background: transparent;
+    border: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 30px;
+    min-width: 36px;
     justify-content: center;
 }
 
-/* ===== ВЕРХНИЕ КНОПКИ ===== */
-.bismillah {
-    position: absolute;
-    top: 32px;
-    left: 38px;
-    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
-    font-size: 34px;
+body.light .theme-toggle,
+body.light .language-toggle { 
+    color: #8a7a6a; 
+}
+
+body.light .theme-toggle:hover,
+body.light .language-toggle:hover { 
+    background: rgba(0,0,0,0.04); 
+}
+
+body.dark .theme-toggle,
+body.dark .language-toggle { 
+    color: rgba(255,255,255,0.25); 
+}
+
+body.dark .theme-toggle:hover,
+body.dark .language-toggle:hover { 
+    background: rgba(255,255,255,0.04); 
+}
+
+.theme-toggle .icon { 
+    font-size: 14px; 
+}
+
+.lang-code {
     font-weight: 700;
-    letter-spacing: 2px;
-    z-index: 2;
-    transition: all 0.4s ease;
+    font-size: 11px;
+    letter-spacing: 0.5px;
 }
 
-.theme-toggle {
-    position: absolute;
-    top: 32px;
-    right: 38px;
-    background: transparent;
-    border: none;
-    padding: 8px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
-    z-index: 2;
+/* ===== ОБЕРТКА ДЛЯ СТРАНИЦ ===== */
+.pages-wrapper {
+    flex: 1;
     display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 40px;
-    letter-spacing: 0.3px;
-}
-
-.language-toggle {
-    position: absolute;
-    top: 32px;
-    right: 130px;
-    background: transparent;
-    border: none;
-    padding: 8px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 40px;
-    letter-spacing: 0.3px;
-}
-
-.theme-toggle .icon,
-.language-toggle .icon { 
-    font-size: 18px; 
+    flex-direction: column;
+    overflow-y: auto;
 }
 
 /* ===== СТРАНИЦЫ ===== */
@@ -480,6 +527,7 @@ body.dark .prayer-labels span {
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: 400px;
 }
 
 .page.active { 
@@ -495,11 +543,6 @@ body.dark .prayer-labels span {
         opacity: 1; 
         transform: translateY(0) scale(1); 
     }
-}
-
-@keyframes shimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
 }
 
 /* ===== ПРИВЕТСТВИЕ ===== */
@@ -1849,107 +1892,113 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
 <body>
 
     <div class="container">
-
+    
+    <!-- ===== ШАПКА (всегда видна) ===== -->
+    <div class="app-header">
         <div class="bismillah">﷽</div>
+        <div class="header-controls">
+            <button class="language-toggle" id="languageToggle">
+                <span class="lang-code" id="langLabel">RU</span>
+            </button>
+            <button class="theme-toggle" id="themeToggle">
+                <span class="icon" id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </div>
 
-        <button class="theme-toggle" id="themeToggle">
-            <span class="icon" id="themeIcon">🌙</span>
-            <span id="themeLabel">Тёмная</span>
-        </button>
-        <button class="language-toggle" id="languageToggle">
-    <span class="icon" id="langIcon">🇷🇺</span>
-    <span id="langLabel">Русский</span>
-</button>
-
- <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
-<div class="page active" id="pageWelcome">
-    <div class="welcome-content">
+    <!-- ===== СТРАНИЦЫ ===== -->
+    <div class="pages-wrapper">
         
-        <!-- БЛОК НАМАЗА -->
-        <div class="prayer-times" id="prayerTimes">
-            <div class="prayer-header">
-                <span class="prayer-icon">🕌</span>
-                <span class="prayer-title">Энгельс</span>
-                <span class="prayer-date" id="prayerDate">1 сен 2026</span>
-            </div>
-            
-            <div class="prayer-countdown">
-                <span class="countdown-label">До Аср осталось:</span>
-                <span class="countdown-time" id="countdownTime">00:41:46</span>
-            </div>
-            
-            <div class="prayer-grid">
-                <div class="prayer-item" data-prayer="Fajr">
-                    <span class="prayer-name">Фаджр</span>
-                    <span class="prayer-time" id="prayerFajr">04:19</span>
+        <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+        <div class="page active" id="pageWelcome">
+            <div class="welcome-content">
+                
+                <!-- БЛОК НАМАЗА -->
+                <div class="prayer-times" id="prayerTimes">
+                    <div class="prayer-header">
+                        <span class="prayer-icon">🕌</span>
+                        <span class="prayer-title">Энгельс</span>
+                        <span class="prayer-date" id="prayerDate">1 сен 2026</span>
+                    </div>
+                    
+                    <div class="prayer-countdown">
+                        <span class="countdown-label">До Аср осталось:</span>
+                        <span class="countdown-time" id="countdownTime">00:41:46</span>
+                    </div>
+                    
+                    <div class="prayer-grid">
+                        <div class="prayer-item" data-prayer="Fajr">
+                            <span class="prayer-name">Фаджр</span>
+                            <span class="prayer-time" id="prayerFajr">04:19</span>
+                        </div>
+                        <div class="prayer-item" data-prayer="Sunrise">
+                            <span class="prayer-name">Шурук</span>
+                            <span class="prayer-time" id="prayerSunrise">06:08</span>
+                        </div>
+                        <div class="prayer-item" data-prayer="Dhuhr">
+                            <span class="prayer-name">Зухр</span>
+                            <span class="prayer-time" id="prayerDhuhr">12:56</span>
+                        </div>
+                        <div class="prayer-item active" data-prayer="Asr">
+                            <span class="prayer-name">Аср</span>
+                            <span class="prayer-time" id="prayerAsr">16:39</span>
+                        </div>
+                        <div class="prayer-item" data-prayer="Maghrib">
+                            <span class="prayer-name">Магриб</span>
+                            <span class="prayer-time" id="prayerMaghrib">19:43</span>
+                        </div>
+                        <div class="prayer-item" data-prayer="Isha">
+                            <span class="prayer-name">Иша</span>
+                            <span class="prayer-time" id="prayerIsha">21:23</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="prayer-item" data-prayer="Sunrise">
-                    <span class="prayer-name">Шурук</span>
-                    <span class="prayer-time" id="prayerSunrise">06:08</span>
+
+                <!-- ПРИВЕТСТВИЕ -->
+                <div class="salam-block">
+                    <div class="arabic-salam">
+                        ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+                    </div>
                 </div>
-                <div class="prayer-item" data-prayer="Dhuhr">
-                    <span class="prayer-name">Зухр</span>
-                    <span class="prayer-time" id="prayerDhuhr">12:56</span>
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-icon">✦</span>
+                    <span class="divider-line"></span>
                 </div>
-                <div class="prayer-item active" data-prayer="Asr">
-                    <span class="prayer-name">Аср</span>
-                    <span class="prayer-time" id="prayerAsr">16:39</span>
+                <div class="verse-block">
+                    <div class="arabic-verse">
+                        وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                        <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+                    </div>
                 </div>
-                <div class="prayer-item" data-prayer="Maghrib">
-                    <span class="prayer-name">Магриб</span>
-                    <span class="prayer-time" id="prayerMaghrib">19:43</span>
-                </div>
-                <div class="prayer-item" data-prayer="Isha">
-                    <span class="prayer-name">Иша</span>
-                    <span class="prayer-time" id="prayerIsha">21:23</span>
-                </div>
+                <p class="welcome-description" data-i18n="welcomeDesc">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+                <button class="btn-primary" id="btnWelcomeNext" data-i18n="startBtn">Начать изучение →</button>
             </div>
         </div>
 
-        <!-- ПРИВЕТСТВИЕ -->
-        <div class="salam-block">
-            <div class="arabic-salam">
-                ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+        <!-- ===== СТРАНИЦА 2: ВЫБОР РЕЖИМА ===== -->
+        <div class="page" id="pageChoose">
+            <div class="choose-page">
+                <h2 id="chooseTitle" data-i18n="chooseMode">Выберите режим</h2>
+                <p id="chooseDesc" data-i18n="chooseModeDesc">Выберите тип теста для проверки знаний</p>
+
+                <div class="choose-card" id="btnChooseFill">
+                    <h3 data-i18n="fillMode">📝 Дополнить аят</h3>
+                    <p style="font-size:14px;opacity:0.7;margin-top:8px;" data-i18n="fillModeDesc">Вставьте пропущенное слово</p>
+                </div>
+                <div class="choose-card" id="btnChooseNext">
+                    <h3 data-i18n="nextMode">🎯 Угадай следующий аят</h3>
+                    <p style="font-size:14px;opacity:0.7;margin-top:8px;" data-i18n="nextModeDesc">Выберите правильный следующий аят</p>
+                </div>
+
+                <div id="selectModeButtons" style="display:none; margin-top:10px;">
+                    <button class="btn-secondary" id="btnChooseJuz" style="margin:5px;" data-i18n="chooseJuz">📖 Выбрать джуз</button>
+                    <button class="btn-secondary" id="btnChooseSurah" style="margin:5px;" data-i18n="chooseSurah">📖 Выбрать суру</button>
+                </div>
+
+                <button class="btn-secondary" id="btnChooseBack" data-i18n="back">← Назад</button>
             </div>
         </div>
-        <div class="divider">
-            <span class="divider-line"></span>
-            <span class="divider-icon">✦</span>
-            <span class="divider-line"></span>
-        </div>
-        <div class="verse-block">
-            <div class="arabic-verse">
-                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
-                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
-            </div>
-        </div>
-        <p class="welcome-description" data-i18n="welcomeDesc">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
-        <button class="btn-primary" id="btnWelcomeNext" data-i18n="startBtn">Начать изучение →</button>
-    </div>
-</div>
-<!-- ===== СТРАНИЦА 2: ВЫБОР РЕЖИМА ===== -->
-<div class="page" id="pageChoose">
-    <div class="choose-page">
-        <h2 id="chooseTitle" data-i18n="chooseMode">Выберите режим</h2>
-        <p id="chooseDesc" data-i18n="chooseModeDesc">Выберите тип теста для проверки знаний</p>
-
-        <div class="choose-card" id="btnChooseFill">
-            <h3 data-i18n="fillMode"> Дополнить аят</h3>
-            <p style="font-size:14px;opacity:0.7;margin-top:8px;" data-i18n="fillModeDesc">Вставьте пропущенное слово</p>
-        </div>
-        <div class="choose-card" id="btnChooseNext">
-            <h3 data-i18n="nextMode"> Угадай следующий аят</h3>
-            <p style="font-size:14px;opacity:0.7;margin-top:8px;" data-i18n="nextModeDesc">Выберите правильный следующий аят</p>
-        </div>
-
-        <div id="selectModeButtons" style="display:none; margin-top:10px;">
-            <button class="btn-secondary" id="btnChooseJuz" style="margin:5px;" data-i18n="chooseJuz">📖 Выбрать джуз</button>
-            <button class="btn-secondary" id="btnChooseSurah" style="margin:5px;" data-i18n="chooseSurah">📖 Выбрать суру</button>
-        </div>
-
-        <button class="btn-secondary" id="btnChooseBack" data-i18n="back">← Назад</button>
-    </div>
-</div>
 
         <!-- ===== СТРАНИЦА 3: ВЫБОР НОМЕРА ===== -->
         <div class="page" id="pageSelect">
@@ -1962,23 +2011,26 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
         </div>
 
         <!-- ===== СТРАНИЦА 4: ТЕСТ ===== -->
-<div class="page" id="pageTest">
-    <div class="test-page">
-        <div class="test-header">
-            <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
-            <span id="progressText">0 из 0</span>
+        <div class="page" id="pageTest">
+            <div class="test-page">
+                <div class="test-header">
+                    <span id="testLabel">📖 <strong id="testTitle">Тест</strong></span>
+                    <span id="progressText">0 из 0</span>
+                </div>
+                <div class="questions-container" id="questionsContainer"></div>
+                <div class="result-block" id="resultBlock"></div>
+                <div class="test-buttons">
+                    <button class="btn-secondary" id="btnTestBack" data-i18n="backToSelect">← Назад</button>
+                    <button class="btn-secondary" id="btnPrevSection" data-i18n="prev">◀ Предыдущий</button>
+                    <button class="btn-secondary" id="btnNextSection" data-i18n="next">Следующий ▶</button>
+                    <button class="btn-secondary" id="btnTestHome" data-i18n="home">🏠 На главную</button>
+                    <button class="btn-secondary" id="checkBtn" data-i18n="check">✅ Проверить</button>
+                </div>
+            </div>
         </div>
-        <div class="questions-container" id="questionsContainer"></div>
-        <div class="result-block" id="resultBlock"></div>
-        <div class="test-buttons">
-            <button class="btn-secondary" id="btnTestBack" data-i18n="backToSelect">← Назад</button>
-<button class="btn-secondary" id="btnPrevSection" data-i18n="prev">◀ Предыдущий</button>
-<button class="btn-secondary" id="btnNextSection" data-i18n="next">Следующий ▶</button>
-<button class="btn-secondary" id="btnTestHome" data-i18n="home">🏠 На главную</button>
-<button class="btn-secondary" id="checkBtn" data-i18n="check">✅ Проверить</button>
-        </div>
-    </div>
-</div>
+
+    </div><!-- /pages-wrapper -->
+</div><!-- /container -->
 
     <script>
         // ================================================================
