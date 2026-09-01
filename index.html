@@ -7379,9 +7379,12 @@ function getTodayPrayerTimes() {
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth() + 1;
+    
+    // Сентябрь = 9
     if (month === 9 && PRAYER_SCHEDULE[day]) {
         return PRAYER_SCHEDULE[day];
     }
+    // Если не сентябрь, показываем 1 сентября
     return PRAYER_SCHEDULE[1];
 }
 
@@ -7391,12 +7394,14 @@ function updatePrayerTimes() {
     const day = today.getDate();
     const month = today.getMonth() + 1;
     
+    // Обновляем дату
     const dateEl = document.getElementById('prayerDate');
     if (dateEl) {
         const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
         dateEl.textContent = `${day} ${months[month - 1]} 2026`;
     }
     
+    // Обновляем время намазов
     const prayerMap = {
         Fajr: 'prayerFajr',
         Sunrise: 'prayerSunrise',
@@ -7415,10 +7420,11 @@ function updatePrayerTimes() {
         }
     }
     
-    highlightNextPrayer(prayerTimes);
+    // Находим следующий намаз
+    findNextPrayer(prayerTimes);
 }
 
-function highlightNextPrayer(prayerTimes) {
+function findNextPrayer(prayerTimes) {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     
@@ -7453,6 +7459,7 @@ function highlightNextPrayer(prayerTimes) {
         }
     }
     
+    // Подсвечиваем активный намаз
     document.querySelectorAll('.prayer-item').forEach(el => {
         el.classList.remove('active');
         if (el.dataset && el.dataset.prayer === nextPrayer) {
@@ -7460,10 +7467,11 @@ function highlightNextPrayer(prayerTimes) {
         }
     });
     
+    // Обновляем таймер
     if (nextPrayer) {
         const label = document.querySelector('.countdown-label');
         if (label) {
-            label.textContent = `До ${names[nextPrayer]} осталось:`;
+            label.textContent = `До ${names[nextPrayer] || nextPrayer} осталось:`;
         }
         updateCountdown(nextMinutes);
     }
@@ -7484,16 +7492,24 @@ function updateCountdown(targetMinutes) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);
     
-    const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    const timeStr = String(hours).padStart(2, '0') + ':' + 
+                    String(minutes).padStart(2, '0') + ':' + 
+                    String(seconds).padStart(2, '0');
     
     const el = document.getElementById('countdownTime');
-    if (el) el.textContent = timeStr;
+    if (el) {
+        el.textContent = timeStr;
+    }
 }
 
-// Запускаем
+// Запускаем при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    updatePrayerTimes();
-    setInterval(updatePrayerTimes, 1000);
+    // Небольшая задержка, чтобы DOM точно загрузился
+    setTimeout(function() {
+        updatePrayerTimes();
+        // Обновляем каждую секунду
+        setInterval(updatePrayerTimes, 1000);
+    }, 100);
 });
     </script>
 </body>
