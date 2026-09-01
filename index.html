@@ -1957,18 +1957,19 @@ body.dark .prayer-time { color: rgba(255,255,255,0.7); }
 
     <div class="container">
     
-    <!-- ===== ШАПКА (всегда видна) ===== -->
-    <div class="app-header">
-        <div class="bismillah">﷽</div>
-        <div class="header-controls">
-            <button class="language-toggle" id="languageToggle">
-                <span class="lang-code" id="langLabel">RU</span>
-            </button>
-            <button class="theme-toggle" id="themeToggle">
-                <span class="icon" id="themeIcon">🌙</span>
-            </button>
-        </div>
+   <!-- ===== ШАПКА (всегда видна) ===== -->
+<div class="app-header">
+    <div class="bismillah">﷽</div>
+    <div class="header-controls">
+        <button class="language-toggle" id="languageToggle">
+            <span id="langIcon">🇷🇺</span>
+            <span class="lang-code" id="langLabel">RU</span>
+        </button>
+        <button class="theme-toggle" id="themeToggle">
+            <span class="icon" id="themeIcon">🌙</span>
+        </button>
     </div>
+</div>
 
     <!-- ===== СТРАНИЦЫ ===== -->
     <div class="pages-wrapper">
@@ -6787,23 +6788,27 @@ function getText(key, replace = {}) {
 
 function updateLanguage() {
     // Обновляем все тексты на странице
-     document.querySelectorAll('[data-i18n]').forEach(el => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         el.innerHTML = getText(key);
     });
     
     // Обновляем кнопку языка
-     document.getElementById('langLabel').textContent = langLabels[currentLang];
-    document.getElementById('langIcon').textContent = langIcons[currentLang];
+    const langLabel = document.getElementById('langLabel');
+    if (langLabel) {
+        langLabel.textContent = langLabels[currentLang];
+    }
+    
+    const langIcon = document.getElementById('langIcon');
+    if (langIcon) {
+        langIcon.textContent = langIcons[currentLang];
+    }
     
     // Обновляем динамические элементы
     updateDynamicTexts();
 }
 
-// ================================================================
-//  ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА (ЦИКЛИЧЕСКОЕ)
-// ================================================================
-
+// ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА (ЦИКЛИЧЕСКОЕ)
 document.getElementById('languageToggle').addEventListener('click', function() {
     const currentIndex = langOptions.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langOptions.length;
@@ -6812,18 +6817,9 @@ document.getElementById('languageToggle').addEventListener('click', function() {
     updateLanguage();
     updateDynamicTexts();
 });
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            updateDynamicTexts();
-        }
 
-        btnWelcomeNext.addEventListener('click', () => showPage('pageChoose'));
-        btnChooseBack.addEventListener('click', () => showPage('pageWelcome'));
-        btnSelectBack.addEventListener('click', () => showPage('pageChoose'));
-        btnTestBack.addEventListener('click', () => showPage('pageSelect'));
-        btnTestHome.addEventListener('click', () => showPage('pageWelcome'));
+// ИНИЦИАЛИЗАЦИЯ ЯЗЫКА ПРИ ЗАГРУЗКЕ
+updateLanguage();
         
 
         // ================================================================
