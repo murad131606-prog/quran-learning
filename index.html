@@ -7439,19 +7439,19 @@ const PRAYER_SCHEDULE = {
     30: { Fajr: '05:02', Sunrise: '06:54', Dhuhr: '12:46', Asr: '15:53', Maghrib: '18:36', Isha: '20:21' }
 };
 
+// Получаем сегодняшнее расписание
 function getTodayPrayerTimes() {
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth() + 1;
     
-    // Сентябрь = 9
     if (month === 9 && PRAYER_SCHEDULE[day]) {
         return PRAYER_SCHEDULE[day];
     }
-    // Если не сентябрь, показываем 1 сентября
     return PRAYER_SCHEDULE[1];
 }
 
+// Обновляем время намазов и таймер
 function updatePrayerTimes() {
     const times = getTodayPrayerTimes();
     const today = new Date();
@@ -7488,6 +7488,7 @@ function updatePrayerTimes() {
     findNextPrayer(prayerTimes);
 }
 
+// Находим следующий намаз
 function findNextPrayer(prayerTimes) {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -7510,8 +7511,10 @@ function findNextPrayer(prayerTimes) {
         const time = prayerTimes[prayer];
         if (!time) continue;
         
-        const [h, m] = time.split(':').map(Number);
-        const prayerMinutes = h * 60 + m;
+        const parts = time.split(':');
+        const hours = parseInt(parts[0]);
+        const minutes = parseInt(parts[1]);
+        const prayerMinutes = hours * 60 + minutes;
         
         let diff = prayerMinutes - currentMinutes;
         if (diff < 0) diff += 24 * 60;
@@ -7535,12 +7538,13 @@ function findNextPrayer(prayerTimes) {
     if (nextPrayer) {
         const label = document.querySelector('.countdown-label');
         if (label) {
-            label.textContent = `До ${names[nextPrayer] || nextPrayer} осталось:`;
+            label.textContent = 'До ' + (names[nextPrayer] || nextPrayer) + ' осталось:';
         }
         updateCountdown(nextMinutes);
     }
 }
 
+// Обновляем таймер обратного отсчета
 function updateCountdown(targetMinutes) {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -7556,9 +7560,11 @@ function updateCountdown(targetMinutes) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);
     
-    const timeStr = String(hours).padStart(2, '0') + ':' + 
-                    String(minutes).padStart(2, '0') + ':' + 
-                    String(seconds).padStart(2, '0');
+    // Форматируем время
+    let timeStr = '';
+    timeStr += String(hours).padStart(2, '0') + ':';
+    timeStr += String(minutes).padStart(2, '0') + ':';
+    timeStr += String(seconds).padStart(2, '0');
     
     const el = document.getElementById('countdownTime');
     if (el) {
@@ -7566,15 +7572,18 @@ function updateCountdown(targetMinutes) {
     }
 }
 
-// Запускаем при загрузке страницы
+// ===== ЗАПУСК =====
+// При загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Небольшая задержка, чтобы DOM точно загрузился
-    setTimeout(function() {
-        updatePrayerTimes();
-        // Обновляем каждую секунду
-        setInterval(updatePrayerTimes, 1000);
-    }, 100);
+    updatePrayerTimes();
+    // Обновляем каждую секунду
+    setInterval(updatePrayerTimes, 1000);
 });
+
+// Также запускаем сразу, если DOM уже загружен
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(updatePrayerTimes, 100);
+}
     </script>
 </body>
 </html>
