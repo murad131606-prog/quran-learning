@@ -1271,7 +1271,6 @@ body.dark .prayer-times {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== ЗАГОЛОВОК ===== */
 .prayer-header {
     display: flex;
     align-items: center;
@@ -1315,7 +1314,6 @@ body.dark .prayer-date {
     color: rgba(255,255,255,0.3);
 }
 
-/* ===== ТАЙМЕР ===== */
 .prayer-countdown {
     text-align: center;
     padding: 4px 0 8px 0;
@@ -1345,7 +1343,6 @@ body.dark .countdown-label {
     margin-left: 6px;
 }
 
-/* ===== СЕТКА НАМАЗОВ (ГОРИЗОНТАЛЬНО) ===== */
 .prayer-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -1415,7 +1412,6 @@ body.dark .prayer-time {
     color: #d4af37;
 }
 
-/* ===== АДАПТИВ ===== */
 @media (max-width: 768px) {
     .prayer-times {
         padding: 12px 14px 10px 14px;
@@ -1468,48 +1464,70 @@ body.dark .prayer-time {
     <span id="langLabel">Русский</span>
 </button>
 
-    <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+   <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
 <div class="page active" id="pageWelcome">
     <div class="welcome-content">
         
-       <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА ===== -->
-<div class="prayer-times" id="prayerTimes">
-    <div class="prayer-header">
-        <span class="prayer-icon">🕌</span>
-        <span class="prayer-title">Энгельс</span>
-        <span class="prayer-date" id="prayerDate">1 сен 2026</span>
-    </div>
-    
-    <div class="prayer-countdown">
-        <span class="countdown-label">До Аср осталось:</span>
-        <span class="countdown-time" id="countdownTime">00:41:46</span>
-    </div>
-    
-    <div class="prayer-grid">
-        <div class="prayer-item">
-            <span class="prayer-name">Фаджр</span>
-            <span class="prayer-time" id="prayerFajr">04:19</span>
+        <!-- ===== БЛОК ВРЕМЕНИ НАМАЗА (ГОРИЗОНТАЛЬНЫЙ) ===== -->
+        <div class="prayer-times" id="prayerTimes">
+            <div class="prayer-header">
+                <span class="prayer-icon">🕌</span>
+                <span class="prayer-title">Энгельс</span>
+                <span class="prayer-date" id="prayerDate">1 сен 2026</span>
+            </div>
+            
+            <div class="prayer-countdown">
+                <span class="countdown-label">До Аср осталось:</span>
+                <span class="countdown-time" id="countdownTime">00:41:46</span>
+            </div>
+            
+            <div class="prayer-grid">
+                <div class="prayer-item">
+                    <span class="prayer-name">Фаджр</span>
+                    <span class="prayer-time" id="prayerFajr">04:19</span>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Шурук</span>
+                    <span class="prayer-time" id="prayerSunrise">06:08</span>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Зухр</span>
+                    <span class="prayer-time" id="prayerDhuhr">12:56</span>
+                </div>
+                <div class="prayer-item active">
+                    <span class="prayer-name">Аср</span>
+                    <span class="prayer-time" id="prayerAsr">16:39</span>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Магриб</span>
+                    <span class="prayer-time" id="prayerMaghrib">19:43</span>
+                </div>
+                <div class="prayer-item">
+                    <span class="prayer-name">Иша</span>
+                    <span class="prayer-time" id="prayerIsha">21:23</span>
+                </div>
+            </div>
         </div>
-        <div class="prayer-item">
-            <span class="prayer-name">Шурук</span>
-            <span class="prayer-time" id="prayerSunrise">06:08</span>
+
+        <!-- ===== ПРИВЕТСТВИЕ ===== -->
+        <div class="salam-block">
+            <div class="arabic-salam">
+                ٱلسَّلَامُ عَلَيْكُمْ<br>وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
+            </div>
         </div>
-        <div class="prayer-item">
-            <span class="prayer-name">Зухр</span>
-            <span class="prayer-time" id="prayerDhuhr">12:56</span>
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
         </div>
-        <div class="prayer-item active">
-            <span class="prayer-name">Аср</span>
-            <span class="prayer-time" id="prayerAsr">16:39</span>
+        <div class="verse-block">
+            <div class="arabic-verse">
+                وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ
+                <small>«Мы облегчили Коран для поминания. Но есть ли среди вас вспоминающие?» (54:17)</small>
+            </div>
         </div>
-        <div class="prayer-item">
-            <span class="prayer-name">Магриб</span>
-            <span class="prayer-time" id="prayerMaghrib">19:43</span>
-        </div>
-        <div class="prayer-item">
-            <span class="prayer-name">Иша</span>
-            <span class="prayer-time" id="prayerIsha">21:23</span>
-        </div>
+        <p class="welcome-description" data-i18n="welcomeDesc">Выберите джуз или суру для проверки знаний аятов Священного Корана</p>
+        <button class="btn-primary" id="btnWelcomeNext" data-i18n="startBtn">Начать изучение →</button>
     </div>
 </div>
         
