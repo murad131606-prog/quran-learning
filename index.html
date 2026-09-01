@@ -151,10 +151,7 @@ body.dark .container {
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 
-        0 30px 80px rgba(0, 0, 0, 0.4),
-        0 10px 30px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
 }
 
 body.dark .arabic-salam { 
@@ -338,6 +335,66 @@ body.dark .number-grid::-webkit-scrollbar-thumb {
 
 body.dark #testTitle {
     color: #f5efe8;
+}
+
+/* ===== ТЕМНАЯ ТЕМА - ВРЕМЯ НАМАЗА ===== */
+body.dark .prayer-times {
+    background: rgba(20, 15, 35, 0.85);
+    border-color: rgba(212, 175, 55, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .prayer-header {
+    border-bottom-color: rgba(212, 175, 55, 0.08);
+}
+
+body.dark .prayer-title {
+    color: #f5efe8;
+}
+
+body.dark .prayer-date {
+    color: rgba(255,255,255,0.3);
+}
+
+body.dark .prayer-countdown {
+    border-bottom-color: rgba(212, 175, 55, 0.08);
+}
+
+body.dark .countdown-label {
+    color: rgba(255,255,255,0.4);
+}
+
+body.dark .countdown-time {
+    color: #d4af37;
+}
+
+body.dark .prayer-row-active {
+    background: rgba(212, 175, 55, 0.06);
+}
+
+body.dark .prayer-cell-label {
+    color: rgba(255,255,255,0.3);
+}
+
+body.dark .prayer-cell-time {
+    color: rgba(255,255,255,0.7);
+}
+
+body.dark .prayer-row-active .prayer-cell-label {
+    color: #d4af37;
+    opacity: 0.7;
+}
+
+body.dark .prayer-row-active .prayer-cell-time {
+    color: #d4af37;
+}
+
+body.dark .prayer-labels {
+    border-top-color: rgba(212, 175, 55, 0.06);
+}
+
+body.dark .prayer-labels span {
+    color: rgba(255,255,255,0.15);
 }
 
 /* ===== КОНТЕЙНЕР ===== */
@@ -1195,23 +1252,24 @@ body.dark .result-block .score { color: #f5efe8; }
     top: 80px;
     left: 38px;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 14px;
-    padding: 10px 16px 8px 16px;
+    border-radius: 16px;
+    padding: 14px 20px 12px 20px;
     border: 1px solid rgba(212, 175, 55, 0.06);
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
-    max-width: 340px;
+    max-width: 280px;
     z-index: 5;
+    min-width: 220px;
 }
 
 body.light .prayer-times {
-    background: rgba(255, 252, 248, 0.5);
+    background: rgba(255, 252, 248, 0.6);
     border-color: rgba(212, 175, 55, 0.08);
     box-shadow: 0 4px 20px rgba(212, 175, 55, 0.04);
 }
 
 body.dark .prayer-times {
-    background: rgba(20, 15, 35, 0.6);
+    background: rgba(20, 15, 35, 0.7);
     border-color: rgba(212, 175, 55, 0.04);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
@@ -1219,17 +1277,19 @@ body.dark .prayer-times {
 .prayer-header {
     display: flex;
     align-items: center;
-    gap: 6px;
-    margin-bottom: 4px;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
 }
 
 .prayer-icon {
-    font-size: 14px;
-    opacity: 0.5;
+    font-size: 16px;
+    opacity: 0.6;
 }
 
 .prayer-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.3px;
 }
@@ -1239,12 +1299,12 @@ body.light .prayer-title {
 }
 
 body.dark .prayer-title {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.7);
 }
 
 .prayer-date {
-    font-size: 10px;
-    opacity: 0.3;
+    font-size: 11px;
+    opacity: 0.4;
     font-weight: 400;
     margin-left: auto;
 }
@@ -1254,110 +1314,138 @@ body.light .prayer-date {
 }
 
 body.dark .prayer-date {
-    color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.3);
 }
 
-.prayer-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px 6px;
-    margin-bottom: 3px;
+/* ===== ОСТАЛОСЬ ВРЕМЕНИ ===== */
+.prayer-countdown {
+    text-align: center;
+    padding: 6px 0 8px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+    margin-bottom: 8px;
 }
 
-.prayer-item {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    padding: 2px 8px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    cursor: default;
+.countdown-label {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.5;
+    display: block;
 }
 
-.prayer-item.active {
-    background: rgba(212, 175, 55, 0.06);
-    border: 1px solid rgba(212, 175, 55, 0.08);
-}
-
-body.light .prayer-item.active {
-    background: rgba(212, 175, 55, 0.04);
-}
-
-body.dark .prayer-item.active {
-    background: rgba(212, 175, 55, 0.04);
-}
-
-.prayer-name {
-    font-size: 9px;
-    font-weight: 500;
-    opacity: 0.3;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-}
-
-body.light .prayer-name {
+body.light .countdown-label {
     color: #6a5a4a;
 }
 
-body.dark .prayer-name {
-    color: rgba(255,255,255,0.2);
+body.dark .countdown-label {
+    color: rgba(255,255,255,0.3);
 }
 
-.prayer-item.active .prayer-name {
-    opacity: 0.6;
+.countdown-time {
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+    margin-top: 2px;
     color: #d4af37;
-}
-
-.prayer-time {
-    font-size: 13px;
-    font-weight: 600;
     font-variant-numeric: tabular-nums;
 }
 
-body.light .prayer-time {
-    color: #2d1b0e;
-}
-
-body.dark .prayer-time {
-    color: rgba(255,255,255,0.6);
-}
-
-.prayer-item.active .prayer-time {
+body.dark .countdown-time {
     color: #d4af37;
 }
 
-.prayer-next {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 10px;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background: rgba(212, 175, 55, 0.03);
-    border-top: 1px solid rgba(212, 175, 55, 0.04);
-    padding-top: 4px;
-    margin-top: 2px;
+body.light .countdown-time {
+    color: #b8942e;
 }
 
-body.light .prayer-next {
+/* ===== ТАБЛИЦА ===== */
+.prayer-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 6px;
+}
+
+.prayer-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.prayer-row-active {
+    background: rgba(212, 175, 55, 0.06);
+}
+
+body.light .prayer-row-active {
+    background: rgba(212, 175, 55, 0.04);
+}
+
+body.dark .prayer-row-active {
+    background: rgba(212, 175, 55, 0.04);
+}
+
+.prayer-cell {
+    font-size: 12px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+.prayer-cell-label {
+    opacity: 0.4;
+}
+
+body.light .prayer-cell-label {
     color: #6a5a4a;
 }
 
-body.dark .prayer-next {
+body.dark .prayer-cell-label {
+    color: rgba(255,255,255,0.3);
+}
+
+.prayer-cell-time {
+    font-weight: 600;
+}
+
+body.light .prayer-cell-time {
+    color: #2d1b0e;
+}
+
+body.dark .prayer-cell-time {
+    color: rgba(255,255,255,0.7);
+}
+
+.prayer-row-active .prayer-cell-label {
+    opacity: 0.7;
+    color: #d4af37;
+}
+
+.prayer-row-active .prayer-cell-time {
+    color: #d4af37;
+}
+
+/* ===== ПОДПИСИ ===== */
+.prayer-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(212, 175, 55, 0.04);
+}
+
+.prayer-labels span {
+    font-size: 8px;
+    opacity: 0.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+}
+
+body.light .prayer-labels span {
+    color: #6a5a4a;
+}
+
+body.dark .prayer-labels span {
     color: rgba(255,255,255,0.2);
-}
-
-#nextPrayerName {
-    font-weight: 600;
-    color: #d4af37;
-    font-size: 10px;
-}
-
-#nextPrayerTime {
-    font-weight: 600;
-    color: #d4af37;
-    font-size: 11px;
 }
 
 @media (max-width: 1024px) {
@@ -1367,60 +1455,36 @@ body.dark .prayer-next {
         left: auto;
         max-width: 100%;
         margin: 0 0 12px 0;
-        padding: 10px 14px 8px 14px;
+        padding: 12px 16px 10px 16px;
         width: 100%;
     }
-    .prayer-grid {
-        justify-content: center;
+    .prayer-table {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .prayer-labels {
+        display: none;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .prayer-times {
-        padding: 8px 12px 6px 12px;
-        border-radius: 12px;
-    }
-    .prayer-time {
-        font-size: 11px;
-    }
-    .prayer-name {
-        font-size: 8px;
+        padding: 10px 12px 8px 12px;
     }
     .prayer-title {
-        font-size: 11px;
+        font-size: 12px;
     }
     .prayer-date {
-        font-size: 9px;
-    }
-    .prayer-next {
-        font-size: 9px;
-    }
-    #nextPrayerTime {
         font-size: 10px;
     }
-    .prayer-item {
-        padding: 1px 5px;
+    .prayer-cell {
+        font-size: 11px;
     }
-    .prayer-grid {
-        gap: 1px 4px;
+    .countdown-time {
+        font-size: 17px;
     }
-}
-
-@media (max-width: 500px) {
-    .prayer-times {
-        padding: 6px 10px 4px 10px;
-    }
-    .prayer-time {
+    .countdown-label {
         font-size: 10px;
-    }
-    .prayer-name {
-        font-size: 7px;
-    }
-    .prayer-item {
-        padding: 1px 4px;
-    }
-    .prayer-grid {
-        gap: 1px 2px;
     }
 }
     </style>
@@ -1440,7 +1504,7 @@ body.dark .prayer-next {
     <span id="langLabel">Русский</span>
 </button>
 
-     <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
+    <!-- ===== СТРАНИЦА 1: ПРИВЕТСТВИЕ ===== -->
 <div class="page active" id="pageWelcome">
     <div class="welcome-content">
         
@@ -1451,36 +1515,49 @@ body.dark .prayer-next {
                 <span class="prayer-title">Энгельс</span>
                 <span class="prayer-date" id="prayerDate">1 сентября 2026</span>
             </div>
-            <div class="prayer-grid">
-                <div class="prayer-item" data-prayer="Fajr">
-                    <span class="prayer-name">Фаджр</span>
-                    <span class="prayer-time" id="prayerFajr">04:02</span>
+            
+            <!-- ОСТАЛОСЬ ВРЕМЕНИ ДО НАМАЗА -->
+            <div class="prayer-countdown" id="prayerCountdown">
+                <span class="countdown-label">До Аср осталось:</span>
+                <span class="countdown-time" id="countdownTime">00:41:46</span>
+            </div>
+            
+            <!-- ТАБЛИЦА С ВРЕМЕНЕМ -->
+            <div class="prayer-table">
+                <div class="prayer-row">
+                    <div class="prayer-cell prayer-cell-label">Фаджр</div>
+                    <div class="prayer-cell prayer-cell-time" id="prayerFajr">04:19</div>
                 </div>
-                <div class="prayer-item" data-prayer="Sunrise">
-                    <span class="prayer-name">Восход</span>
-                    <span class="prayer-time" id="prayerSunrise">06:08</span>
+                <div class="prayer-row">
+                    <div class="prayer-cell prayer-cell-label">Шурук</div>
+                    <div class="prayer-cell prayer-cell-time" id="prayerSunrise">06:08</div>
                 </div>
-                <div class="prayer-item" data-prayer="Dhuhr">
-                    <span class="prayer-name">Зухр</span>
-                    <span class="prayer-time" id="prayerDhuhr">12:56</span>
+                <div class="prayer-row">
+                    <div class="prayer-cell prayer-cell-label">Зухр</div>
+                    <div class="prayer-cell prayer-cell-time" id="prayerDhuhr">12:56</div>
                 </div>
-                <div class="prayer-item" data-prayer="Asr">
-                    <span class="prayer-name">Аср</span>
-                    <span class="prayer-time" id="prayerAsr">16:39</span>
+                <div class="prayer-row prayer-row-active">
+                    <div class="prayer-cell prayer-cell-label">Аср</div>
+                    <div class="prayer-cell prayer-cell-time" id="prayerAsr">16:39</div>
                 </div>
-                <div class="prayer-item" data-prayer="Maghrib">
-                    <span class="prayer-name">Магриб</span>
-                    <span class="prayer-time" id="prayerMaghrib">19:42</span>
+                <div class="prayer-row">
+                    <div class="prayer-cell prayer-cell-label">Магриб</div>
+                    <div class="prayer-cell prayer-cell-time" id="prayerMaghrib">19:43</div>
                 </div>
-                <div class="prayer-item" data-prayer="Isha">
-                    <span class="prayer-name">Иша</span>
-                    <span class="prayer-time" id="prayerIsha">21:39</span>
+                <div class="prayer-row">
+                    <div class="prayer-cell prayer-cell-label">Иша</div>
+                    <div class="prayer-cell prayer-cell-time" id="prayerIsha">21:23</div>
                 </div>
             </div>
-            <div class="prayer-next">
-                <span>🔔 Ближайший: </span>
-                <span id="nextPrayerName">Аср</span>
-                <span id="nextPrayerTime">16:39</span>
+            
+            <!-- ПОДПИСИ -->
+            <div class="prayer-labels">
+                <span>Время утреннего намаза</span>
+                <span>Время восхода солнца</span>
+                <span>Время полуденной молитвы</span>
+                <span>Время послеполуденного намаза</span>
+                <span>Время вечернего намаза</span>
+                <span>Время ночного намаза</span>
             </div>
         </div>
 
@@ -1505,7 +1582,6 @@ body.dark .prayer-next {
         <button class="btn-primary" id="btnWelcomeNext" data-i18n="startBtn">Начать изучение →</button>
     </div>
 </div>
-
 <!-- ===== СТРАНИЦА 2: ВЫБОР РЕЖИМА ===== -->
 <div class="page" id="pageChoose">
     <div class="choose-page">
@@ -6903,11 +6979,9 @@ function getTodayPrayerTimes() {
     const day = today.getDate();
     const month = today.getMonth() + 1;
     
-    // Сентябрь = месяц 9
     if (month === 9 && PRAYER_SCHEDULE[day]) {
         return PRAYER_SCHEDULE[day];
     }
-    // Если не сентябрь, показываем 1 сентября
     return PRAYER_SCHEDULE[1];
 }
 
@@ -6945,18 +7019,19 @@ function updatePrayerTimes() {
         }
     }
     
-    // Находим ближайший намаз
+    // Находим ближайший намаз и обновляем таймер
     findNextPrayer(prayerTimes);
 }
 
 function findNextPrayer(prayerTimes) {
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
+    const currentSeconds = now.getSeconds();
     
     const prayerOrder = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
     const prayerNames = {
         Fajr: 'Фаджр',
-        Sunrise: 'Восход',
+        Sunrise: 'Шурук',
         Dhuhr: 'Зухр',
         Asr: 'Аср',
         Maghrib: 'Магриб',
@@ -6965,6 +7040,7 @@ function findNextPrayer(prayerTimes) {
     
     let nextPrayer = null;
     let nextTime = Infinity;
+    let nextPrayerMinutes = 0;
     
     for (const prayer of prayerOrder) {
         const time = prayerTimes[prayer];
@@ -6979,23 +7055,63 @@ function findNextPrayer(prayerTimes) {
         if (diff < nextTime) {
             nextTime = diff;
             nextPrayer = prayer;
+            nextPrayerMinutes = prayerMinutes;
         }
     }
     
-    document.querySelectorAll('.prayer-item').forEach(el => {
-        el.classList.remove('active');
-        if (el.dataset.prayer === nextPrayer) {
-            el.classList.add('active');
-        }
+    // Подсвечиваем активную строку
+    document.querySelectorAll('.prayer-row').forEach(el => {
+        el.classList.remove('prayer-row-active');
     });
     
     if (nextPrayer) {
-        const nameEl = document.getElementById('nextPrayerName');
-        const timeEl = document.getElementById('nextPrayerTime');
-        if (nameEl) nameEl.textContent = prayerNames[nextPrayer] || nextPrayer;
-        if (timeEl) timeEl.textContent = prayerTimes[nextPrayer] || '--:--';
+        const rows = document.querySelectorAll('.prayer-row');
+        const prayerMap = {Fajr: 0, Sunrise: 1, Dhuhr: 2, Asr: 3, Maghrib: 4, Isha: 5};
+        const index = prayerMap[nextPrayer];
+        if (rows[index]) {
+            rows[index].classList.add('prayer-row-active');
+        }
+        
+        // Обновляем таймер обратного отсчета
+        updateCountdown(nextPrayerMinutes, nextPrayer, prayerNames);
     }
 }
+
+function updateCountdown(targetMinutes, prayerName, prayerNames) {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const currentSeconds = now.getSeconds();
+    
+    let diffMinutes = targetMinutes - currentMinutes;
+    if (diffMinutes < 0) diffMinutes += 24 * 60;
+    
+    const totalSeconds = diffMinutes * 60 - currentSeconds;
+    
+    if (totalSeconds <= 0) {
+        document.getElementById('countdownTime').textContent = '00:00:00';
+        return;
+    }
+    
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    
+    const timeString = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    document.getElementById('countdownTime').textContent = timeString;
+    
+    // Обновляем надпись "До Аср осталось"
+    const label = document.querySelector('.countdown-label');
+    if (label) {
+        const name = prayerNames[prayerName] || prayerName;
+        label.textContent = `До ${name} осталось:`;
+    }
+}
+
+// Загружаем при загрузке и обновляем каждую секунду
+document.addEventListener('DOMContentLoaded', function() {
+    updatePrayerTimes();
+    setInterval(updatePrayerTimes, 1000);
+});
 
 // Загружаем при загрузке и обновляем каждую минуту
 document.addEventListener('DOMContentLoaded', function() {
